@@ -4,10 +4,15 @@
     <title>Hello</title>
     <meta charset="utf-8" />
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   </head>
   <body>
     <h1>Hello!sub!!</h1>
-    <p><span th:text="${message}"></span>!!!</p>
+    <p class="text-primary"><span th:text="${message}"></span>!!!</p>
     <img id="hhh" th:src="@{/images/echichi.jpg}" />
 
     <script type="text/javascript" th:src="@{/js/common.js}"></script>

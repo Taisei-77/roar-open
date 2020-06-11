@@ -8,13 +8,56 @@
       rel="stylesheet"
       href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
     />
+
     <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <h1>Hello!sub!!６1</h1>
-    <p class="text-primary"><span th:text="${message}"></span>!!!</p>
-    <img id="hhh" th:src="@{/images/echichi.jpg}" />
-
+    <!-- サイドバーのかたまり -->
+    <div id="sideBar">
+      <nav>
+        <ul>
+          <li><a href="#" id="roar" class="btn">roar</a></li>
+          <li><a href="#" id="home" class="btn">ホーム</a></li>
+          <li id="teams"><a href="#" id="team" class="btn">チーム</a></li>
+          <li><a href="#" id="chat" class="btn">チャット</a></li>
+          <li><a href="#" id="news" class="btn">ニュース</a></li>
+          <li><a href="#" id="profile" class="btn">プロフィール</a></li>
+          <li><a href="#" id="setting" class="btn">設定</a></li>
+        </ul>
+      </nav>
+      <footer>
+        <ul>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">ガイドライン</a></li>
+          <li><a href="#">ヘルプ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </footer>
+    </div>
+    <!--  メインコンテンツのかたまり-->
+    <main>
+      <!-- ログインと新規会員登録のブロック-->
+      <div id="signUp_contents" class="text-right">
+        <button id="inLogin">ログイン</button>
+        <button id="inRegister">新規会員登録</button>
+      </div>
+      <!-- 真ん中のメッセージブロック -->
+      <div id="label_contents" class="text-center">
+        <h1 id="label_title">roar</h1>
+        <div id="label_explanation">
+          <p>
+            スポーツ専門のチャットツールでチームの輪を広げよう
+          </p>
+          <p>簡単にチームのメンバーを募れる</p>
+          <p>スポーツコミュニティユーザー数世界１位</p>
+          <p>さあ、今すぐroarで新しい体験を...</p>
+        </div>
+        <!--  ページ下部の登録ボタンのブロック-->
+      </div>
+      <div id="startUp_content" class="text-center">
+        <button id="startUp">今すぐはじめる</button>
+      </div>
+    </main>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
   </body>
 </html>

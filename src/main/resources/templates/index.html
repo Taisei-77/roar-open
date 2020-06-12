@@ -38,8 +38,78 @@
     <main>
       <!-- ログインと新規会員登録のブロック-->
       <div id="signUp_contents" class="text-right">
-        <button id="inLogin">ログイン</button>
-        <button id="inRegister">新規会員登録</button>
+      <!-- ログイン Button trigger modal -->
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal">
+          ログイン
+        </button>
+
+        <!-- ログイン Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content p-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">ログイン</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group mb-4">  
+                    <label for="email">メールアドレス</label>
+                    <input type="email" class="form-control" id="loginInputEmail" aria-describedby="emailHelp" placeholder="メールアドレス">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group mb-4">                    
+                    <label for="password">パスワード<small class="text-muted">何文字以内</small></label>
+                    <input type="password" class="form-control" id="loginInputPassword" placeholder="パスワード">
+                  </div>
+                  <button type="submit" class="btn btn-dark mb-4">ログイン</button>
+                </form>
+                <div class="modal-footer">
+                  <p>アカウントをお持ちでない場合、<a href="#" class="text-decoration-none">新規会員登録</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 新規会員登録 Button trigger modal -->
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#registerModal">
+          新規会員登録
+        </button>
+
+        <!-- 新規会員登録 Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content p-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">新規会員登録</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group mb-4">
+                    <input type="password" class="form-control" id="userName" placeholder="ユーザーID">
+                  </div>
+                  <div class="form-group mb-4">
+                    <input type="email" class="form-control" id="registerInputEmail" aria-describedby="emailHelp" placeholder="メールアドレス">
+                    <small id="registerHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group mb-4">
+                    <input type="password" class="form-control" id="registerInputPassword" placeholder="パスワード">
+                  </div>
+                  <button type="submit" class="btn btn-dark mb-4">登録</button>
+                </form>
+                <div class="modal-footer">
+                  <p>すでにアカウントをお持ちの場合、<a href="#" class="text-decoration-none">ログイン</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- 真ん中のメッセージブロック -->
       <div id="label_contents" class="text-center">

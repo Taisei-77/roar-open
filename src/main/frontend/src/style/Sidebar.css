@@ -1,0 +1,19 @@
+.sidebar {
+  min-width: 200px;
+}
+
+.sidebarFixed {
+  position: sticky;
+  top: 0;
+}
+
+li {
+  display: block;
+  text-align: center;
+}
+
+.link {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+}

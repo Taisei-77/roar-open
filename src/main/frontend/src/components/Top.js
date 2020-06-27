@@ -1,5 +1,15 @@
 import React from "react";
 import "../style/Top.css";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalDialog,
+  FormGroup,
+  ModalFooter,
+  ModalTitle,
+} from "react-bootstrap";
+import ModalHeader from "react-bootstrap/ModalHeader";
 
 class Top extends React.Component {
   render() {
@@ -9,17 +19,17 @@ class Top extends React.Component {
           {/* <!-- ログインと新規会員登録のブロック--> */}
           <div id="signUpContents" className="text-right">
             {/* <!-- ログイン Button trigger modal --> */}
-            <button
+            <Button
               type="button"
               className="btn btn-dark"
               data-toggle="modal"
               data-target="#loginModal"
             >
               ログイン
-            </button>
+            </Button>
 
             {/* <!-- ログイン Modal --> */}
-            <div
+            <Modal
               className="modal fade"
               id="loginModal"
               tabIndex="-1"
@@ -27,24 +37,24 @@ class Top extends React.Component {
               aria-labelledby="registerModalLabel"
               aria-hidden="true"
             >
-              <div className="modal-dialog">
+              <ModalDialog className="modal-dialog">
                 <div className="modal-content p-3">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="loginModalLabel">
+                  <ModalHeader className="modal-header">
+                    <ModalTitle className="modal-title" id="loginModalLabel">
                       ログイン
-                    </h5>
-                    <button
+                    </ModalTitle>
+                    <Button
                       type="button"
                       className="close"
                       data-dismiss="modal"
                       aria-label="Close"
                     >
                       <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
+                    </Button>
+                  </ModalHeader>
+                  <ModalBody className="modal-body">
                     <form>
-                      <div className="form-group mb-4">
+                      <FormGroup className="form-group mb-4">
                         <label htmlFor="email">メールアドレス</label>
                         <input
                           type="email"
@@ -56,8 +66,8 @@ class Top extends React.Component {
                         <small id="emailHelp" className="form-text text-muted">
                           We'll never share your email with anyone else.
                         </small>
-                      </div>
-                      <div className="form-group mb-4">
+                      </FormGroup>
+                      <FormGroup className="form-group mb-4">
                         <label htmlFor="password">
                           パスワード
                           <small className="text-muted">何文字以内</small>
@@ -68,33 +78,33 @@ class Top extends React.Component {
                           id="loginInputPassword"
                           placeholder="パスワード"
                         />
-                      </div>
-                      <button type="submit" className="btn btn-dark mb-4">
+                      </FormGroup>
+                      <Button type="submit" className="btn btn-dark mb-4">
                         ログイン
-                      </button>
+                      </Button>
                     </form>
-                    <div className="modal-footer">
+                    <ModalFooter className="modal-footer">
                       <p>
                         アカウントをお持ちでない場合、
                         <a href="#" className="text-decoration-none">
                           新規会員登録
                         </a>
                       </p>
-                    </div>
-                  </div>
+                    </ModalFooter>
+                  </ModalBody>
                 </div>
-              </div>
-            </div>
+              </ModalDialog>
+            </Modal>
 
             {/* <!-- 新規会員登録 Button trigger modal --> */}
-            <button
+            <Button
               type="button"
               className="btn btn-dark"
               data-toggle="modal"
               data-target="#registerModal"
             >
               新規会員登録
-            </button>
+            </Button>
 
             {/* <!-- 新規会員登録 Modal --> */}
             <div
@@ -111,14 +121,14 @@ class Top extends React.Component {
                     <h5 className="modal-title" id="registerModalLabel">
                       新規会員登録
                     </h5>
-                    <button
+                    <Button
                       type="button"
                       className="close"
                       data-dismiss="modal"
                       aria-label="Close"
                     >
                       <span aria-hidden="true">&times;</span>
-                    </button>
+                    </Button>
                   </div>
                   <div className="modal-body">
                     <form>
@@ -153,9 +163,9 @@ class Top extends React.Component {
                           placeholder="パスワード"
                         />
                       </div>
-                      <button type="submit" className="btn btn-dark mb-4">
+                      <Button type="submit" className="btn btn-dark mb-4">
                         登録
-                      </button>
+                      </Button>
                     </form>
                     <div className="modal-footer">
                       <p>
@@ -182,7 +192,7 @@ class Top extends React.Component {
             {/* <!--  ページ下部の登録ボタンのブロック--> */}
           </div>
           <div id="startUpContent" className="text-center">
-            <button id="startUp">今すぐはじめる</button>
+            <Button id="startUp">今すぐはじめる</Button>
           </div>
         </main>
       </div>

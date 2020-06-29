@@ -44,3 +44,7 @@ main {
   height: 50px;
   width: 200px;
 }
+
+#characterlimit {
+  font-size: 12px;
+}

@@ -2,9 +2,14 @@ import React from "react";
 import "../style/Top.css";
 import {
   Button,
+  ButtonToolbar,
   Modal,
   ModalBody,
   ModalDialog,
+  Form,
+  FormControl,
+  FormLabel,
+  FormText,
   FormGroup,
   ModalFooter,
   ModalTitle,
@@ -12,174 +17,114 @@ import {
 import ModalHeader from "react-bootstrap/ModalHeader";
 
 class Top extends React.Component {
+	constructor(props, context) {
+    super(props, context);
+
+		this.state = {
+			loginShow: false,
+			registerShow: false,
+		};
+    
+	}
+
   render() {
+		let loginClose = () => this.setState({ loginShow: false });
+		let registerClose = () => this.setState({ registerShow: false });
+
     return (
       <div>
         <main>
-          {/* <!-- ログインと新規会員登録のブロック--> */}
-          <div id="signUpContents" className="text-right">
-            {/* <!-- ログイン Button trigger modal --> */}
-            <Button
-              type="button"
-              className="btn btn-dark"
-              data-toggle="modal"
-              data-target="#loginModal"
-            >
+          {/* <!-- ログイン新規会員登録モーダルの右上寄せブロック --> */}
+          <ButtonToolbar className="float-right">
+            <Button onClick={() => this.setState({ loginShow: true })}>
               ログイン
             </Button>
-
-            {/* <!-- ログイン Modal --> */}
-            <Modal
-              className="modal fade"
-              id="loginModal"
-              tabIndex="-1"
-              role="dialog"
-              aria-labelledby="registerModalLabel"
-              aria-hidden="true"
-            >
-              <ModalDialog className="modal-dialog">
-                <div className="modal-content p-3">
-                  <ModalHeader className="modal-header">
-                    <ModalTitle className="modal-title" id="loginModalLabel">
-                      ログイン
-                    </ModalTitle>
-                    <Button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </Button>
-                  </ModalHeader>
-                  <ModalBody className="modal-body">
-                    <form>
-                      <FormGroup className="form-group mb-4">
-                        <label htmlFor="email">メールアドレス</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="loginInputEmail"
-                          aria-describedby="emailHelp"
-                          placeholder="メールアドレス"
-                        />
-                        <small id="emailHelp" className="form-text text-muted">
-                          We'll never share your email with anyone else.
-                        </small>
-                      </FormGroup>
-                      <FormGroup className="form-group mb-4">
-                        <label htmlFor="password">
-                          パスワード
-                          <small className="text-muted">何文字以内</small>
-                        </label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="loginInputPassword"
-                          placeholder="パスワード"
-                        />
-                      </FormGroup>
-                      <Button type="submit" className="btn btn-dark mb-4">
-                        ログイン
-                      </Button>
-                    </form>
-                    <ModalFooter className="modal-footer">
-                      <p>
-                        アカウントをお持ちでない場合、
-                        <a href="#" className="text-decoration-none">
-                          新規会員登録
-                        </a>
-                      </p>
-                    </ModalFooter>
-                  </ModalBody>
-                </div>
-              </ModalDialog>
-            </Modal>
-
-            {/* <!-- 新規会員登録 Button trigger modal --> */}
-            <Button
-              type="button"
-              className="btn btn-dark"
-              data-toggle="modal"
-              data-target="#registerModal"
-            >
+            <Button onClick={() => this.setState({ registerShow: true })} style={{ marginLeft: 5 }}>
               新規会員登録
             </Button>
 
-            {/* <!-- 新規会員登録 Modal --> */}
-            <div
-              className="modal fade"
-              id="registerModal"
-              tabIndex="-1"
-              role="dialog"
-              aria-labelledby="registerModalLabel"
-              aria-hidden="true"
+            <Modal
+              show={this.state.loginShow}
+              onHide={loginClose}
             >
-              <div className="modal-dialog">
-                <div className="modal-content p-3">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="registerModalLabel">
-                      新規会員登録
-                    </h5>
-                    <Button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </Button>
-                  </div>
-                  <div className="modal-body">
-                    <form>
-                      <div className="form-group mb-4">
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="userName"
-                          placeholder="ユーザーID"
-                        />
-                      </div>
-                      <div className="form-group mb-4">
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="registerInputEmail"
-                          aria-describedby="emailHelp"
-                          placeholder="メールアドレス"
-                        />
-                        <small
-                          id="registerHelp"
-                          className="form-text text-muted"
-                        >
-                          We'll never share your email with anyone else.
-                        </small>
-                      </div>
-                      <div className="form-group mb-4">
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="registerInputPassword"
-                          placeholder="パスワード"
-                        />
-                      </div>
-                      <Button type="submit" className="btn btn-dark mb-4">
-                        登録
-                      </Button>
-                    </form>
-                    <div className="modal-footer">
-                      <p>
-                        すでにアカウントをお持ちの場合、
-                        <a href="#" className="text-decoration-none">
-                          ログイン
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  ログイン
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group controlId="formBasicEmail"  className="m-3">
+                    <Form.Label className="mb-3">メールアドレス</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword" className="m-3">
+                    <Form.Label className="mb-3">パスワード</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicCheckbox" className="mb-3">
+                    <Form.Check type="checkbox" label="Check me out" />
+                  </Form.Group>
+                  <Button variant="primary" type="submit" className="m-3">
+                    ログイン
+                  </Button>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Form.Text className="text-muted m-3">
+                  アカウントをお持ちでない場合、新規会員登録
+                </Form.Text>
+              </Modal.Footer>
+            </Modal>
+
+            <Modal
+              show={this.state.registerShow}
+              onHide={registerClose}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  アカウントを作成
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group controlId="formBasicName" className="m-3">
+                    <Form.Label className="mb-3">ユーザーネーム</Form.Label>
+                    <Form.Control type="name" placeholder="User name" />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicEmail" className="m-3">
+                    <Form.Label className="mb-3">メールアドレス</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword" className="m-3">
+                    <Form.Label className="mb-3">パスワード</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicCheckbox">
+                    <Form.Check type="checkbox" label="Check me out" />
+                  </Form.Group>
+                  <Button variant="primary" type="submit"  className="m-3">
+                    登録
+                  </Button>
+                </Form>
+              </Modal.Body>
+                <Modal.Footer>
+                  <Form.Text className="text-muted m-3">
+                    すでにアカウントをお持ちの場合、ログイン
+                  </Form.Text>
+                </Modal.Footer>
+            </Modal>
+          </ButtonToolbar>
+          <div className="clearfix"></div>
           {/* <!-- 真ん中のメッセージブロック --> */}
           <div id="labelContents" className="text-center">
             <h1 id="labelTitle">roar</h1>

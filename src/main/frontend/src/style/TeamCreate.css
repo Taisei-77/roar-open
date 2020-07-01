@@ -1,0 +1,28 @@
+.select {
+  width: 500px;
+  display: inline-block;
+}
+
+.concept {
+  width: 500px;
+  height: 200px;
+}
+
+table,
+tr,
+th,
+td {
+  border: 1px solid black;
+}
+
+th {
+  width: 200px;
+}
+
+td {
+  width: 200px;
+}
+td span {
+  width: 200px;
+  display: inline-block;
+}

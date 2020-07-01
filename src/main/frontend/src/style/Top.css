@@ -4,6 +4,10 @@ main {
   min-width: 550px;
 }
 
+.btn {
+  cursor: pointer;
+}
+
 /* メインの上部のスタイル */
 #signUpContents {
   height: 200px;

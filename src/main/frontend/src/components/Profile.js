@@ -3,9 +3,11 @@ import React from "react";
 class Profile extends React.Component {
   render() {
     return (
-      <div>
-        <h1>ここはプロフィール！</h1>
-      </div>
+      <header>
+        <div>
+          プロフィールの編集
+        </div>
+      </header>
     );
   }
 }

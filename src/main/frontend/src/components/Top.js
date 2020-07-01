@@ -76,7 +76,7 @@ class Top extends React.Component {
               </Modal.Body>
               <Modal.Footer>
                 <Form.Text className="text-muted m-3">
-                  アカウントをお持ちでない場合、新規会員登録
+                  アカウントをお持ちでない場合、<span className="btn" onClick={() => this.setState({ registerShow: true })}>新規会員登録</span>
                 </Form.Text>
               </Modal.Footer>
             </Modal>
@@ -119,7 +119,7 @@ class Top extends React.Component {
               </Modal.Body>
                 <Modal.Footer>
                   <Form.Text className="text-muted m-3">
-                    すでにアカウントをお持ちの場合、ログイン
+                    すでにアカウントをお持ちの場合、<span className="btn" onClick={() => this.setState({ loginShow: true })}>ログイン</span>
                   </Form.Text>
                 </Modal.Footer>
             </Modal>

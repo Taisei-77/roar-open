@@ -1,12 +1,12 @@
 import React from "react";
 import "../style/Profile.css";
-import { Col, Image, Row,} from "react-bootstrap";
+import { Container, Col, Image, Row,} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class Profile extends React.Component {
   render() {
     return (
-      <container>
+      <Container>
         <header>
           <div  className="text-right m-3 p-3">
             <Link to="/ProfileCreate">プロフィールの編集</Link>
@@ -59,7 +59,7 @@ class Profile extends React.Component {
             </div>
           </Col>
         </Row>
-      </container>
+      </Container>
 
 
     );

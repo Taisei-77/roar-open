@@ -1,4 +1,5 @@
 import React from "react";
+import TextField from "@material-ui/core/TextField";
 
 // cssの読み込み
 import "../style/TeamCreate.css";
@@ -13,47 +14,40 @@ class TeamCreate extends React.Component {
     return (
       <div className="teamCreateBody">
         <div className="teamCreateContainer">
-          <p>チーム名</p>
-          <input type="text" placeholder="チーム名"></input>
+          <TextField id="teamName" label="チーム名" />
         </div>
         <TeamCreateView className="teamCreateContainer" />
         <div>基本プロフィール</div>
         <TeamProfile className="teamCreateContainer" />
         <div className="teamCreateContainer">
-          <p>チームコンセプト</p>
-          <textarea
-            className="concept"
-            placeholder="チームコンセプトを自由に記述"
-          ></textarea>
+          <TextField
+            id="teamConcept"
+            label="チームコンセプト"
+            multiline
+            rows={4}
+            variant="outlined"
+          />
         </div>
         <div className="teamCreateContainer">
           <p>大会参加実績</p>
-          <table>
-            <thead>
-              <tr>
-                <th>参加年度</th>
-                <th>大会名</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <textarea placeholder="参加年度"></textarea>
-                </td>
-                <td>
-                  <textarea placeholder="大会名"></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <textarea placeholder="参加年度"></textarea>
-                </td>
-                <td>
-                  <textarea placeholder="大会名"></textarea>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="compePartPerform">
+            <TextField className="partYear" label="参加年" variant="standard" />
+            <span></span>
+            <TextField
+              className="compeName"
+              label="大会名"
+              variant="standard"
+            />
+          </div>
+          <div className="compePartPerform">
+            <TextField className="partYear" label="参加年" variant="standard" />
+            <span></span>
+            <TextField
+              className="compeName"
+              label="大会名"
+              variant="standard"
+            />
+          </div>
         </div>
         <div className="teamCreateButton">
           <Button variant="outline-primary" type="submit">

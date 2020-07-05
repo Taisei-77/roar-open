@@ -1,5 +1,7 @@
 import React from "react";
 
+import "../style/TeamCreateView.css";
+
 var createObjectURL =
   (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
@@ -19,8 +21,8 @@ export class TeamCreateView extends React.Component {
     return (
       <div>
         <input type="file" ref="file" onChange={this.handleChangeFile} />
-        <div>
-          <img src={this.state.image_src} />
+        <div className="imgPreview">
+          <img src={this.state.image_src} alt="" />
         </div>
       </div>
     );

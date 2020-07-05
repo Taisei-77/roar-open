@@ -7,17 +7,23 @@
   margin: 20px 0;
 }
 
-.concept {
-  width: 700px;
-  height: 200px;
+#teamConcept {
+  width: 670px;
 }
 
-td {
-  width: 350px;
+.compePartPerform {
+  margin-bottom: 10px;
+}
+.compePartPerform span {
+  margin-right: 10px;
 }
 
-td textarea {
-  width: 350px;
+.partYear {
+  width: 100px;
+}
+
+.compeName {
+  width: 400px;
 }
 
 .teamCreateButton {

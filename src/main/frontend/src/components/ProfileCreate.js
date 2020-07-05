@@ -1,15 +1,13 @@
 import React from "react";
 import "../style/Profile.css";
 import { Col, Image, Row,} from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-class Profile extends React.Component {
-  render() {
+const ProfileCreate = () => {
     return (
       <container>
         <header>
-          <div  className="text-right m-3 p-3">
-            <Link to="/ProfileCreate">プロフィールの編集</Link>
+          <div className="text-right m-3 p-3">
+            保存
           </div>
         </header>
 
@@ -26,28 +24,28 @@ class Profile extends React.Component {
               プロフィール
             </div>
             <div>
-              
+              <textarea></textarea>
             </div>
 
             <div>
               活動
             </div>
             <div>
-              活動内容
+              <textarea></textarea>
             </div>
 
             <div>
               趣味
             </div>
             <div>
-              趣味内容
+              <textarea></textarea>
             </div>
 
             <div>
               SNS
             </div>
             <div>
-              SNS一覧
+              <textarea></textarea>
             </div>
           </Col>
           <Col md={6}>
@@ -63,7 +61,6 @@ class Profile extends React.Component {
 
 
     );
-  }
 }
 
-export default Profile;
+export default ProfileCreate;

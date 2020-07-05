@@ -13,6 +13,7 @@ import Chat from "./components/Chat";
 import News from "./components/News";
 import Profile from "./components/Profile";
 import Setting from "./components/Setting";
+import ProfileCreate from "./components/ProfileCreate";
 
 class App extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class App extends React.Component {
             <Route path="/Chat" component={Chat} />
             <Route path="/News" component={News} />
             <Route path="/Profile" component={Profile} />
+            <Route path="/ProfileCreate" component={ProfileCreate} />
             <Route path="/Setting" component={Setting} />
           </div>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 var createObjectURL =
   (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
-export class View extends React.Component {
+export class TeamCreateView extends React.Component {
   constructor(props) {
     super(props);
     this.state = { image_src: "" };

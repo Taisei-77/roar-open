@@ -1,28 +1,25 @@
-.select {
-  width: 500px;
-  display: inline-block;
+.teamCreateBody {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.teamCreateContainer {
+  margin: 20px 0;
 }
 
 .concept {
-  width: 500px;
+  width: 700px;
   height: 200px;
 }
 
-table,
-tr,
-th,
 td {
-  border: 1px solid black;
+  width: 350px;
 }
 
-th {
-  width: 200px;
+td textarea {
+  width: 350px;
 }
 
-td {
-  width: 200px;
-}
-td span {
-  width: 200px;
-  display: inline-block;
+.teamCreateButton {
+  text-align: center;
 }

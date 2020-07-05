@@ -30,8 +30,10 @@ class TeamCreate extends React.Component {
           <p>大会参加実績</p>
           <table>
             <thead>
-              <th>参加年度</th>
-              <th>大会名</th>
+              <tr>
+                <th>参加年度</th>
+                <th>大会名</th>
+              </tr>
             </thead>
             <tbody>
               <tr>

@@ -23,11 +23,6 @@ class SideBar extends React.Component {
       <div className="sidebar">
         <ul className="sidebarFixed">
           <li>
-            <Link to="/" className="link">
-              roar
-            </Link>
-          </li>
-          <li>
             <Link to="/Home" className="link">
               ホーム
             </Link>

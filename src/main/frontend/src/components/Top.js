@@ -118,9 +118,10 @@ const Top = (props) => {
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox" className="mb-3">
-                  <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
+                <Form.Group
+                  controlId="formBasicCheckbox"
+                  className="mb-3"
+                ></Form.Group>
                 <Button variant="primary" type="submit" className="m-3">
                   ログイン
                 </Button>
@@ -181,9 +182,7 @@ const Top = (props) => {
                     required
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox"></Form.Group>
                 <Button variant="primary" type="submit" className="m-3">
                   登録
                 </Button>

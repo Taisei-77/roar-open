@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import "../style/Top.css";
 import { Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
+import { auth } from "../firebase/index";
 
-const Top = () => {
-  const [login, isLoginShow] = useState(false);
-  const [register, isRegisterShow] = useState(false);
+const Top = (props) => {
+  const [login, isLoginShow] = useState(false),
+    [register, isRegisterShow] = useState(false),
+    [login_email, setLogEmail] = useState(""),
+    [login_pass, setLogPass] = useState(""),
+    [register_user, setRegUser] = useState(""),
+    [register_email, setRegEmail] = useState(""),
+    [register_pass, setRegPass] = useState("");
 
   //modalの切り替え
   const toggleModal = () => {
@@ -14,6 +20,58 @@ const Top = () => {
     } else {
       isLoginShow(true);
       isRegisterShow(false);
+    }
+  };
+
+  //テキストをセット
+  const handleChange = (e) => {
+    //name属性に応じてvalueをセット
+    switch (e.target.name) {
+      case "login_email":
+        setLogEmail(e.target.value);
+        break;
+      case "login_pass":
+        setLogPass(e.target.value);
+        break;
+      case "register_user":
+        setRegUser(e.target.value);
+        break;
+      case "register_email":
+        setRegEmail(e.target.value);
+        break;
+      case "register_pass":
+        setRegPass(e.target.value);
+        break;
+      //no default
+    }
+  };
+
+  //送信
+  const handleFormSubmit = (e) => {
+    //通常の送信処理等を停止
+    e.preventDefault();
+    //ログイン認証
+    if (e.target.name === "login") {
+      auth
+        .signInWithEmailAndPassword(login_email, login_pass)
+        .then((res) => {
+          //正常終了時
+          props.history.push("/Home");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    } else if (e.target.name === "register") {
+      //新規登録認証
+      auth
+        .createUserWithEmailAndPassword(register_email, register_pass)
+        .then((res) => {
+          //正常終了時
+          props.history.push("/Home");
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
   };
 
@@ -35,16 +93,30 @@ const Top = () => {
               <Modal.Title>ログイン</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form>
+              <Form name="login" onSubmit={handleFormSubmit}>
                 <Form.Group controlId="formBasicEmail" className="m-3">
                   <Form.Label className="mb-3">メールアドレス</Form.Label>
-                  <Form.Control type="email" placeholder="Email" />
+                  <Form.Control
+                    type="email"
+                    placeholder="Email"
+                    name="login_email"
+                    value={login_email}
+                    onChange={handleChange}
+                    required
+                  />
                   <Form.Text className="text-muted"></Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword" className="m-3">
                   <Form.Label className="mb-3">パスワード</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    name="login_pass"
+                    value={login_pass}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox" className="mb-3">
                   <Form.Check type="checkbox" label="Check me out" />
@@ -69,24 +141,45 @@ const Top = () => {
               <Modal.Title>アカウントを作成</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form>
+              <Form name="register" onSubmit={handleFormSubmit}>
                 <Form.Group controlId="formBasicName" className="m-3">
                   <Form.Label className="mb-3">ユーザーネーム</Form.Label>
-                  <Form.Control type="name" placeholder="Username" />
+                  <Form.Control
+                    type="name"
+                    placeholder="Username"
+                    name="register_user"
+                    value={register_user}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail" className="m-3">
                   <Form.Label className="mb-3">メールアドレス</Form.Label>
-                  <Form.Control type="email" placeholder="Email" />
+                  <Form.Control
+                    type="email"
+                    placeholder="Email"
+                    name="register_email"
+                    value={register_email}
+                    onChange={handleChange}
+                    required
+                  />
                   <Form.Text className="text-muted"></Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword" className="m-3">
                   <Form.Label className="mb-3">
                     パスワード
-                    <span id="characterlimit">(半角英数字8~16桁)</span>
+                    <span id="characterlimit">(半角英数字6~16桁)</span>
                   </Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    name="register_pass"
+                    value={register_pass}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Check me out" />

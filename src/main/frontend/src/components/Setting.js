@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { auth } from "../firebase/index";
 
 const url = "http://localhost:8080/api/users";
 
@@ -34,10 +35,17 @@ const Setting = () => {
     UserInfo();
   }, []);
 
+  const handleLogout = () => {
+    auth.signOut();
+  };
+
   return (
     <div>
       <h1>ここは設定画面が入る予定！</h1>
       <p>{userData}</p>
+      <a href="!#" onClick={handleLogout}>
+        ログアウト
+      </a>
     </div>
   );
 };

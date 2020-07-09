@@ -15,6 +15,8 @@ import Profile from "./components/Profile";
 import Setting from "./components/Setting";
 import ProfileCreate from "./components/ProfileCreate";
 
+import Auth from "./auth/Auth";
+
 class App extends React.Component {
   render() {
     return (
@@ -23,14 +25,18 @@ class App extends React.Component {
           <SideBar />
           <div className="main">
             <Route exact path="/" component={Top} />
-            <Route path="/Home" component={Home} />
-            <Route path="/TeamCreate" component={TeamCreate} />
             <Route path="/TeamSearch" component={TeamSearch} />
-            <Route path="/Chat" component={Chat} />
-            <Route path="/News" component={News} />
-            <Route path="/Profile" component={Profile} />
-            <Route path="/ProfileCreate" component={ProfileCreate} />
-            <Route path="/Setting" component={Setting} />
+            {/* 以下認証のみ */}
+            <Auth>
+              <Route path="/Home" component={Home} />
+              <Route path="/TeamCreate" component={TeamCreate} />
+              <Route path="/TeamSearch" component={TeamSearch} />
+              <Route path="/Chat" component={Chat} />
+              <Route path="/News" component={News} />
+              <Route path="/Profile" component={Profile} />
+              <Route path="/ProfileCreate" component={ProfileCreate} />
+              <Route path="/Setting" component={Setting} />
+            </Auth>
           </div>
         </div>
       </BrowserRouter>

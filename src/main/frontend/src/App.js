@@ -22,10 +22,11 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <SideBar />
+          <Auth>
+            <SideBar />
+          </Auth>
           <div className="main">
             <Route exact path="/" component={Top} />
-            <Route path="/TeamSearch" component={TeamSearch} />
             {/* 以下認証のみ */}
             <Auth>
               <Route path="/Home" component={Home} />

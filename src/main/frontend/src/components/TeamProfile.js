@@ -9,48 +9,49 @@ import {
   Prefectures,
   ActivityFrequency,
   DayOfTheWeek,
-} from "../date/date";
+} from "../data/data";
 
-export const TeamProfile = (props) => {
+export const TeamProfile = () => {
   return (
     <div>
       <div className="selectBlock">
         <p>競技</p>
         <Select
-          className="select"
+          className="profileSelect"
           isClearable
+          isSearchable
           options={SportName}
           placeholder="何のスポーツ？"
-        ></Select>
+        />
       </div>
       <div className="selectBlock">
         <p>活動拠点</p>
         <Select
-          className="select"
+          className="profileSelect"
           isMulti
           isClearable
           options={Prefectures}
           placeholder="どこで活動してる？"
-        ></Select>
+        />
       </div>
       <div className="selectBlock">
         <p>活動頻度</p>
         <Select
-          className="select"
+          className="profileSelect"
           isClearable
           options={ActivityFrequency}
           placeholder="どれくらい活動してる？"
-        ></Select>
+        />
       </div>
       <div className="selectBlock">
         <p>活動曜日</p>
         <Select
-          className="select"
+          className="profileSelect"
           isMulti
           isClearable
           options={DayOfTheWeek}
           placeholder="何曜日に活動してる？"
-        ></Select>
+        />
       </div>
     </div>
   );

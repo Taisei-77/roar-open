@@ -1,7 +1,12 @@
 import React from "react";
-import { CircularProgress } from "@material-ui/core";
 
-const spinner = () => {
-  return <CircularProgress color="white" size="1em" />;
+const Spinner = () => {
+  return (
+    <div>
+      <div className="spinner-border text-light" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  );
 };
-export default spinner;
+export default Spinner;

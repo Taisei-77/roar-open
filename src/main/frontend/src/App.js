@@ -27,11 +27,11 @@ class App extends React.Component {
           </Auth>
           <div className="main">
             <Route exact path="/" component={Top} />
+            <Route path="/TeamSearch" component={TeamSearch} />
             {/* 以下認証のみ */}
             <Auth>
               <Route path="/Home" component={Home} />
               <Route path="/TeamCreate" component={TeamCreate} />
-              <Route path="/TeamSearch" component={TeamSearch} />
               <Route path="/Chat" component={Chat} />
               <Route path="/News" component={News} />
               <Route path="/Profile" component={Profile} />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../style/Top.css";
 import { Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
 import { auth } from "../firebase/index";
+import Spinner from "../UIkit/Spinner";
 
 const Top = (props) => {
   const [login, isLoginShow] = useState(false),
@@ -10,18 +11,19 @@ const Top = (props) => {
     [login_pass, setLogPass] = useState(""),
     [register_user, setRegUser] = useState(""),
     [register_email, setRegEmail] = useState(""),
-    [register_pass, setRegPass] = useState("");
+    [register_pass, setRegPass] = useState(""),
+    [login_text, setLogin_text] = useState(false),
+    [register_text, setRegister_text] = useState(false);
 
   //modalの切り替え
   const toggleModal = () => {
-    if (login === true) {
-      isLoginShow(false);
-      isRegisterShow(true);
-    } else {
-      isLoginShow(true);
-      isRegisterShow(false);
-    }
+    isLoginShow(!login);
+    isRegisterShow(!register);
   };
+
+  //送信中ボタンを更新マークにする
+  const login_button_text = login_text ? <Spinner /> : "ログイン";
+  const register_button_text = register_text ? <Spinner /> : "登録";
 
   //テキストをセット
   const handleChange = (e) => {
@@ -50,6 +52,8 @@ const Top = (props) => {
   const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
     e.preventDefault();
+    setLogin_text(true);
+    setRegister_text(true);
     //ログイン認証
     if (e.target.name === "login") {
       auth
@@ -123,7 +127,8 @@ const Top = (props) => {
                   className="mb-3"
                 ></Form.Group>
                 <Button variant="primary" type="submit" className="m-3">
-                  ログイン
+                  {/* ログインボタンのテキスト */}
+                  {login_button_text}
                 </Button>
               </Form>
             </Modal.Body>
@@ -184,7 +189,8 @@ const Top = (props) => {
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox"></Form.Group>
                 <Button variant="primary" type="submit" className="m-3">
-                  登録
+                  {/* 登録ボタンのテキスト */}
+                  {register_button_text}
                 </Button>
               </Form>
             </Modal.Body>

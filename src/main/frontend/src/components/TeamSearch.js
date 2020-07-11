@@ -70,6 +70,7 @@ export const TeamSearch = () => {
         <TeamSearchCard />
         <TeamSearchCard />
         <TeamSearchCard />
+        <TeamSearchCard />
       </div>
     </div>
   );

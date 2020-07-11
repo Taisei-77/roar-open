@@ -12,10 +12,25 @@ import { TeamProfile } from "./TeamProfile";
 import { CompePartPerform } from "./CompePartPerform";
 
 export const TeamCreate = () => {
+  // ユーザーが入力したチームコンセプトの値を動的に取得する記述。
   const [teamConceptValue, setTeamConceptValue] = useState("");
   const teamConceptValueChenge = (e) => {
     setTeamConceptValue(e.target.value);
   };
+
+  // 追加ボタンを押すと、大会参加実績を追加するための記述（上限は５個に設定している。）。
+  const [compePartPerform, setCompePartPerform] = useState([]);
+  const [keyNumber, setKeyNumber] = useState(-1);
+
+  function handleClick() {
+    if (compePartPerform.length <= 4) {
+      setKeyNumber(keyNumber + 1);
+      setCompePartPerform(compePartPerform.concat(keyNumber));
+    }
+  }
+  const compePartPerforms = compePartPerform.map((number) => (
+    <CompePartPerform key={number} />
+  ));
 
   return (
     <div className="teamCreateBody">
@@ -39,8 +54,8 @@ export const TeamCreate = () => {
       </div>
       <div className="teamCreateContainer">
         <span>大会参加実績</span>
-        <Button>追加する</Button>
-        <CompePartPerform />
+        <Button onClick={handleClick}>追加する</Button>
+        <div>{compePartPerforms}</div>
       </div>
       <div className="teamCreateButton">
         <Button variant="contained" type="submit">

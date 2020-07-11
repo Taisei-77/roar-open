@@ -9,52 +9,52 @@ class Profile extends React.Component {
       <Container>
         <header>
           <div  className="text-right m-3 p-3">
-            <Link to="/ProfileCreate">プロフィールの編集</Link>
+            <Link to={{ pathname: "/ProfileCreate", state: { name: "test" }}}>プロフィールの編集</Link>
           </div>
         </header>
 
         <Row>
           <Col md={6}>
-            <div>
+            <div className="my-3">
               アイコン
             </div>
             <Image
              src=""
              rounded />
               
-            <div>
+            <div className="my-3">
               プロフィール
             </div>
-            <div>
-              
+            <div className="border p-2">
+              プロフィール内容
             </div>
 
-            <div>
+            <div className="my-3">
               活動
             </div>
-            <div>
+            <div className="border p-2">
               活動内容
             </div>
 
-            <div>
+            <div className="my-3">
               趣味
             </div>
-            <div>
+            <div className="border p-2">
               趣味内容
             </div>
 
-            <div>
+            <div className="my-3">
               SNS
             </div>
-            <div>
+            <div className="border p-2">
               SNS一覧
             </div>
           </Col>
           <Col md={6}>
-            <div>
+            <div className="my-3">
               ギャラリー
             </div>
-            <div>
+            <div className="border p-2">
               ギャラリー集
             </div>
           </Col>

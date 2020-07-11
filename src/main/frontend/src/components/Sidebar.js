@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../style/Sidebar.css";
 
-class SideBar extends React.Component {
+class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,4 +70,4 @@ class SideBar extends React.Component {
   }
 }
 
-export default SideBar;
+export default Sidebar;

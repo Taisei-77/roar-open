@@ -39,7 +39,7 @@ public class Rest {
     @Autowired
     SearchService searchService;
 
-    @GetMapping("/Search")
+    @GetMapping("/search")
     public List<Search> getAllA() {
         // System.out.println("address=" + address + ", password=" + password);
         return searchService.getAll();

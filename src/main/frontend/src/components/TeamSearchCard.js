@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const TeamSearchCard = () => {
+export const TeamSearchCard = (props) => {
   const classes = useStyles();
 
   return (

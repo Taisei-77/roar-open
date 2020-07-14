@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 
@@ -19,7 +19,7 @@ import {
 import { TeamSearchCard } from "./TeamSearchCard";
 
 // データベースとの通信
-const url = "http://localhost:8080/api/Search";
+const url = "http://localhost:8080/api/search";
 
 const TeamSearch = () => {
   const [sportName, setSportName] = useState(""),
@@ -37,7 +37,7 @@ const TeamSearch = () => {
   };
 
   // 検索機能の記述
-  let arr = [];
+  let searchResults = "";
 
   const SearchInfo = () => {
     axios
@@ -53,11 +53,15 @@ const TeamSearch = () => {
       )
       //get(エンドポイント, { params: {送りたいパラメーターの指定}　}
       .then((res) => {
+        setSearchResultData(res.data);
         // 通信に成功後レスポンスが返ってきた時に実行したい処理
         //取得データ全てをリスト化表示
-        for (var i = 0; i < res.data.length; i++) {
-          setSearchResultData(arr.concat(res.data[i]));
-        }
+
+        // for (var i = 0; i < res.data.length; i++) {
+        //   arr = arr.concat(res.data[i]);
+        //   setSearchResultData(JSON.stringify(arr));
+        // }
+
         //   for (var i = 0; i < res.data.length; i++) {
         //     arr.push(
         //       <li key={res.data[i].id}>
@@ -67,17 +71,12 @@ const TeamSearch = () => {
         //     );
         //   }
         //   fetchUserInfo(arr);
-        alert(res.data[i]);
       })
       .catch((error) => {
         // 通信に失敗してレスポンスが返ってこなかった時に実行したい処理
         alert(error);
       });
   };
-
-  const searchResults = searchResultData.map((data) => (
-    <TeamSearchCard props={data} />
-  ));
 
   const [freeWord, setFreeWord] = useState("");
   const freeWordChange = (e) => {
@@ -138,6 +137,18 @@ const TeamSearch = () => {
         </Toolbar>
       </AppBar>
       <div>{searchResults}</div>
+      {searchResultData.map((data) => (
+        <TeamSearchCard
+          id={data.id}
+          team_name={data.team_name}
+          picture={data.picture}
+          sport_name={data.sport_name}
+          prefectures={data.prefectures}
+          activity_frequency={data.activity_frequency}
+          day_of_the_week={data.day_of_the_week}
+          team_concept={data.team_concept}
+        />
+      ))}
     </div>
   );
 };

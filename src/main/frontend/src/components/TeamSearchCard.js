@@ -27,7 +27,16 @@ const useStyles = makeStyles({
   },
 });
 
-export const TeamSearchCard = (props) => {
+export const TeamSearchCard = ({
+  id,
+  team_name,
+  picture,
+  sport_name,
+  prefectures,
+  activity_frequency,
+  day_of_the_week,
+  team_concept,
+}) => {
   const classes = useStyles();
 
   return (
@@ -39,7 +48,7 @@ export const TeamSearchCard = (props) => {
               component="img"
               alt="チーム画像"
               height="225"
-              image="https://source.unsplash.com/random"
+              image={picture}
               title="チーム画像"
             />
           </CardActionArea>
@@ -47,7 +56,7 @@ export const TeamSearchCard = (props) => {
         <Grid item xs={8}>
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
-              大阪ハリケーンず
+              {team_name}
             </Typography>
             <Typography
               variant="body2"
@@ -55,10 +64,7 @@ export const TeamSearchCard = (props) => {
               component="p"
               className={classes.teamConcept}
             >
-              ゆる〜く活動中！
-              週に１回、体育館を借りて、バスケットボールをやっています。
-              時々、地域の大会に参加したり、他チームとの練習試合などもしています。
-              和やかな雰囲気でバスケットボールを楽しみたい方は是非チームに参加してください！
+              {team_concept}
             </Typography>
             <CardActions>
               <Button

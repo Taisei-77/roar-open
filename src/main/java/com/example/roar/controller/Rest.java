@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 //json(API)受信時に動く
@@ -25,14 +24,14 @@ public class Rest {
     UserService userService;
 
     @PostMapping("/user")
-    public User getAllData(@RequestBody User jsonUid) {
-        System.out.println(jsonUid.getUid());
-        return userService.getUserInfo(jsonUid.getUid());
+    public User user(@RequestBody User uidData) {
+        // System.out.println(uidData.getUid());
+        return userService.getProfile(uidData.getUid());
     }
 
     @PostMapping("/profile")
-    public String getAll() {
-        return "OK";
+    public void profile(@RequestBody User profileData) {
+        userService.setProfile(profileData);
     }
 
     @Autowired

@@ -18,16 +18,10 @@ public class Search {
     private long id;
     @Column(nullable = false)
     private String team_name; // チーム名
-    @Column(nullable = true)
     private String picture; // チーム写真
-    @Column(nullable = true)
     private String sport_name; // 競技名
-    @Column(nullable = true)
     private String prefectures; // 活動地域
-    @Column(nullable = true)
     private String activity_frequency; // 活動頻度
-    @Column(nullable = true)
     private String day_of_the_week; // 活動曜日
-    @Column(nullable = true)
     private String team_concept; // チームコンセプト
 }

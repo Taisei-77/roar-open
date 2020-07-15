@@ -1,13 +1,17 @@
 import React from "react";
+import { Container } from 'react-bootstrap';
+import NewsList from "./NewsList";
 
-class News extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>ここはニュース画面です！</h1>
+const News = () => {
+
+  return (
+    <Container>
+      <div className="m-5">
+        <h1 className="text-left">News</h1>
       </div>
-    );
-  }
-}
+      <NewsList/>
+    </Container>
+  );
+};
 
 export default News;

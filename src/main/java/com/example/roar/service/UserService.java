@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+// import java.util.List;
 
 import com.example.roar.entity.User;
 import com.example.roar.entity.UserRepository;
@@ -16,11 +16,11 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    // public User postTweet(User tweet) {
-    // return userRepository.save(tweet);
-    // }
+    public User postTweet(User tweet) {
+        return userRepository.save(tweet);
+    }
 
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public User getUserInfo(String uid) {
+        return userRepository.findByUidIs(uid);
     }
 }

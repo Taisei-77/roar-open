@@ -55,10 +55,12 @@ const ProfileCreate = (props) => {
     axios
       .post(url, {
         uid: auth.currentUser.uid,
+        icon: icon,
         profile: profile,
         activ: activ,
         likes: like,
         sns: sns,
+        gallery: gallery,
       })
       .then(() => {
         props.history.push("/Profile");

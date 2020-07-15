@@ -7,23 +7,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
-//import lombok.AllArgsConstructor;
 import lombok.Data;
-//import lombok.NoArgsConstructor;
 
 @Entity // JPAのエンティティであることを示す。DBで使用するオブジェクトをエンティティ。フィールド=カラム。
 @Data
-// @NoArgsConstructor //引数を持たないコンストラクタを生成
-// @AllArgsConstructor //全ての引数を持つコンストラクタを生成
-@Table(name = "user_info")
+@Table(name = "users_info")
 public class User {
     @Id // 主キーを示す
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
-    private String address;
+    private String uid;
     @Column(nullable = false)
-    private String user;
+    private String user_name;
     @Column(nullable = false)
-    private String password;
+    private String icon;
+    @Column(nullable = false)
+    private String profile;
+    @Column(nullable = false)
+    private String activ;
+    @Column(nullable = false)
+    private String likes;
+    @Column(nullable = false)
+    private String sns;
+    @Column(nullable = false)
+    private String gallery;
 }

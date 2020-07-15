@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,16 +24,14 @@ public class Rest {
     @Autowired
     UserService userService;
 
-    @GetMapping("/users")
-    public List<User> getAllData() {
-        return userService.getAll();
+    @PostMapping("/user")
+    public User getAllData(@RequestBody User jsonUid) {
+        System.out.println(jsonUid.getUid());
+        return userService.getUserInfo(jsonUid.getUid());
     }
 
-    // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得
-    // @RequestParamで/rest?keyword=Java&limit=10 ⇒クエリパラメータJava,10を取得
-    @PostMapping("/login")
+    @PostMapping("/profile")
     public String getAll() {
-        // System.out.println("address=" + address + ", password=" + password);
         return "OK";
     }
 
@@ -41,26 +40,11 @@ public class Rest {
 
     @GetMapping("/search")
     public List<Search> getAllA() {
-        // System.out.println("address=" + address + ", password=" + password);
         return searchService.getAll();
     }
 
-    // post送信パターン
-    // axios
-    // .post("http://localhost:8080/api/login", {
-    // email: login_email,
-    // password: login_pass,
-    // })
-    // .then((res) => {
-    // //レスポンスを受け取るオブジェクトをresとする
-    // // 通信成功後
-    // console.log(res);
-    // })
-    // .catch((error) => {
-    // // 通信失敗
-    // console.log(error);
-    // });
-
+    // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得
+    // @RequestParamで/rest?keyword=Java&limit=10 ⇒クエリパラメータJava,10を取得
     // GET受信パターン
     // @GetMapping("/login")
     // public String getAll(@RequestParam("address") String address,

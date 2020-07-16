@@ -76,10 +76,14 @@ const TeamSearch = () => {
 
   // 検索ボタンを押した時に実行される処理
   const TeamSearchBtn = () => {
-    setSportName(document.sport_name.select.value);
-    setPrefectures(document.prefectures_name.select.value);
-    setActivityFrequency(document.activity_frequency_name.select.value);
-    setDayOfTheWeek(document.day_of_the_week_name.select.value);
+    setSportName(document.getElementsByName("sport_name")[0].value);
+    setPrefectures(document.getElementsByName("prefectures_name")[0].value);
+    setActivityFrequency(
+      document.getElementsByName("activity_frequency_name")[0].value
+    );
+    setDayOfTheWeek(
+      document.getElementsByName("day_of_the_week_name")[0].value
+    );
     SearchInfo();
     window.scrollTo(0, 0);
   };
@@ -94,24 +98,20 @@ const TeamSearch = () => {
 
   const SearchInfo = () => {
     axios
-      .get(
-        url /*, {
+      .get(url, {
         params: {
           sportName: sportName,
           prefectures: prefectures,
           activityFrequency: activityFrequency,
           dayOfTheWeek: dayOfTheWeek,
         },
-      }*/
-      )
+      })
       //get(エンドポイント, { params: {送りたいパラメーターの指定}　}
       .then((res) => {
-        // 通信に成功後レスポンスが返ってきた時に実行したい処理
         //取得データ全てをリスト化表示
         setSearchResultData(res.data);
       })
       .catch((error) => {
-        // 通信に失敗してレスポンスが返ってこなかった時に実行したい処理
         alert(error);
       });
   };
@@ -145,42 +145,34 @@ const TeamSearch = () => {
     <div>
       <AppBar color="default" position="sticky">
         <Toolbar>
-          <form name="sport_name">
-            <Select
-              className="select"
-              isClearable
-              options={SportName}
-              placeholder="スポーツ名"
-              name="select"
-            />
-          </form>
-          <form name="prefectures_name">
-            <Select
-              className="select"
-              isClearable
-              options={Prefectures}
-              placeholder="活動地域"
-              name="select"
-            />
-          </form>
-          <form name="activity_frequency_name">
-            <Select
-              className="select"
-              isClearable
-              options={ActivityFrequency}
-              placeholder="活動頻度"
-              name="select"
-            />
-          </form>
-          <form name="day_of_the_week_name">
-            <Select
-              className="select"
-              isClearable
-              options={DayOfTheWeek}
-              placeholder="活動曜日"
-              name="select"
-            />
-          </form>
+          <Select
+            className="select"
+            isClearable
+            options={SportName}
+            placeholder="スポーツ名"
+            name="sport_name"
+          />
+          <Select
+            className="select"
+            isClearable
+            options={Prefectures}
+            placeholder="活動地域"
+            name="prefectures_name"
+          />
+          <Select
+            className="select"
+            isClearable
+            options={ActivityFrequency}
+            placeholder="活動頻度"
+            name="activity_frequency_name"
+          />
+          <Select
+            className="select"
+            isClearable
+            options={DayOfTheWeek}
+            placeholder="活動曜日"
+            name="day_of_the_week_name"
+          />
           <TextField
             className="freeWordBox"
             size="small"

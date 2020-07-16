@@ -59,7 +59,7 @@ const TeamSearch = () => {
     [prefectures, setPrefectures] = useState(""),
     [activityFrequency, setActivityFrequency] = useState(""),
     [dayOfTheWeek, setDayOfTheWeek] = useState(""),
-    [searchResultData, setSearchResultData] = useState([]);
+    [searchResultData, setSearchResultData] = useState([]); //検索結果を管理するためのstate
 
   const [state, dispatch] = useReducer(reducer, {
     currentPage: 1, //現在のページ

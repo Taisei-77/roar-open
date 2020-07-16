@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import "../style/TeamCreate.css";
 
 // コンポーネントの読み込み
-import { TeamCreateView } from "./TeamCreateView";
+import { CreatePhoto } from "../UIkit/CreatePhoto";
 import { TeamProfile } from "./TeamProfile";
 import { CompePartPerform } from "./CompePartPerform";
 
@@ -37,7 +37,7 @@ export const TeamCreate = () => {
       <div className="teamCreateContainer">
         <TextField id="teamName" label="チーム名" name="" value="" />
       </div>
-      <TeamCreateView className="teamCreateContainer" />
+      <CreatePhoto className="teamCreateContainer" height={450} width={700} />
       <div>基本プロフィール</div>
       <TeamProfile className="teamCreateContainer" />
       <div className="teamCreateContainer">

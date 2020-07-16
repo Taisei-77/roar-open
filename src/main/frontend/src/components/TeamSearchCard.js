@@ -27,16 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const TeamSearchCard = ({
-  id,
-  team_name,
-  picture,
-  sport_name,
-  prefectures,
-  activity_frequency,
-  day_of_the_week,
-  team_concept,
-}) => {
+export const TeamSearchCard = (props) => {
   const classes = useStyles();
 
   return (
@@ -48,7 +39,7 @@ export const TeamSearchCard = ({
               component="img"
               alt="チーム画像"
               height="225"
-              image={picture}
+              image={props.picture}
               title="チーム画像"
             />
           </CardActionArea>
@@ -56,7 +47,7 @@ export const TeamSearchCard = ({
         <Grid item xs={8}>
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
-              {team_name}
+              {props.team_name}
             </Typography>
             <Typography
               variant="body2"
@@ -64,7 +55,8 @@ export const TeamSearchCard = ({
               component="p"
               className={classes.teamConcept}
             >
-              {team_concept}
+              {props.team_concept}
+              {}
             </Typography>
             <CardActions>
               <Button

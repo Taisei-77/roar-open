@@ -3,7 +3,7 @@ import "../style/Profile.css";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
-import { TeamCreateView } from "./TeamCreateView";
+import { CreatePhoto } from "../UIkit/CreatePhoto";
 import { auth } from "../firebase/index";
 import axios from "axios";
 
@@ -81,7 +81,7 @@ const ProfileCreate = (props) => {
         <Row>
           <Col md={6}>
             <div className="my-3">アイコン</div>
-            <TeamCreateView />
+            <CreatePhoto height={140} width={140} />
             <div className="my-3">プロフィール</div>
             <TextField
               name="profile"

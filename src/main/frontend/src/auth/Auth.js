@@ -1,44 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { auth } from "../firebase/index";
-class Auth extends React.Component {
-  state = {
-    signinCheck: false, //ログインチェックが完了してるか
-    signedIn: false, //ログインしてるか
-  };
+const Auth = (props) => {
+  const [signinCheck, setSigninCheck] = useState(false), //認証処理が完了してるか
+    [signedIn, setSignedIn] = useState(false); //ログインしてるか
 
-  componentDidMount = () => {
-    //ログインしてるかどうかチェック
+  useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        //してる
-        this.setState({
-          signinCheck: true,
-          signedIn: true,
-        });
+        //ログインしている
+        setSignedIn(true);
+        props.toggleSidebar(true);
       } else {
-        //してない
-        this.setState({
-          signinCheck: true,
-          signedIn: false,
-        });
+        //していない
+        setSignedIn(false);
       }
+      setSigninCheck(true); //認証完了
+      return () =>
+        //unmounting時
+        auth.onAuthStateChanged();
     });
-  };
+  }, [auth.onAuthStateChanged]);
 
-  render() {
-    //チェック中(ローディング)
-    if (!this.state.signinCheck) {
-      return <></>;
-    }
-    if (this.state.signedIn) {
-      //サインインしてるとき（そのまま表示）
-      return this.props.children;
-    } else {
-      //してないとき（ログイン画面にリダイレクト）
-      return <Redirect to="/" />;
-    }
+  //認証チェック中(ローディング)
+  if (!signinCheck) {
+    return <></>;
   }
-}
+  if (signedIn) {
+    //ログインしているとき（そのまま表示）
+    return props.children;
+  } else {
+    //していないとき（ログイン画面にリダイレクト）
+    return <Redirect to="/" />;
+  }
+};
 
 export default Auth;

@@ -21,6 +21,12 @@ const Top = (props) => {
     isRegisterShow(!register);
   };
 
+  //ボタンの回転のオンオフ
+  const toggleSpinner = (flag) => {
+    setLogin_text(flag);
+    setRegister_text(flag);
+  };
+
   //送信中ボタンを更新マークにする
   const login_button_text = login_text ? <Spinner /> : "ログイン";
   const register_button_text = register_text ? <Spinner /> : "登録";
@@ -52,8 +58,7 @@ const Top = (props) => {
   const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
     e.preventDefault();
-    setLogin_text(true);
-    setRegister_text(true);
+    toggleSpinner(true);
     //ログイン認証
     if (e.target.name === "login") {
       auth
@@ -63,6 +68,7 @@ const Top = (props) => {
           props.history.push("/Home");
         })
         .catch((error) => {
+          toggleSpinner(false);
           alert(error);
         });
     } else if (e.target.name === "register") {
@@ -74,6 +80,7 @@ const Top = (props) => {
           props.history.push("/Home");
         })
         .catch((error) => {
+          toggleSpinner(false);
           alert(error);
         });
     }

@@ -25,21 +25,14 @@ class App extends React.Component {
     this.state = {
       signedIn: false,
     };
+    this.toggleSidebar = this.toggleSidebar.bind(this);
   }
 
-  componentDidMount = () => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({
-          signedIn: true,
-        });
-      } else {
-        this.setState({
-          signedIn: false,
-        });
-      }
+  toggleSidebar(boolean) {
+    this.setState({
+      signedIn: boolean,
     });
-  };
+  }
 
   render() {
     return (
@@ -50,14 +43,22 @@ class App extends React.Component {
             <Route exact path="/" component={Top} />
             <Route path="/TeamSearch" component={TeamSearch} />
             {/* 以下認証のみ */}
-            <Auth>
+            <Auth toggleSidebar={this.toggleSidebar}>
               <Route path="/Home" component={Home} />
               <Route path="/TeamCreate" component={TeamCreate} />
               <Route path="/Chat" component={Chat} />
               <Route path="/News" component={News} />
               <Route path="/Profile" component={Profile} />
               <Route path="/ProfileCreate" component={ProfileCreate} />
-              <Route path="/Setting" component={Setting} />
+              <Route
+                path="/Setting"
+                render={(props) => (
+                  <Setting
+                    toggleSidebar={(boolean) => this.toggleSidebar(boolean)}
+                    {...props}
+                  />
+                )}
+              />
             </Auth>
           </div>
         </div>

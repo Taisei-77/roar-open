@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../firebase/index";
 import axios from "axios";
 
-const url = "http://localhost:8080/api/user";
+const url = "http://localhost:8080/api/profile";
 
 const Profile = () => {
   const [icon, setIcon] = useState(""),
@@ -18,10 +18,7 @@ const Profile = () => {
   const UserInfo = () => {
     //送信
     axios
-      .post(url, {
-        //ユーザーID取得し送信
-        uid: auth.currentUser.uid,
-      })
+      .get(url + "/" + auth.currentUser.uid) //パスパラメータにユーザーIDを追加
       .then((res) => {
         // alert(res.data.user_name);
         setIcon(res.data.icon);

@@ -10,6 +10,7 @@ import com.example.roar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,15 +24,14 @@ public class Rest {
     @Autowired
     UserService userService;
 
-    @PostMapping("/user")
-    public User user(@RequestBody User uidData) {
-        // System.out.println(uidData.getUid());
+    @GetMapping("/profile/{uid}")
+    public User user(@PathVariable("uid") User uidData) {
         return userService.getProfile(uidData.getUid());
     }
 
     @PostMapping("/profile")
-    public void profile(@RequestBody User profileData) {
-        userService.setProfile(profileData);
+    public User profile(@RequestBody User profileData) {
+        return userService.setProfile(profileData);
     }
 
     @Autowired

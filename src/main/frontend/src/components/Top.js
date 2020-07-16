@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../style/Top.css";
 import { Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
 import { auth } from "../firebase/index";
-import Spinner from "../UIkit/spinner";
+import Spinner from "../UIkit/Spinner";
 
 const Top = (props) => {
   const [login, isLoginShow] = useState(false),

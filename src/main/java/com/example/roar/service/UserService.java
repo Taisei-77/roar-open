@@ -14,7 +14,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void setProfile(User profileData) {
+    public User setProfile(User profileData) {
         User user = new User();
         user.setUid(profileData.getUid());
         // user.setUser_name(profileData.getUser_name());
@@ -24,7 +24,7 @@ public class UserService {
         user.setLikes(profileData.getLikes());
         user.setSns(profileData.getSns());
         user.setGallery(profileData.getGallery());
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User getProfile(String uid) {

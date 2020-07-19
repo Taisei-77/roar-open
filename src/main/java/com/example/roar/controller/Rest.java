@@ -3,6 +3,7 @@ package com.example.roar.controller;
 import java.util.List;
 
 import com.example.roar.entity.Search;
+import com.example.roar.entity.SearchRepository;
 import com.example.roar.entity.User;
 import com.example.roar.service.SearchService;
 import com.example.roar.service.UserService;
@@ -25,7 +26,7 @@ public class Rest {
     UserService userService;
 
     @GetMapping("/profile/{uid}")
-    public User user(@PathVariable("uid") User uidData) {
+    public User profilUid(@PathVariable("uid") User uidData) {
         return userService.getProfile(uidData.getUid());
     }
 
@@ -37,9 +38,15 @@ public class Rest {
     @Autowired
     SearchService searchService;
 
-    @GetMapping("/search")
-    public List<Search> getAllA() {
-        return searchService.getAll();
+    @GetMapping("/search") // @RequestParamを省略
+    public List<Search> search(String sportName, String prefectures, String activityFrequency, String dayOfTheWeek) {
+        System.out.println(sportName + prefectures);
+        Search search = new Search();
+        search.setSportName(sportName);
+        search.setPrefectures(prefectures);
+        search.setActivityFrequency(activityFrequency);
+        search.setDayOfTheWeek(dayOfTheWeek);
+        return searchService.findTeam(search);
     }
 
     // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得

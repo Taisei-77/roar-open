@@ -16,12 +16,25 @@ public class Search {
     @Id // 主キーを示す
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
-    private String team_name; // チーム名
-    private String picture; // チーム写真
-    private String sport_name; // 競技名
-    private String prefectures; // 活動地域
-    private String activity_frequency; // 活動頻度
-    private String day_of_the_week; // 活動曜日
-    private String team_concept; // チームコンセプト
+    // チーム名
+    @Column(nullable = false, name = "team_name")
+    private String teamName;
+    // チーム写真
+    @Column(name = "picture")
+    private String picture;
+    // 競技名
+    @Column(name = "sport_name")
+    private String sportName;
+    // 活動地域
+    @Column(name = "prefectures")
+    private String prefectures;
+    // 活動頻度
+    @Column(name = "activity_frequency")
+    private String activityFrequency;
+    // 活動曜日
+    @Column(name = "day_of_the_week")
+    private String dayOfTheWeek;
+    // チームコンセプト
+    @Column(name = "team_concept")
+    private String teamConcept;
 }

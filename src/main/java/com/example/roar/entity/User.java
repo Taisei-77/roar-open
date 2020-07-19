@@ -14,11 +14,13 @@ public class User {
     @Id // 主キーを示す
     @Column(nullable = false)
     private String uid; // uid
-    private String user_name; // ユーザー名
+    @Column(name = "user_name")
+    private String userName; // ユーザー名
     private String icon; // アイコン
     private String profile; // プロフィール
     private String activ; // 活動
     private String likes; // 趣味
     private String sns; // SNS
     private String gallery; // ギャラリー
+
 }

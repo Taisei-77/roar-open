@@ -16,11 +16,8 @@ public class SearchService {
     @Autowired
     SearchRepository searchRepository;
 
-    // public User postTweet(User tweet) {
-    // return userRepository.save(tweet);
-    // }
-
-    public List<Search> getAll() {
-        return searchRepository.findAll();
+    public List<Search> findTeam(Search search) {
+        return searchRepository.findTeamSQL(search.getSportName(), search.getPrefectures(),
+                search.getActivityFrequency(), search.getDayOfTheWeek());
     }
 }

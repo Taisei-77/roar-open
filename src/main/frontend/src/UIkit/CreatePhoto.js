@@ -12,6 +12,9 @@ const useStyle = makeStyles({
   trimming: {
     objectFit: "cover",
   },
+  canvas: {
+    display: "none",
+  },
 });
 
 // createObjectURLのメソッドを定義。
@@ -79,14 +82,14 @@ export const CreatePhoto = (props) => {
     let barr, bin, i, len;
     bin = atob(base64.split("base64,")[1]);
     len = bin.length;
-    barr = new Uint8Array(len);
+    barr = new Uint8Array(len); //2進数でのcanvas画像のデータ
     i = 0;
     for (let i = 0; i < len; i++) {
       barr[i] = bin.charCodeAt(i);
     }
-    blob = new Blob([barr], { type: "image/jpeg" });
+    blob = new Blob([barr], { type: "image/jpeg" }); //2進数のcanvas画像データをBlob型のデータに変換する。
+    // props.pictureData(blob);
     console.log(blob);
-    console.log(image_src);
   };
 
   return (
@@ -101,9 +104,13 @@ export const CreatePhoto = (props) => {
           value={image_src}
           height={props.height}
           width={props.width}
-          // onChange={handleChangeImg}
         />
-        <canvas id="canvas" height={props.height} width={props.width}></canvas>
+        <canvas
+          // className={classes.canvas}
+          id="canvas"
+          height={props.height}
+          width={props.width}
+        ></canvas>
       </div>
       <div className="imgUploadBtn">
         <input

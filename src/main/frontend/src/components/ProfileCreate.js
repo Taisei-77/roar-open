@@ -47,6 +47,10 @@ const ProfileCreate = (props) => {
       //no default
     }
   };
+  // CreatePhotoが取得した画像データを、Iconに格納するための関数。（子=>親へのデータの受け渡し）
+  const getPictureData = (pictureData) => {
+    setIcon(pictureData);
+  };
 
   const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
@@ -81,7 +85,11 @@ const ProfileCreate = (props) => {
         <Row>
           <Col md={6}>
             <div className="my-3">アイコン</div>
-            <CreatePhoto height={140} width={140} />
+            <CreatePhoto
+              pictureData={getPictureData}
+              height={140}
+              width={140}
+            />
             <div className="my-3">プロフィール</div>
             <TextField
               name="profile"

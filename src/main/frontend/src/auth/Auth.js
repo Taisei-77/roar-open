@@ -20,7 +20,8 @@ const Auth = (props) => {
         //unmounting時
         auth.onAuthStateChanged();
     });
-  }, [auth.onAuthStateChanged]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //認証チェック中(ローディング)
   if (!signinCheck) {

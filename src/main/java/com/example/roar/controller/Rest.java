@@ -3,7 +3,6 @@ package com.example.roar.controller;
 import java.util.List;
 
 import com.example.roar.entity.Search;
-import com.example.roar.entity.SearchRepository;
 import com.example.roar.entity.User;
 import com.example.roar.service.SearchService;
 import com.example.roar.service.UserService;

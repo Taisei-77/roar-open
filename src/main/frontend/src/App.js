@@ -17,7 +17,6 @@ import Setting from "./components/Setting";
 import ProfileCreate from "./components/ProfileCreate";
 
 import Auth from "./auth/Auth";
-import { auth } from "./firebase/index";
 
 class App extends React.Component {
   constructor(props) {

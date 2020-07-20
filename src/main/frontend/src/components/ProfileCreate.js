@@ -29,9 +29,9 @@ const ProfileCreate = (props) => {
   const handleChange = (e) => {
     //name属性に応じてvalueをセット
     switch (e.target.name) {
-      // case "login_email":
-      //   setIcon(e.target.value);
-      //   break;
+      case "icon":
+        setIcon(e.target.value);
+        break;
       case "profile":
         setProfile(e.target.value);
         break;
@@ -43,6 +43,9 @@ const ProfileCreate = (props) => {
         break;
       case "sns":
         setSns(e.target.value);
+        break;
+      case "gallery":
+        setGallery(e.target.value);
         break;
       //no default
     }

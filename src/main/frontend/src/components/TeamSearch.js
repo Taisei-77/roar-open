@@ -55,10 +55,10 @@ const reducer = (state, action) => {
 
 const TeamSearch = () => {
   // ユーザーが検索のために選択した値を管理するstate
-  const [sportName, setSportName] = useState(""),
-    [prefectures, setPrefectures] = useState(""),
-    [activityFrequency, setActivityFrequency] = useState(""),
-    [dayOfTheWeek, setDayOfTheWeek] = useState(""),
+  const //[sportName, setSportName] = useState(""),
+    // [prefectures, setPrefectures] = useState(""),
+    // [activityFrequency, setActivityFrequency] = useState(""),
+    // [dayOfTheWeek, setDayOfTheWeek] = useState(""),
     [searchResultData, setSearchResultData] = useState([]); //検索結果を管理するためのstate
 
   const [state, dispatch] = useReducer(reducer, {
@@ -76,14 +76,6 @@ const TeamSearch = () => {
 
   // 検索ボタンを押した時に実行される処理
   const TeamSearchBtn = () => {
-    setSportName(document.getElementsByName("sport_name")[0].value);
-    setPrefectures(document.getElementsByName("prefectures_name")[0].value);
-    setActivityFrequency(
-      document.getElementsByName("activity_frequency_name")[0].value
-    );
-    setDayOfTheWeek(
-      document.getElementsByName("day_of_the_week_name")[0].value
-    );
     SearchInfo();
     window.scrollTo(0, 0);
   };
@@ -100,16 +92,20 @@ const TeamSearch = () => {
     axios
       .get(url, {
         params: {
-          sportName: sportName,
-          prefectures: prefectures,
-          activityFrequency: activityFrequency,
-          dayOfTheWeek: dayOfTheWeek,
+          sportName: document.getElementsByName("sport_name")[0].value, //sportName,
+          prefectures: document.getElementsByName("prefectures_name")[0].value,
+          activityFrequency: document.getElementsByName(
+            "activity_frequency_name"
+          )[0].value,
+          dayOfTheWeek: document.getElementsByName("day_of_the_week_name")[0]
+            .value,
         },
       })
       //get(エンドポイント, { params: {送りたいパラメーターの指定}　}
       .then((res) => {
         //取得データ全てをリスト化表示
         setSearchResultData(res.data);
+        console.log(res.data);
       })
       .catch((error) => {
         alert(error);
@@ -193,13 +189,13 @@ const TeamSearch = () => {
           state.resourceData.map((data) => (
             <TeamSearchCard
               id={data.id}
-              team_name={data.team_name}
+              team_name={data.teamName}
               picture={data.picture}
-              sport_name={data.sport_name}
+              sport_name={data.sportName}
               prefectures={data.prefectures}
-              activity_frequency={data.activity_frequency}
-              day_of_the_week={data.day_of_the_week}
-              team_concept={data.team_concept}
+              activity_frequency={data.activityFrequency}
+              day_of_the_week={data.dayOfTheWeek}
+              team_concept={data.teamConcept}
             />
           ))
         ) : (

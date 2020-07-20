@@ -13,7 +13,14 @@ import { CompePartPerform } from "./CompePartPerform";
 
 export const TeamCreate = () => {
   // ユーザーが入力したチームコンセプトの値を動的に取得する記述。
-  const [teamConceptValue, setTeamConceptValue] = useState("");
+  const [picture, setPicture] = useState(""), //チーム写真の値を管理するstate
+    [teamConceptValue, setTeamConceptValue] = useState(""); //チームコンセプトの値を管理するstate
+
+  const getPictureData = (pictureData) => {
+    setPicture(pictureData);
+  };
+
+  //　チームコンセプトの値を取得するイベント
   const teamConceptValueChenge = (e) => {
     setTeamConceptValue(e.target.value);
   };
@@ -22,6 +29,7 @@ export const TeamCreate = () => {
   const [compePartPerform, setCompePartPerform] = useState([]);
   const [keyNumber, setKeyNumber] = useState(-1);
 
+  // 大会参加実績の記入欄を増やす関数
   function handleClick() {
     if (compePartPerform.length <= 4) {
       setKeyNumber(keyNumber + 1);
@@ -37,7 +45,12 @@ export const TeamCreate = () => {
       <div className="teamCreateContainer">
         <TextField id="teamName" label="チーム名" name="" value="" />
       </div>
-      <CreatePhoto className="teamCreateContainer" height={450} width={700} />
+      <CreatePhoto
+        className="teamCreateContainer"
+        pictureData={getPictureData}
+        height={450}
+        width={700}
+      />
       <div>基本プロフィール</div>
       <TeamProfile className="teamCreateContainer" />
       <div className="teamCreateContainer">

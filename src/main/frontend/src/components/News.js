@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from 'react-bootstrap';
-import NewsList from "./NewsList";
+import NewsCard from './NewsCard';
 
 const News = () => {
 
@@ -9,7 +9,10 @@ const News = () => {
       <div className="m-5">
         <h1 className="text-left">News</h1>
       </div>
-      <NewsList/>
+      <div className="ml-5 ">
+        最新のニュースを紹介
+      </div>
+      <NewsCard/>
     </Container>
   );
 };

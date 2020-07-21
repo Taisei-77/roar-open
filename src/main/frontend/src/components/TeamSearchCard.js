@@ -94,6 +94,7 @@ export const TeamSearchCard = (props) => {
           </CardContent>
         </Grid>
       </Grid>
+      {/* チーム詳細を表示するモーダル */}
       <Modal
         open={modalOpen}
         onClose={handleClose}

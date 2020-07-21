@@ -2,12 +2,13 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 
-const useStyle = makeStyles((theme) => ({
+// スタイルの設定
+const useStyle = makeStyles({
   paper: {
     width: 700,
     height: 700,
     backgroundColor: "white",
-    padding: theme.spacing(10, 10, 10),
+    padding: "50px",
     overflow: "scroll",
     borderRadius: 20,
   },
@@ -24,7 +25,7 @@ const useStyle = makeStyles((theme) => ({
     textAlign: "center",
     margin: "20px auto",
   },
-}));
+});
 
 const TeamDetails = (props) => {
   const classes = useStyle();
@@ -39,6 +40,7 @@ const TeamDetails = (props) => {
         <p>活動頻度：{props.activity_frequency}</p>
         <p>活動曜日：{props.day_of_the_week}</p>
         <p>チームメンバー数</p>
+        {/* チームメンバーの数を計算して入れたい */}
       </div>
       <p>チームコンセプト</p>
       <p>{props.team_concept}</p>

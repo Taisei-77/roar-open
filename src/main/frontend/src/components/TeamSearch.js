@@ -86,7 +86,6 @@ const TeamSearch = () => {
   };
 
   // 検索機能の記述
-  let searchResults = "";
 
   const SearchInfo = () => {
     axios
@@ -202,6 +201,7 @@ const TeamSearch = () => {
           <p>検索結果は0件でした。</p>
         )}
       </div>
+
       <div>
         <Button onClick={viewPreview} disabled={state.currentPage === 1}>
           前へ

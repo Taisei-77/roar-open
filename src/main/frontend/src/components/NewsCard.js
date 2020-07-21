@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -8,12 +8,16 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-
 export default class NewsCard extends React.Component {
+  state = {
+    articles: [], //オブジェクトの入れ物
+    refreshing: false, // これは何のためにあるのかは不明
+  };
 
     state = {
         articles: []//オブジェクトの入れ物
     }
+  
 
     getNews = async () => {//APIからdataを取り出す処理
         this.setState({ refreshing: true });

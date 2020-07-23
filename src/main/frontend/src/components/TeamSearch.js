@@ -55,10 +55,7 @@ const reducer = (state, action) => {
 
 const TeamSearch = () => {
   // ユーザーが検索のために選択した値を管理するstate
-  const //[sportName, setSportName] = useState(""),
-    // [prefectures, setPrefectures] = useState(""),
-    // [activityFrequency, setActivityFrequency] = useState(""),
-    // [dayOfTheWeek, setDayOfTheWeek] = useState(""),
+  const [freeWord, setFreeWord] = useState(""), //フリーワードstate
     [searchResultData, setSearchResultData] = useState([]); //検索結果を管理するためのstate
 
   const [state, dispatch] = useReducer(reducer, {
@@ -76,8 +73,16 @@ const TeamSearch = () => {
 
   // 検索ボタンを押した時に実行される処理
   const TeamSearchBtn = () => {
-    SearchInfo();
-    window.scrollTo(0, 0);
+    //フリーワード文字数チェック
+    if (freeWord.length === 1) {
+      alert("フリーワード検索は2文字以上のキーワードで検索してください");
+    } else if (freeWord.match(/ + |　+/)) {
+      //空白(半角全角)を含む場合処理判定なし
+      alert("フリーワード検索は空白(半角全角)を含めることができません");
+    } else {
+      SearchInfo();
+      window.scrollTo(0, 0);
+    }
   };
 
   // 検索結果を表示するデータを切り出してくれる処理。
@@ -86,7 +91,6 @@ const TeamSearch = () => {
   };
 
   // 検索機能の記述
-
   const SearchInfo = () => {
     axios
       .get(url, {
@@ -98,6 +102,7 @@ const TeamSearch = () => {
           )[0].value,
           dayOfTheWeek: document.getElementsByName("day_of_the_week_name")[0]
             .value,
+          freeWord: freeWord,
         },
       })
       //get(エンドポイント, { params: {送りたいパラメーターの指定}　}
@@ -111,7 +116,6 @@ const TeamSearch = () => {
       });
   };
 
-  const [freeWord, setFreeWord] = useState("");
   const freeWordChange = (e) => {
     setFreeWord(e.target.value);
   };

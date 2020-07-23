@@ -16,8 +16,8 @@ public class SearchService {
     @Autowired
     SearchRepository searchRepository;
 
-    public List<Search> findTeam(Search search) {
+    public List<Search> findTeam(Search search, String freeWord) {
         return searchRepository.findTeamSQL(search.getSportName(), search.getPrefectures(),
-                search.getActivityFrequency(), search.getDayOfTheWeek());
+                search.getActivityFrequency(), search.getDayOfTheWeek(), freeWord);
     }
 }

@@ -38,14 +38,15 @@ public class Rest {
     SearchService searchService;
 
     @GetMapping("/search") // @RequestParamを省略
-    public List<Search> search(String sportName, String prefectures, String activityFrequency, String dayOfTheWeek) {
+    public List<Search> search(String sportName, String prefectures, String activityFrequency, String dayOfTheWeek,
+            String freeWord) {
         System.out.println(sportName + prefectures);
         Search search = new Search();
         search.setSportName(sportName);
         search.setPrefectures(prefectures);
         search.setActivityFrequency(activityFrequency);
         search.setDayOfTheWeek(dayOfTheWeek);
-        return searchService.findTeam(search);
+        return searchService.findTeam(search, freeWord);
     }
 
     // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得

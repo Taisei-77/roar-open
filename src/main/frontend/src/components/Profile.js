@@ -10,7 +10,7 @@ const url = "http://localhost:8080/api/profile";
 const Profile = () => {
   const [icon, setIcon] = useState(""),
     [profile, setProfile] = useState(""),
-    [activ, setActiv] = useState(""),
+    [activity, setActivity] = useState(""),
     [like, setLike] = useState(""),
     [sns, setSns] = useState(""),
     [gallery, setGallery] = useState("");
@@ -23,7 +23,7 @@ const Profile = () => {
         // alert(res.data.user_name);
         setIcon(res.data.icon);
         setProfile(res.data.profile);
-        setActiv(res.data.activ);
+        setActivity(res.data.activity);
         setLike(res.data.likes);
         setSns(res.data.sns);
         setGallery(res.data.gallery);
@@ -47,7 +47,7 @@ const Profile = () => {
               state: {
                 beforeIcon: icon,
                 beforeProfile: profile,
-                beforeActive: activ,
+                beforeActivity: activity,
                 beforeLike: like,
                 beforeSns: sns,
                 beforeGallery: gallery,
@@ -69,7 +69,7 @@ const Profile = () => {
           <div className="border p-2">{profile}</div>
 
           <div className="my-3">活動</div>
-          <div className="border p-2">{activ}</div>
+          <div className="border p-2">{activity}</div>
 
           <div className="my-3">趣味</div>
           <div className="border p-2">{like}</div>

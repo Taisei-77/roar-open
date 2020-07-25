@@ -20,7 +20,7 @@ public class UserService {
         // user.setUser_name(profileData.getUser_name());
         user.setIcon(profileData.getIcon());
         user.setProfile(profileData.getProfile());
-        user.setActiv(profileData.getActiv());
+        user.setActivity(profileData.getActivity());
         user.setLikes(profileData.getLikes());
         user.setSns(profileData.getSns());
         user.setGallery(profileData.getGallery());

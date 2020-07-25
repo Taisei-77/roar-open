@@ -3,11 +3,9 @@ import "../style/Profile.css";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
-// import { CreatePhoto } from "../UIkit/CreatePhoto";
+import { CreatePhoto } from "../UIkit/CreatePhoto";
 import { auth } from "../firebase/index";
-import { storage } from "../firebase/index";
 import axios from "axios";
-import ImageArea from "./ImageArea";
 
 const url = "http://localhost:8080/api/profile";
 
@@ -20,21 +18,16 @@ const ProfileCreate = (props) => {
     beforeSns,
     beforeGallery,
   } = props.location.state;
-
   const [icon, setIcon] = useState(beforeIcon),
     [profile, setProfile] = useState(beforeProfile),
     [activity, setActivity] = useState(beforeActivity),
     [like, setLike] = useState(beforeLike),
     [sns, setSns] = useState(beforeSns),
-    [gallery, setGallery] = useState(beforeGallery),
-    [images, setImages] = useState([]);
+    [gallery, setGallery] = useState(beforeGallery);
 
   const handleChange = (e) => {
     //name属性に応じてvalueをセット
     switch (e.target.name) {
-      case "icon":
-        setIcon(e.target.value);
-        break;
       case "profile":
         setProfile(e.target.value);
         break;
@@ -53,10 +46,6 @@ const ProfileCreate = (props) => {
       //no default
     }
   };
-  // CreatePhotoが取得した画像データを、Iconに格納するための関数。（子=>親へのデータの受け渡し）
-  // const getPictureData = (pictureData) => {
-  //   setIcon(pictureData);
-  // };
 
   const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
@@ -96,18 +85,12 @@ const ProfileCreate = (props) => {
         <Row>
           <Col md={6}>
             <div className="my-3">アイコン</div>
-            {/* <CreatePhoto
-              pictureData={getPictureData}
+            <CreatePhoto
               height={140}
               width={140}
-            /> */}
-            <img src={icon} />
-            <ImageArea
-              images={images}
-              setImages={setImages}
               getImages={getImages}
+              firstImages={beforeIcon}
             />
-
             <div className="my-3">プロフィール</div>
             <TextField
               name="profile"

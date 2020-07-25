@@ -3,9 +3,11 @@ import "../style/Profile.css";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
-import { CreatePhoto } from "../UIkit/CreatePhoto";
+// import { CreatePhoto } from "../UIkit/CreatePhoto";
 import { auth } from "../firebase/index";
+import { storage } from "../firebase/index";
 import axios from "axios";
+import ImageArea from "./ImageArea";
 
 const url = "http://localhost:8080/api/profile";
 
@@ -19,12 +21,14 @@ const ProfileCreate = (props) => {
     beforeGallery,
   } = props.location.state;
 
-  const [icon, setIcon] = useState(beforeIcon),
+  const 
+    [icon, setIcon] = useState(beforeIcon),
     [profile, setProfile] = useState(beforeProfile),
     [activ, setActiv] = useState(beforeActiv),
     [like, setLike] = useState(beforeLike),
     [sns, setSns] = useState(beforeSns),
-    [gallery, setGallery] = useState(beforeGallery);
+    [gallery, setGallery] = useState(beforeGallery),
+    [images, setImages] = useState([]);
 
   const handleChange = (e) => {
     //name属性に応じてvalueをセット
@@ -51,9 +55,11 @@ const ProfileCreate = (props) => {
     }
   };
   // CreatePhotoが取得した画像データを、Iconに格納するための関数。（子=>親へのデータの受け渡し）
-  const getPictureData = (pictureData) => {
-    setIcon(pictureData);
-  };
+  // const getPictureData = (pictureData) => {
+  //   setIcon(pictureData);
+  // };
+
+
 
   const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
@@ -75,7 +81,13 @@ const ProfileCreate = (props) => {
       .catch((error) => {
         alert(error);
       });
+      
   };
+
+  const getImages = (url) => {
+    setIcon(url);
+  };
+
   return (
     <Container>
       <header>
@@ -87,12 +99,20 @@ const ProfileCreate = (props) => {
       <Form onSubmit={handleFormSubmit}>
         <Row>
           <Col md={6}>
+
             <div className="my-3">アイコン</div>
-            <CreatePhoto
+            {/* <CreatePhoto
               pictureData={getPictureData}
               height={140}
               width={140}
+            /> */}
+            <img src={icon}/>
+            <ImageArea
+              images={images} 
+              setImages={setImages}
+              getImages={getImages}
             />
+
             <div className="my-3">プロフィール</div>
             <TextField
               name="profile"

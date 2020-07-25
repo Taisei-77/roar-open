@@ -24,7 +24,7 @@ const NewsCard = () =>  {
                         json.articles
                     );
                 } 
-                //tryに例外が発生するとすぐこちらが呼び出される//tryに例外が発生するとすぐこちらが呼び出される
+                //tryに例外が発生するとすぐこちらが呼び出される
                 catch (e) {
                     console.log(e);
                 }
@@ -58,7 +58,7 @@ const NewsCard = () =>  {
                         <Grid item xs={8}>
                             <CardContent>
                                 {/* ニュースタイトル */}
-                                <Typography gutterBottom variant="h5" component="h2">
+                                <Typography gutterBottom variant="h5">
                                     {item.title}
                                 </Typography>
                                 {/* ニュースディスクリプション */}

@@ -47,7 +47,7 @@ const Profile = () => {
               state: {
                 beforeIcon: icon,
                 beforeProfile: profile,
-                beforeActiv: activ,
+                beforeActive: activ,
                 beforeLike: like,
                 beforeSns: sns,
                 beforeGallery: gallery,
@@ -61,8 +61,10 @@ const Profile = () => {
 
       <Row>
         <Col md={6}>
-          <div className="my-3">{icon}</div>
-          <Image src="" rounded />
+          {/* <div className="my-3">{icon}</div> */}
+
+          <Image src={icon} height="140" width="140" roundedCircle />
+
           <div className="my-3">プロフィール</div>
           <div className="border p-2">{profile}</div>
 

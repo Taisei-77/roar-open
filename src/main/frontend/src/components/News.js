@@ -2,7 +2,9 @@ import React from "react";
 import { Container } from 'react-bootstrap';
 import NewsCard from './NewsCard';
 
+
 const News = () => {
+
   return (
     <Container>
       <div className="m-5">

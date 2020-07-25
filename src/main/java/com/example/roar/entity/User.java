@@ -18,7 +18,7 @@ public class User {
     private String userName; // ユーザー名
     private String icon; // アイコン
     private String profile; // プロフィール
-    private String activ; // 活動
+    private String activity; // 活動
     private String likes; // 趣味
     private String sns; // SNS
     private String gallery; // ギャラリー

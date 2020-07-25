@@ -15,16 +15,15 @@ const ProfileCreate = (props) => {
   const {
     beforeIcon,
     beforeProfile,
-    beforeActiv,
+    beforeActivity,
     beforeLike,
     beforeSns,
     beforeGallery,
   } = props.location.state;
 
-  const 
-    [icon, setIcon] = useState(beforeIcon),
+  const [icon, setIcon] = useState(beforeIcon),
     [profile, setProfile] = useState(beforeProfile),
-    [activ, setActiv] = useState(beforeActiv),
+    [activity, setActivity] = useState(beforeActivity),
     [like, setLike] = useState(beforeLike),
     [sns, setSns] = useState(beforeSns),
     [gallery, setGallery] = useState(beforeGallery),
@@ -39,8 +38,8 @@ const ProfileCreate = (props) => {
       case "profile":
         setProfile(e.target.value);
         break;
-      case "activ":
-        setActiv(e.target.value);
+      case "activity":
+        setActivity(e.target.value);
         break;
       case "like":
         setLike(e.target.value);
@@ -59,8 +58,6 @@ const ProfileCreate = (props) => {
   //   setIcon(pictureData);
   // };
 
-
-
   const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
     e.preventDefault();
@@ -70,7 +67,7 @@ const ProfileCreate = (props) => {
         uid: auth.currentUser.uid,
         icon: icon,
         profile: profile,
-        activ: activ,
+        activity: activity,
         likes: like,
         sns: sns,
         gallery: gallery,
@@ -81,7 +78,6 @@ const ProfileCreate = (props) => {
       .catch((error) => {
         alert(error);
       });
-      
   };
 
   const getImages = (url) => {
@@ -99,16 +95,15 @@ const ProfileCreate = (props) => {
       <Form onSubmit={handleFormSubmit}>
         <Row>
           <Col md={6}>
-
             <div className="my-3">アイコン</div>
             {/* <CreatePhoto
               pictureData={getPictureData}
               height={140}
               width={140}
             /> */}
-            <img src={icon}/>
+            <img src={icon} />
             <ImageArea
-              images={images} 
+              images={images}
               setImages={setImages}
               getImages={getImages}
             />
@@ -126,11 +121,11 @@ const ProfileCreate = (props) => {
 
             <div className="my-3">活動</div>
             <TextField
-              name="activ"
+              name="activity"
               multiline
               rows={4}
               variant="outlined"
-              value={activ}
+              value={activity}
               className="w-100"
               onChange={handleChange}
             />

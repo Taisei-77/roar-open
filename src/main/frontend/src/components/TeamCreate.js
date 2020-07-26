@@ -50,6 +50,7 @@ export const TeamCreate = () => {
         pictureData={getPictureData}
         height={450}
         width={700}
+        myTitle="チームの写真"
       />
       <div>基本プロフィール</div>
       <TeamProfile className="teamCreateContainer" />

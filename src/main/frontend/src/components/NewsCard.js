@@ -9,7 +9,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 const NewsCard = () =>  {
-    
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
@@ -23,16 +22,13 @@ const NewsCard = () =>  {
                     setArticles(
                         json.articles
                     );
-                } 
+                }
                 //tryに例外が発生するとすぐこちらが呼び出される
                 catch (e) {
                     console.log(e);
                 }
-              
             };
-            
             fetchData();
-
             }, []
     );
 
@@ -87,5 +83,5 @@ const NewsCard = () =>  {
         </ul>
     );
 }
-    
+
 export default NewsCard;

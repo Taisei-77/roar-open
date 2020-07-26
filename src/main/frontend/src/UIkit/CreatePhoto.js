@@ -100,7 +100,7 @@ export const CreatePhoto = (props) => {
         />
         <label htmlFor="contained-button-file">
           <Button variant="contained" color="primary" component="span">
-            チームの写真を選択
+            {props.myTitle}を選択
           </Button>
         </label>
       </div>

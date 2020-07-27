@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 
 // CSSの読み込み
-import "../style/TeamCreateView.css";
+import "../style/CreatePhoto.css";
 import { makeStyles } from "@material-ui/core";
 
 // firebaseのstorage
@@ -15,9 +15,9 @@ const useStyle = makeStyles({
   trimming: {
     objectFit: "cover",
   },
-  canvas: {
-    display: "none",
-  },
+  // canvas: {
+  //   display: "none",
+  // },
 });
 
 // ファイルサイズを縮小させるための記述（ここは変数を定義する）
@@ -39,7 +39,7 @@ export const CreatePhoto = (props) => {
     //前回プレビューした画像があり、
     //現在保存されている画像でなければfirebaseStorageから削除
     if (fileName.length > 0 && fileName !== props.firstImages.slice(78, 94)) {
-      storage.ref("images").child(fileName).delete();
+      storage.ref(props.storageFolder).child(fileName).delete();
     }
 
     files = e.target.files; //取得したファイルデータをfilesに格納する
@@ -52,8 +52,8 @@ export const CreatePhoto = (props) => {
     fileName = Array.from(crypto.getRandomValues(new Uint32Array(N)))
       .map((n) => S[n % S.length])
       .join("");
-    //storageのimagesフォルダへアップロード
-    const uploadRef = storage.ref("images").child(fileName);
+    //storageのフォルダへアップロード
+    const uploadRef = storage.ref(props.storageFolder).child(fileName);
     const uploadTask = uploadRef.put(blob);
 
     //up成功時
@@ -83,12 +83,12 @@ export const CreatePhoto = (props) => {
           height={props.height}
           width={props.width}
         />
-        <canvas
+        {/* <canvas
           // className={classes.canvas}
           id="canvas"
           height={props.height}
           width={props.width}
-        ></canvas>
+        ></canvas> */}
       </div>
       <div className="imgUploadBtn">
         <input

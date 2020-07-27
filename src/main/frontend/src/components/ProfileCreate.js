@@ -91,6 +91,7 @@ const ProfileCreate = (props) => {
               getImages={getImages}
               firstImages={beforeIcon}
               myTitle="アイコン"
+              storageFolder={"images"}
             />
             <div className="my-3">プロフィール</div>
             <TextField

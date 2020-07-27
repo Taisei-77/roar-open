@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RequestMapping("/api")
 public class Rest {
+    // users_infoテーブルAPI
     @Autowired
     UserService userService;
 
@@ -34,6 +35,7 @@ public class Rest {
         return userService.setProfile(profileData);
     }
 
+    // seach_infoテーブルAPI
     @Autowired
     SearchService searchService;
 
@@ -47,6 +49,11 @@ public class Rest {
         search.setActivityFrequency(activityFrequency);
         search.setDayOfTheWeek(dayOfTheWeek);
         return searchService.findTeam(search, freeWord);
+    }
+
+    @PostMapping("/search")
+    public Search search(@RequestBody Search teamData) {
+        return searchService.setTeam(teamData);
     }
 
     // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得

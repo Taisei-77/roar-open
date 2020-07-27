@@ -22,6 +22,7 @@ export const TeamProfile = () => {
           isSearchable
           options={SportName}
           placeholder="何のスポーツ？"
+          name="sport_name"
         />
       </div>
       <div className="selectBlock">
@@ -32,6 +33,7 @@ export const TeamProfile = () => {
           isClearable
           options={Prefectures}
           placeholder="どこで活動してる？"
+          name="prefectures_name"
         />
       </div>
       <div className="selectBlock">
@@ -41,6 +43,7 @@ export const TeamProfile = () => {
           isClearable
           options={ActivityFrequency}
           placeholder="どれくらい活動してる？"
+          name="activity_frequency_name"
         />
       </div>
       <div className="selectBlock">
@@ -51,6 +54,7 @@ export const TeamProfile = () => {
           isClearable
           options={DayOfTheWeek}
           placeholder="何曜日に活動してる？"
+          name="day_of_the_week_name"
         />
       </div>
     </div>

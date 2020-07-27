@@ -19,9 +19,7 @@ const NewsCard = () =>  {
                 try {
                     const result = await fetch(url);
                     const json = await result.json();
-                    setArticles(
-                        json.articles
-                    );
+                    setArticles(json.articles);
                 }
                 //tryに例外が発生するとすぐこちらが呼び出される
                 catch (e) {
@@ -36,48 +34,40 @@ const NewsCard = () =>  {
         //カードの見た目
         <ul>
             {articles.map( item => (
-                <li key={item.id} className="m-3 d-block col-md-12">
-                <Card>
-                    <Grid container>
-                        <Grid item xs={4}>
-                            {/* ニュースのサムネイル */}
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    alt="ニュース画像"
-                                    height="255"
-                                    image={item.urlToImage}
-                                    title="ニュース画像"
-                                />
-                            </CardActionArea>
+                <li key={item.id} className="m-3">
+                    <Card>
+                        <Grid container>
+                            <Grid item xs={2}>
+                                {/* ニュースのサムネイル */}
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        alt="ニュース画像"
+                                        height="150"
+                                        image={item.urlToImage}
+                                        title="ニュース画像"
+                                    />
+                                </CardActionArea>
+                            </Grid>
+                            <Grid item xs={10}>
+                                <CardContent>
+                                    {/* ニュースタイトル */}
+                                    <Typography gutterBottom variant="h5">
+                                        {item.title}
+                                    </Typography>
+                                    <CardActions>
+                                        <Button
+                                            size="small"
+                                            color="primary"
+                                            href={item.url}
+                                        >
+                                            詳細を確認する
+                                        </Button>
+                                    </CardActions>
+                                </CardContent>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={8}>
-                            <CardContent>
-                                {/* ニュースタイトル */}
-                                <Typography gutterBottom variant="h5">
-                                    {item.title}
-                                </Typography>
-                                {/* ニュースディスクリプション */}
-                                <Typography
-                                    variant="caption"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    {item.description}
-                                </Typography>
-                                <CardActions>
-                                    <Button
-                                        size="small"
-                                        color="primary"
-                                        href={item.url}
-                                    >
-                                        詳細を確認する
-                                    </Button>
-                                </CardActions>
-                            </CardContent>
-                        </Grid>
-                    </Grid>
-                </Card>
+                    </Card>
                 </li>
             ))}
         </ul>

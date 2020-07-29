@@ -8,7 +8,7 @@ import "../style/TeamCreate.css";
 import axios from "axios";
 
 // コンポーネントの読み込み
-import { CreatePhoto } from "../UIkit/CreatePhoto";
+import { CreatePhoto } from "../UIkit/index";
 import { TeamProfile } from "./TeamProfile";
 import { CompePartPerform } from "./CompePartPerform";
 
@@ -26,6 +26,7 @@ export const TeamCreate = (props) => {
       case "teamName":
         setTeamNameValue(e.target.value);
         break;
+      //no default
     }
   };
 

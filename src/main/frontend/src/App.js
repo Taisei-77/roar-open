@@ -41,12 +41,12 @@ class App extends React.Component {
           <div className="main">
             <Route exact path="/" component={Top} />
             <Route path="/TeamSearch" component={TeamSearch} />
+            <Route path="/News" component={News} />
             {/* 以下認証のみ */}
             <Auth toggleSidebar={this.toggleSidebar}>
               <Route path="/Home" component={Home} />
               <Route path="/TeamCreate" component={TeamCreate} />
               <Route path="/Chat" component={Chat} />
-              <Route path="/News" component={News} />
               <Route path="/Profile" component={Profile} />
               <Route path="/ProfileCreate" component={ProfileCreate} />
               <Route

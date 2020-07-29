@@ -3,7 +3,7 @@ import "../style/Profile.css";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
-import { CreatePhoto } from "../UIkit/CreatePhoto";
+import { CreatePhoto } from "../UIkit/index";
 import { auth } from "../firebase/index";
 import axios from "axios";
 

@@ -24,7 +24,7 @@ const useStyle = makeStyles({
 let files = ""; //取得したファイルを格納するための変数
 let fileName = ""; //16桁を格納するための画像名
 
-export const CreatePhoto = (props) => {
+const CreatePhoto = (props) => {
   const [image_src, set_image_src] = useState("");
   const classes = useStyle();
 
@@ -107,3 +107,5 @@ export const CreatePhoto = (props) => {
     </div>
   );
 };
+
+export default CreatePhoto;

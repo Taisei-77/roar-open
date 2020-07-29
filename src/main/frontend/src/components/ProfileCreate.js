@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/Profile.css";
+import styles from "../style/Profile.module.css";
 import { Container, Col, Form, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";

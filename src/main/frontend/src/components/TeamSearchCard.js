@@ -1,49 +1,19 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 
+// import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Fade from "@material-ui/core/Fade";
 import Backdrop from "@material-ui/core/Backdrop";
 
+// css modules
+import styles from "../style/TeamSearchCard.module.css";
+
 import TeamDetails from "./TeamDetails";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 1000,
-    margin: 20,
-  },
-  cardContent: {
-    background: "#CBE6F3",
-    height: 225,
-  },
-  teamConcept: {
-    marginTop: 10,
-    height: 120,
-  },
-  cardAction: {
-    marginLeft: "auto",
-  },
-  Modal: {
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    // maxHeight: 500,
-  },
-});
-
 export const TeamSearchCard = (props) => {
-  const classes = useStyles(),
-    [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleOpen = () => {
     setModalOpen(true);
@@ -54,51 +24,40 @@ export const TeamSearchCard = (props) => {
   };
 
   return (
-    <Card className={classes.root}>
+    <div className={styles.root}>
       <Grid container>
         <Grid item xs={4}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="チーム画像"
+          <div>
+            <img
+              className={styles.teamPicture}
+              src={props.picture}
               height="225"
-              image={props.picture}
-              title="チーム画像"
+              alt="チーム画像は、まだありません"
             />
-          </CardActionArea>
+          </div>
         </Grid>
         <Grid item xs={8}>
-          <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {props.team_name}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.teamConcept}
-            >
-              {props.team_concept}
-              {}
-            </Typography>
-            <CardActions>
+          <div className={styles.cardContent}>
+            <div className={styles.cardHead}>
+              <h2 className={styles.teamNameContent}>{props.team_name}</h2>
               <Button
-                className={classes.cardAction}
+                className={styles.detailButton}
                 size="small"
                 color="primary"
                 onClick={handleOpen}
               >
                 詳細を確認する
               </Button>
-            </CardActions>
-          </CardContent>
+            </div>
+            <p className={styles.teamConcept}>{props.team_concept}</p>
+          </div>
         </Grid>
       </Grid>
       {/* チーム詳細を表示するモーダル */}
       <Modal
         open={modalOpen}
         onClose={handleClose}
-        className={classes.Modal}
+        className={styles.modal}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -118,6 +77,6 @@ export const TeamSearchCard = (props) => {
           />
         </Fade>
       </Modal>
-    </Card>
+    </div>
   );
 };

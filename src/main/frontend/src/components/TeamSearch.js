@@ -7,7 +7,7 @@ import { AppBar, Toolbar, Button, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 // CSSの読み込み
-import "../style/TeamSearch.css";
+import styles from "../style/TeamSearch.module.css";
 
 // 他ファイルからコンポーネントの読み込み
 import {
@@ -145,28 +145,28 @@ const TeamSearch = () => {
       <AppBar color="default" position="sticky">
         <Toolbar>
           <Select
-            className="select"
+            className={styles.select}
             isClearable
             options={SportName}
             placeholder="スポーツ名"
             name="sport_name"
           />
           <Select
-            className="select"
+            className={styles.select}
             isClearable
             options={Prefectures}
             placeholder="活動地域"
             name="prefectures_name"
           />
           <Select
-            className="select"
+            className={styles.select}
             isClearable
             options={ActivityFrequency}
             placeholder="活動頻度"
             name="activity_frequency_name"
           />
           <Select
-            className="select"
+            className={styles.select}
             isClearable
             options={DayOfTheWeek}
             placeholder="活動曜日"
@@ -202,18 +202,23 @@ const TeamSearch = () => {
             />
           ))
         ) : (
-          <p>検索結果は0件でした。</p>
+          <p className={styles.searchResultNone}>検索結果は0件でした。</p>
         )}
       </div>
 
-      <div>
-        <Button onClick={viewPreview} disabled={state.currentPage === 1}>
+      <div className={styles.pageNationActuion}>
+        <Button
+          variant="contained"
+          onClick={viewPreview}
+          disabled={state.currentPage === 1}
+        >
           前へ
         </Button>
-        <span>
+        <span className={styles.pageNationInfo}>
           {state.currentPage}/{state.pageAmount}
         </span>
         <Button
+          variant="contained"
           onClick={viewNext}
           disabled={
             state.currentPage === state.pageAmount || state.pageAmount === 0

@@ -63,10 +63,10 @@ const Chat = () => {
   return (
     <div>
       <div className="chat">
-        <div ClassName="list">
+        <div className="list">
           <ChatGroupList />
         </div>
-        <div ClassName="message">
+        <div className="message">
           <MessageList
             toBottomHeight={"100%"}
             // lockable={true}

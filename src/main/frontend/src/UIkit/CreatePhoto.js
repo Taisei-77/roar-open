@@ -15,9 +15,6 @@ const useStyle = makeStyles({
   trimming: {
     objectFit: "cover",
   },
-  // canvas: {
-  //   display: "none",
-  // },
 });
 
 // ファイルサイズを縮小させるための記述（ここは変数を定義する）
@@ -83,12 +80,6 @@ const CreatePhoto = (props) => {
           height={props.height}
           width={props.width}
         />
-        {/* <canvas
-          // className={classes.canvas}
-          id="canvas"
-          height={props.height}
-          width={props.width}
-        ></canvas> */}
       </div>
       <div className="imgUploadBtn">
         <input
@@ -99,7 +90,7 @@ const CreatePhoto = (props) => {
           onChange={handleChangeFile}
         />
         <label htmlFor="contained-button-file">
-          <Button variant="contained" color="primary" component="span">
+          <Button variant="contained" component="span">
             {props.myTitle}を選択
           </Button>
         </label>

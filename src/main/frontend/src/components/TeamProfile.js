@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-import "../style/TeamProfile.css";
+import styles from "../style/TeamProfile.module.css";
 
 // データの読み込み
 import {
@@ -13,9 +13,9 @@ import {
 
 export const TeamProfile = () => {
   return (
-    <div>
-      <div className="selectBlock">
-        <p>競技</p>
+    <div className={styles.TeamProfileContainer}>
+      <div className={styles.selectBlock}>
+        <p className={styles.selectTitle}>競技</p>
         <Select
           className="profileSelect"
           isClearable
@@ -25,8 +25,8 @@ export const TeamProfile = () => {
           name="sport_name"
         />
       </div>
-      <div className="selectBlock">
-        <p>活動拠点</p>
+      <div className={styles.selectBlock}>
+        <p className={styles.selectTitle}>活動拠点</p>
         <Select
           className="profileSelect"
           isMulti
@@ -36,8 +36,8 @@ export const TeamProfile = () => {
           name="prefectures_name"
         />
       </div>
-      <div className="selectBlock">
-        <p>活動頻度</p>
+      <div className={styles.selectBlock}>
+        <p className={styles.selectTitle}>活動頻度</p>
         <Select
           className="profileSelect"
           isClearable
@@ -46,8 +46,8 @@ export const TeamProfile = () => {
           name="activity_frequency_name"
         />
       </div>
-      <div className="selectBlock">
-        <p>活動曜日</p>
+      <div className={styles.selectBlock}>
+        <p className={styles.selectTitle}>活動曜日</p>
         <Select
           className="profileSelect"
           isMulti

@@ -1,14 +1,12 @@
 import React from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatList } from "react-chat-elements";
-import "../style/ChatGroupList.css";
 
 const ChatGroupList = () => {
   return (
     <div>
-      <div className="ChatGroupList">
+      <div>
         <ChatList
-          className="chat-list"
           dataSource={[
             {
               avatar:

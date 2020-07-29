@@ -1,0 +1,40 @@
+.root {
+  max-width: 900px;
+  margin: 30px;
+  height: 225px;
+  background-color: #e6e6e6;
+  box-shadow: 0 12px 10px -6px rgba(0, 0, 0, 0.3);
+}
+.teamPicture {
+  width: 300px;
+  object-fit: cover;
+  /* object-position: 50% 50%; */
+}
+.cardContent {
+  background-color: "#F9F9F9";
+  height: 225px;
+  padding: 20px 20px;
+}
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+}
+.teamNameContent {
+  font-size: 30px;
+}
+.detailButton {
+  text-align: "right";
+}
+.teamConcept {
+  margin: 20px 0 0 5px;
+  height: 120px;
+  color: gray;
+}
+.modal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /*  maxHeight: 500; */
+}

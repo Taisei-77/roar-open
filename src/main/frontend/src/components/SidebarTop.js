@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "../style/Sidebar.css";
+import styles from "../style/Sidebar.module.css";
 
 class SidebarTop extends React.Component {
   constructor(props) {
@@ -13,15 +13,15 @@ class SidebarTop extends React.Component {
 
   render() {
     return (
-      <div className="sidebar">
-        <ul className="sidebarFixed">
+      <div className={styles.sidebar}>
+        <ul className={styles.sidebarFixed}>
           <li>
-            <Link to="/" className="link">
+            <Link to="/" className={styles.link}>
               roar
             </Link>
           </li>
           <li>
-            <Link to="/TeamSearch" className="link">
+            <Link to="/TeamSearch" className={styles.link}>
               チームを探す
             </Link>
           </li>

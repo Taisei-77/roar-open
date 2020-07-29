@@ -1,52 +1,84 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+
+import styles from "../style/TeamDetails.module.css";
 import { Button } from "@material-ui/core";
 
+import { GiJapan, GiRunningShoe } from "react-icons/gi";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { DiCodeigniter } from "react-icons/di";
+
 // スタイルの設定
-const useStyle = makeStyles({
-  paper: {
-    width: 700,
-    height: 700,
-    backgroundColor: "white",
-    padding: "50px",
-    overflow: "scroll",
-    borderRadius: 20,
-  },
-  team_name: {
-    borderBottom: "3px solid gray",
-    fontSize: "30px",
-  },
-  team_profile: {
-    fontSize: "20px",
-    margin: "20px 0",
-  },
-  join_btn: {
-    display: "block",
-    textAlign: "center",
-    margin: "20px auto",
-  },
-});
 
 const TeamDetails = (props) => {
-  const classes = useStyle();
-
   return (
-    <div className={classes.paper}>
-      <p className={classes.team_name}>{props.team_name}</p>
-      <img src={props.picture} alt="チーム画像" />
-      <div className={classes.team_profile}>
-        <p>スポーツ名：{props.sport_name}</p>
-        <p>活動地域：{props.prefectures}</p>
-        <p>活動頻度：{props.activity_frequency}</p>
-        <p>活動曜日：{props.day_of_the_week}</p>
-        <p>チームメンバー数</p>
-        {/* チームメンバーの数を計算して入れたい */}
+    <div className={styles.container}>
+      <div className={styles.team_details_title}>チーム詳細</div>
+      <div className={styles.team_details_main}>
+        <p className={styles.team_name}>{props.team_name}</p>
+        <img
+          className={styles.teamPicture}
+          src={props.picture}
+          alt="チーム画像"
+        />
+        <p className={styles.team_info_title}>基本プロフィール</p>
+        <div className={styles.team_info_container}>
+          <div className={styles.team_info_card}>
+            <div
+              className={`${styles.team_info_card_title} ${styles.sport_name_background_color}`}
+            >
+              <GiRunningShoe className={styles.team_info_card_icon} />
+              スポーツ
+            </div>
+            <div className={styles.team_info_card_body}>
+              <p className={styles.team_info_card_value}>{props.sport_name}</p>
+            </div>
+          </div>
+          <div className={styles.team_info_card}>
+            <div
+              className={`${styles.team_info_card_title} ${styles.prefectures_background_color}`}
+            >
+              <GiJapan className={styles.team_info_card_icon} />
+              活動地域
+            </div>
+            <div className={styles.team_info_card_body}>
+              <p className={styles.team_info_card_value}>{props.prefectures}</p>
+            </div>
+          </div>
+          <div className={styles.team_info_card}>
+            <div
+              className={`${styles.team_info_card_title} ${styles.activity_frequency_background_color}`}
+            >
+              <DiCodeigniter className={styles.team_info_card_icon} />
+              活動頻度
+            </div>
+            <div className={styles.team_info_card_body}>
+              <p className={styles.team_info_card_value}>
+                {props.activity_frequency}
+              </p>
+            </div>
+          </div>
+          <div className={styles.team_info_card}>
+            <div
+              className={`${styles.team_info_card_title} ${styles.day_of_the_week_background_color}`}
+            >
+              <FaRegCalendarAlt className={styles.team_info_card_icon} />
+              活動曜日
+            </div>
+            <div className={styles.team_info_card_body}>
+              <p className={styles.team_info_card_value}>
+                {props.day_of_the_week}
+              </p>
+            </div>
+          </div>
+        </div>
+        <p className={styles.team_info_title}>チームコンセプト</p>
+        <p className={styles.team_concept}>{props.team_concept}</p>
+        <div className={styles.join_btn}>
+          <Button variant="contained" color="primary">
+            {props.team_name}に参加する
+          </Button>
+        </div>
       </div>
-      <p>チームコンセプト</p>
-      <p>{props.team_concept}</p>
-      <Button className={classes.join_btn} variant="contained" color="primary">
-        {props.team_name}に参加する
-      </Button>
     </div>
   );
 };

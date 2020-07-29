@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "../style/Profile.css";
-import { Container, Col, Image, Row } from "react-bootstrap";
+import styles from "../style/Profile.module.css";
+
+import { FcSettings } from "react-icons/fc";
+
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/index";
 import axios from "axios";
@@ -38,51 +40,49 @@ const Profile = () => {
   }, []);
 
   return (
-    <Container>
-      <header>
-        <div className="text-right m-3 p-3">
-          <Link
-            to={{
-              pathname: "/ProfileCreate",
-              state: {
-                beforeIcon: icon,
-                beforeProfile: profile,
-                beforeActivity: activity,
-                beforeLike: like,
-                beforeSns: sns,
-                beforeGallery: gallery,
-              },
-            }}
-          >
-            プロフィールの編集
-          </Link>
-        </div>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <p className={styles.profileTitle}>プロフィール</p>
+        <Link
+          to={{
+            pathname: "/ProfileCreate",
+            state: {
+              beforeIcon: icon,
+              beforeProfile: profile,
+              beforeActivity: activity,
+              beforeLike: like,
+              beforeSns: sns,
+              beforeGallery: gallery,
+            },
+          }}
+        >
+          <FcSettings className={styles.profileCreateButton} />
+        </Link>
       </header>
 
-      <Row>
-        <Col md={6}>
-          {/* <div className="my-3">{icon}</div> */}
+      <div className={styles.main}>
+        {/* <div className="my-3">{icon}</div> */}
 
-          <Image src={icon} height="140" width="140" roundedCircle />
-
-          <div className="my-3">プロフィール</div>
-          <div className="border p-2">{profile}</div>
-
-          <div className="my-3">活動</div>
-          <div className="border p-2">{activity}</div>
-
-          <div className="my-3">趣味</div>
-          <div className="border p-2">{like}</div>
-
-          <div className="my-3">SNS</div>
-          <div className="border p-2">{sns}</div>
-        </Col>
-        <Col md={6}>
-          <div className="my-3">ギャラリー</div>
-          <div className="border p-2">{gallery}</div>
-        </Col>
-      </Row>
-    </Container>
+        {/* <Image src={icon} height="140" width="140" roundedCircle /> */}
+        <img src={icon} className={styles.avatar} />
+        <div className={styles.mainContent}>
+          <div className={styles.mainContentLeft}>
+            <div className={styles.profileItem}>自己紹介</div>
+            <div className={styles.profileItemValue}>{profile}</div>
+            <div className={styles.profileItem}>活動</div>
+            <div className={styles.profileItemValue}>{activity}</div>
+            <div className={styles.profileItem}>趣味</div>
+            <div className={styles.profileItemValue}>{like}</div>
+            <div className={styles.profileItem}>SNS</div>
+            <div className={styles.profileItemValue}>{sns}</div>
+          </div>
+          <div className={styles.mainContentRight}>
+            <div className={styles.gallery}>ギャラリー</div>
+            <div className={styles.galleryValue}>{gallery}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -28,6 +28,9 @@
   background-color: #f9f9f9;
   margin-top: 50px;
 }
+.mainHeader {
+  display: flex;
+}
 .avatar {
   border-radius: 50%;
   object-fit: cover;
@@ -35,7 +38,13 @@
   height: 200px;
   margin: 0 0 0 50px;
 }
-.mainContent {
+.userName {
+  display: block;
+  margin: 40px;
+  font-size: 30px;
+  color: #4c4c4c;
+}
+.mainBody {
   display: flex;
 }
 .mainContentLeft {

@@ -32,7 +32,6 @@ const Profile = () => {
     axios
       .get(url + "/" + auth.currentUser.uid) //パスパラメータにユーザーIDを追加
       .then((res) => {
-        // alert(res.data.user_name);
         setIcon(res.data.icon);
         setProfile(res.data.profile);
         setActivity(res.data.activity);
@@ -72,7 +71,7 @@ const Profile = () => {
 
       <div className={styles.main}>
         <div className={styles.mainHeader}>
-          <img src={icon} className={styles.avatar} />
+          <img src={icon} className={styles.avatar} alt="アイコン画像" />
           <p className={styles.userName}>{name}</p>
         </div>
         <div className={styles.mainBody}>

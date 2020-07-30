@@ -1,5 +1,11 @@
 import React from "react";
 
+import { auth } from "../firebase/index";
+import axios from "axios";
+
+//propsにhistoryを渡すため
+import { withRouter } from "react-router-dom";
+
 import styles from "../style/TeamDetails.module.css";
 import { Button } from "@material-ui/core";
 
@@ -10,6 +16,23 @@ import { DiCodeigniter } from "react-icons/di";
 // スタイルの設定
 
 const TeamDetails = (props) => {
+  const url = "http://localhost:8080/api/usersTeams";
+  //参加ボタン
+  const handleSubmit = () => {
+    //送信
+    axios
+      .post(url, {
+        uid: auth.currentUser.uid,
+        teamId: props.team_id,
+        teamName: props.team_name,
+      })
+      .then(() => {
+        props.history.push("/Chat");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.team_details_title}>チーム詳細</div>
@@ -74,7 +97,7 @@ const TeamDetails = (props) => {
         <p className={styles.team_info_title}>チームコンセプト</p>
         <p className={styles.team_concept}>{props.team_concept}</p>
         <div className={styles.join_btn}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             {props.team_name}に参加する
           </Button>
         </div>
@@ -83,4 +106,4 @@ const TeamDetails = (props) => {
   );
 };
 
-export default TeamDetails;
+export default withRouter(TeamDetails);

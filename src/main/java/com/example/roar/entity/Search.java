@@ -15,7 +15,8 @@ import lombok.Data;
 public class Search {
     @Id // 主キーを示す
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "team_id")
+    private long teamId;
     // チーム名
     @Column(nullable = false, name = "team_name")
     private String teamName;
@@ -37,4 +38,7 @@ public class Search {
     // チームコンセプト
     @Column(name = "team_concept")
     private String teamConcept;
+    // 更新日時
+    @Column(name = "updated_at")
+    private String updatedAt;
 }

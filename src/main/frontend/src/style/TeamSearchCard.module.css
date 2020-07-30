@@ -20,6 +20,7 @@
   justify-content: space-between;
 }
 .teamNameContent {
+  color: #4c4c4c;
   font-size: 30px;
 }
 .detailButton {

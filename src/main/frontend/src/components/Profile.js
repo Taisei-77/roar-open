@@ -4,7 +4,7 @@ import styles from "../style/Profile.module.css";
 import { FcSettings } from "react-icons/fc";
 
 import { Link } from "react-router-dom";
-import { auth } from "../firebase/index";
+import { auth, db } from "../firebase/index";
 import axios from "axios";
 
 const url = "http://localhost:8080/api/profile";
@@ -16,6 +16,14 @@ const Profile = () => {
     [like, setLike] = useState(""),
     [sns, setSns] = useState(""),
     [gallery, setGallery] = useState("");
+
+  //ユーザー名取得
+  db.collection("users")
+    .doc(auth.currentUser.uid)
+    .get()
+    .then((doc) => {
+      alert(doc.data().name);
+    });
 
   const UserInfo = () => {
     //送信

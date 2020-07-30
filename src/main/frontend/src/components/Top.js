@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../style/Top.css";
 import { Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
-import { auth } from "../firebase/index";
+import { auth, db } from "../firebase/index";
 import { Spinner } from "../UIkit/index";
 
 const Top = (props) => {
@@ -14,7 +14,6 @@ const Top = (props) => {
     [register_pass, setRegPass] = useState(""),
     [login_text, setLogin_text] = useState(false),
     [register_text, setRegister_text] = useState(false);
-
   //modalの切り替え
   const toggleModal = () => {
     isLoginShow(!login);
@@ -63,25 +62,38 @@ const Top = (props) => {
     if (e.target.name === "login") {
       auth
         .signInWithEmailAndPassword(login_email, login_pass)
-        .then((res) => {
+        .then(() => {
           //正常終了時
           props.history.push("/Home");
         })
         .catch((error) => {
           toggleSpinner(false);
-          alert(error);
+          alert("送信エラー　" + error);
         });
     } else if (e.target.name === "register") {
       //新規登録認証
       auth
         .createUserWithEmailAndPassword(register_email, register_pass)
-        .then((res) => {
+        .then(() => {
           //正常終了時
+          //ユーザー名をfireStoreに登録
+          db.collection("users")
+            .doc(auth.currentUser.uid)
+            .set({
+              name: register_user,
+            })
+            .then(function () {
+              console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+              alert("登録エラー　Error writing document：" + error);
+            });
+
           props.history.push("/Home");
         })
         .catch((error) => {
           toggleSpinner(false);
-          alert(error);
+          alert("送信エラー　" + error);
         });
     }
   };
@@ -164,6 +176,7 @@ const Top = (props) => {
                     value={register_user}
                     onChange={handleChange}
                     required
+                    pattern="\S+.*" // 始まりは空白以外\S 以後は+ 文字. 全て* 許可
                   />
                 </Form.Group>
 

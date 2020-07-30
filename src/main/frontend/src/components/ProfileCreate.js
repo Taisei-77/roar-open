@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from "../style/Profile.module.css";
-import { Container, Col, Form, Button, Row } from "react-bootstrap";
+import styles from "../style/ProfileCreate.module.css";
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { CreatePhoto } from "../UIkit/index";
 import { auth } from "../firebase/index";
 import axios from "axios";
@@ -74,83 +74,89 @@ const ProfileCreate = (props) => {
   };
 
   return (
-    <Container>
-      <header>
-        <div className="text-right m-3 p-3">
-          <Link to="/Profile">キャンセル</Link>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <div className={styles.profileCreateTitle}>プロフィール編集</div>
+        <div>
+          <Link className={styles.profileCreatePreviewBtn} to="/Profile">
+            変更せずに戻る
+          </Link>
         </div>
       </header>
+      <div className={styles.main}>
+        <Form onSubmit={handleFormSubmit}>
+          {/* <div className={styles.profileItem}>アイコン</div> */}
+          <CreatePhoto
+            height={140}
+            width={140}
+            getImages={getImages}
+            firstImages={beforeIcon}
+            myTitle="アイコン"
+            storageFolder={"images"}
+          />
+          <div className={styles.mainContent}>
+            <div className={styles.mainContentLeft}>
+              <div className={styles.profileItem}>プロフィール</div>
+              <TextField
+                name="profile"
+                multiline
+                rows={4}
+                variant="outlined"
+                value={profile}
+                className={styles.profileItemValue}
+                onChange={handleChange}
+              />
 
-      <Form onSubmit={handleFormSubmit}>
-        <Row>
-          <Col md={6}>
-            <div className="my-3">アイコン</div>
-            <CreatePhoto
-              height={140}
-              width={140}
-              getImages={getImages}
-              firstImages={beforeIcon}
-              myTitle="アイコン"
-              storageFolder={"images"}
-            />
-            <div className="my-3">プロフィール</div>
-            <TextField
-              name="profile"
-              multiline
-              rows={4}
-              variant="outlined"
-              value={profile}
-              className="w-100"
-              onChange={handleChange}
-            />
+              <div className={styles.profileItem}>活動</div>
+              <TextField
+                name="activity"
+                multiline
+                rows={4}
+                variant="outlined"
+                value={activity}
+                className={styles.profileItemValue}
+                onChange={handleChange}
+              />
 
-            <div className="my-3">活動</div>
-            <TextField
-              name="activity"
-              multiline
-              rows={4}
-              variant="outlined"
-              value={activity}
-              className="w-100"
-              onChange={handleChange}
-            />
+              <div className={styles.profileItem}>趣味</div>
+              <TextField
+                name="like"
+                multiline
+                rows={4}
+                variant="outlined"
+                value={like}
+                className={styles.profileItemValue}
+                onChange={handleChange}
+              />
 
-            <div className="my-3">趣味</div>
-            <TextField
-              name="like"
-              multiline
-              rows={4}
-              variant="outlined"
-              value={like}
-              className="w-100"
-              onChange={handleChange}
-            />
-
-            <div className="my-3">SNS</div>
-            <TextField
-              name="sns"
-              multiline
-              rows={4}
-              variant="outlined"
-              value={sns}
-              className="w-100"
-              onChange={handleChange}
-            />
-          </Col>
-          <Col md={6}>
-            <div className="my-3">ギャラリー</div>
-            <div>
-              <Form.Group>
-                <Form.File name="" value="" />
-              </Form.Group>
+              <div className={styles.profileItem}>SNS</div>
+              <TextField
+                name="sns"
+                multiline
+                rows={4}
+                variant="outlined"
+                value={sns}
+                className={styles.profileItemValue}
+                onChange={handleChange}
+              />
             </div>
-          </Col>
-        </Row>
-        <Button type="submit" className="m-3">
-          保存
-        </Button>
-      </Form>
-    </Container>
+            <div className={styles.mainContentRight}>
+              <div className={styles.profileItem}>ギャラリー</div>
+              <div>
+                <Form.Group>
+                  <Form.File name="" value="" />
+                </Form.Group>
+              </div>
+            </div>
+          </div>
+          <div className={styles.submitBtn}>
+            <Button type="submit" variant="contained" color="primary">
+              プロフィールに反映させる
+            </Button>
+          </div>
+        </Form>
+      </div>
+    </div>
   );
 };
 

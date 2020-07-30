@@ -66,7 +66,7 @@ export const TeamSearchCard = (props) => {
       >
         <Fade in={modalOpen}>
           <TeamDetails
-            id={props.id}
+            team_id={props.team_id}
             team_name={props.team_name}
             picture={props.picture}
             sport_name={props.sport_name}

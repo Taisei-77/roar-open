@@ -10,7 +10,8 @@ import axios from "axios";
 const url = "http://localhost:8080/api/profile";
 
 const Profile = () => {
-  const [icon, setIcon] = useState(""),
+  const [name, setName] = useState(""),
+    [icon, setIcon] = useState(""),
     [profile, setProfile] = useState(""),
     [activity, setActivity] = useState(""),
     [like, setLike] = useState(""),
@@ -22,7 +23,8 @@ const Profile = () => {
     .doc(auth.currentUser.uid)
     .get()
     .then((doc) => {
-      alert(doc.data().name);
+      console.log(doc.data().name);
+      setName(doc.data().name);
     });
 
   const UserInfo = () => {
@@ -69,11 +71,11 @@ const Profile = () => {
       </header>
 
       <div className={styles.main}>
-        {/* <div className="my-3">{icon}</div> */}
-
-        {/* <Image src={icon} height="140" width="140" roundedCircle /> */}
-        <img src={icon} className={styles.avatar} />
-        <div className={styles.mainContent}>
+        <div className={styles.mainHeader}>
+          <img src={icon} className={styles.avatar} />
+          <p className={styles.userName}>{name}</p>
+        </div>
+        <div className={styles.mainBody}>
           <div className={styles.mainContentLeft}>
             <div className={styles.profileItem}>自己紹介</div>
             <div className={styles.profileItemValue}>{profile}</div>

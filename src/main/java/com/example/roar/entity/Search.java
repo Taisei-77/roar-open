@@ -39,6 +39,6 @@ public class Search {
     @Column(name = "team_concept")
     private String teamConcept;
     // 更新日時
-    @Column(name = "updated_at")
-    private String updatedAt;
+    // @Column(name = "updated_at")
+    // private String updatedAt;
 }

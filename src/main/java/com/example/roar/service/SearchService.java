@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 import com.example.roar.entity.Search;
 import com.example.roar.entity.SearchRepository;
 
@@ -15,11 +13,6 @@ import com.example.roar.entity.SearchRepository;
 public class SearchService {
     @Autowired
     SearchRepository searchRepository;
-
-    public List<Search> findTeam(Search search, String freeWord) {
-        return searchRepository.findTeamSQL(search.getSportName(), search.getPrefectures(),
-                search.getActivityFrequency(), search.getDayOfTheWeek(), freeWord);
-    }
 
     public Search setTeam(Search teamData) {
         Search search = new Search();

@@ -3,8 +3,10 @@ package com.example.roar.controller;
 import java.util.List;
 
 import com.example.roar.entity.Search;
+import com.example.roar.entity.SearchRepository;
 import com.example.roar.entity.User;
 import com.example.roar.entity.UsersTeams;
+import com.example.roar.entity.SearchRepository.CustomSearch;
 import com.example.roar.service.SearchService;
 import com.example.roar.service.UserService;
 import com.example.roar.service.UsersTeamsService;
@@ -40,20 +42,17 @@ public class Rest {
 
     // 以下「seach_info」テーブルAPI
     @Autowired
-    SearchService searchService;
+    SearchRepository searchRepository;
 
     // チーム検索で取得
     @GetMapping("/search") // @RequestParamを省略
-    public List<Search> search(String sportName, String prefectures, String activityFrequency, String dayOfTheWeek,
-            String freeWord) {
-        System.out.println(sportName + prefectures);
-        Search search = new Search();
-        search.setSportName(sportName);
-        search.setPrefectures(prefectures);
-        search.setActivityFrequency(activityFrequency);
-        search.setDayOfTheWeek(dayOfTheWeek);
-        return searchService.findTeam(search, freeWord);
+    public List<CustomSearch> search(String sportName, String prefectures, String activityFrequency,
+            String dayOfTheWeek, String freeWord) {
+        return searchRepository.findTeamSQL(sportName, prefectures, activityFrequency, dayOfTheWeek, freeWord);
     }
+
+    @Autowired
+    SearchService searchService;
 
     // チーム登録・更新
     @PostMapping("/search")

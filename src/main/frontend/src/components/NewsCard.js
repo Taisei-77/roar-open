@@ -21,26 +21,27 @@ const NewsCard = () => {
         const result = await fetch(url);
         const json = await result.json();
         setArticles(json.articles);
-      } catch (e) {
-        //tryに例外が発生するとすぐこちらが呼び出される
-        console.log(e);
+      }
+      //tryに例外が発生するとすぐこちらが呼び出される
+      catch (e) {
+        alert(e);
       }
     };
     fetchData();
   }, []);
-
+  //webAPIから取得したニュース情報
   console.log(articles);
+  //取得したニュースの中からsource.nameが一致するもの以外をresultに返す
+  const result = articles.filter(function(i){
+      return i.source.name !== "Gekisaka.jp";
+  });
+  //ゲキサカ以外のニュース情報
+  console.log(result);
 
-  //取得したニュースの中からauthorが一致するもの以外をresultに返す
-  // const result = articles.filter(function(i){
-  //     return i.author !== "F1-Gate.com";　ゲキサカのauthorが分かり次第書き換える
-  // });
-  // console.log(result);
   return (
     //カードの見た目
     <ul>
-      {/* articlesをresultに後で変える */}
-      {articles.map((item) => (
+      {result.map((item) => (
         <li key={item.id} className="m-3">
           <Card>
             <Grid container>

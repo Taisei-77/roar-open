@@ -33,11 +33,6 @@ class Sidebar extends React.Component {
               ホーム
             </Link>
           </li>
-          {/* <li onClick={this.toggleClick} className={styles.link}>
-            チーム
-          </li>
-          {this.state.click ? (
-            <ul> */}
           <li className={styles.sidebarItem}>
             <Link to="/TeamCreate" className={styles.link}>
               チームを作る

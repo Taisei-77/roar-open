@@ -46,19 +46,18 @@
 }
 .sidebarItem:hover::after {
   left: 0;
-  background-color: red;
+  background-color: #771623;
 }
 
 .link {
+  color: white;
+  text-decoration: none;
   display: block;
   height: 50px;
   line-height: 50px;
 }
-a {
-  color: white;
-  text-decoration: none;
-}
-a:hover {
+
+.link:hover {
   color: white;
   text-decoration: none;
 }

@@ -12,7 +12,6 @@ import TeamCreate from "./components/TeamCreate";
 import TeamSearch from "./components/TeamSearch";
 import Chat from "./components/Chat";
 import News from "./components/News";
-// import Profile from "./components/Profile";
 import Setting from "./components/Setting";
 import ProfileCreate from "./components/ProfileCreate";
 

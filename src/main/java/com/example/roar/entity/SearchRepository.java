@@ -15,7 +15,7 @@ public interface SearchRepository extends JpaRepository<Search, Long> {
             + "s.team_id as teamId," + " s.team_name AS teamName, " + " s.picture AS picture, "
             + " s.sport_name AS sportName, " + " s.prefectures AS prefectures, "
             + " s.activity_frequency AS activityFrequency, " + " s.day_of_the_week AS dayOfTheWeek, "
-            + " s.team_concept AS teamConcept, " + " s.updated_at AS updatedAt, " + " count(s.team_name) as count "
+            + " s.team_concept AS teamConcept, " + " s.updated_at AS updatedAt, " + " count(s.team_id) as count "
 
             + " FROM search_info AS s " + " left join users_teams_info AS u ON s.team_id=u.teams_team_id "
 

@@ -30,8 +30,8 @@ public class Rest {
 
     // プロフィール取得
     @GetMapping("/profile/{uid}")
-    public User profilUid(@PathVariable("uid") User uidData) {
-        return userService.getProfile(uidData.getUid());
+    public User profileUid(@PathVariable("uid") String uidData) {
+        return userService.getProfile(uidData);
     }
 
     // プロフィール登録・更新
@@ -40,7 +40,7 @@ public class Rest {
         return userService.setProfile(profileData);
     }
 
-    // 以下「seach_info」テーブルAPI
+    // 以下「search_info」テーブルAPI
     @Autowired
     SearchRepository searchRepository;
 
@@ -68,6 +68,13 @@ public class Rest {
     @PostMapping("/usersTeams")
     public UsersTeams usersTeams(@RequestBody UsersTeams usersTeamsData) {
         return usersTeamsService.setUsersTeams(usersTeamsData);
+    }
+
+    // 所属チームリスト取得
+    @GetMapping("/usersTeams/{uid}")
+    public List<UsersTeams> usersTeamsUid(@PathVariable("uid") String usersTeamsUidData) {
+        System.out.println(usersTeamsUidData);
+        return usersTeamsService.getUsersTeams(usersTeamsUidData);
     }
 
     // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得

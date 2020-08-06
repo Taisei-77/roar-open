@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import com.example.roar.entity.UsersTeams;
 import com.example.roar.entity.UsersTeamsRepository;
 
@@ -20,5 +22,9 @@ public class UsersTeamsService {
         usersTeams.setTeamId(usersTeamsData.getTeamId());
         usersTeams.setTeamName(usersTeamsData.getTeamName());
         return usersTeamsRepository.save(usersTeams);
+    }
+
+    public List<UsersTeams> getUsersTeams(String uid) {
+        return usersTeamsRepository.findByUidIs(uid);
     }
 }

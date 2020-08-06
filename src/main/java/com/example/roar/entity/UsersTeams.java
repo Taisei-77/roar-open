@@ -17,12 +17,12 @@ public class UsersTeams {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     // uid
-    @Column(nullable = false)
+    @Column(name = "teams_uid", nullable = false)
     private String uid;
     // チームID
-    @Column(nullable = false, name = "team_id")
+    @Column(name = "teams_team_id")
     private String teamId;
     // チーム名
-    @Column(nullable = false, name = "team_name")
+    @Column(name = "teams_team_name")
     private String teamName;
 }

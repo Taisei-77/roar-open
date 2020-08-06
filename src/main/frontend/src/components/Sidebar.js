@@ -55,11 +55,11 @@ class Sidebar extends React.Component {
               ニュース
             </Link>
           </li>
-          <li className={styles.sidebarItem}>
+          {/* <li className={styles.sidebarItem}>
             <Link to="/Profile" className={styles.link}>
               プロフィール
             </Link>
-          </li>
+          </li> */}
           <li className={styles.sidebarItem}>
             <Link to="/Setting" className={styles.link}>
               設定

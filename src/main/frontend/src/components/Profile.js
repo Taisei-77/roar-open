@@ -16,7 +16,8 @@ const Profile = () => {
     [activity, setActivity] = useState(""),
     [like, setLike] = useState(""),
     [sns, setSns] = useState(""),
-    [gallery, setGallery] = useState("");
+    [gallery, setGallery] = useState(""),
+    [teamCount, setTeamCount] = useState(0);
 
   //ユーザー名取得
   db.collection("users")
@@ -50,6 +51,16 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.mainHeader}>
+        <div className={styles.mainHeaderLeft}>
+          <img src={icon} className={styles.avatar} alt="アイコン画像" />
+          <p className={styles.userName}>{name}</p>
+        </div>
+        <div className={styles.mainHeaderRight}>
+          <p className={styles.teamCount}>{teamCount}</p>
+          <p className={styles.teamCountTitle}>所属チーム数</p>
+        </div>
+      </div>
       <header className={styles.header}>
         <p className={styles.profileTitle}>プロフィール</p>
         <Link
@@ -65,29 +76,26 @@ const Profile = () => {
             },
           }}
         >
+          プロフィールの編集
           <FcSettings className={styles.profileCreateButton} />
         </Link>
       </header>
 
       <div className={styles.main}>
-        <div className={styles.mainHeader}>
-          <img src={icon} className={styles.avatar} alt="アイコン画像" />
-          <p className={styles.userName}>{name}</p>
-        </div>
         <div className={styles.mainBody}>
           <div className={styles.mainContentLeft}>
             <div className={styles.profileItem}>自己紹介</div>
             <div className={styles.profileItemValue}>{profile}</div>
             <div className={styles.profileItem}>活動</div>
             <div className={styles.profileItemValue}>{activity}</div>
+          </div>
+          <div className={styles.mainContentRight}>
             <div className={styles.profileItem}>趣味</div>
             <div className={styles.profileItemValue}>{like}</div>
             <div className={styles.profileItem}>SNS</div>
             <div className={styles.profileItemValue}>{sns}</div>
-          </div>
-          <div className={styles.mainContentRight}>
-            <div className={styles.gallery}>ギャラリー</div>
-            <div className={styles.galleryValue}>{gallery}</div>
+            {/* <div className={styles.gallery}>ギャラリー</div>
+            <div className={styles.galleryValue}>{gallery}</div> */}
           </div>
         </div>
       </div>

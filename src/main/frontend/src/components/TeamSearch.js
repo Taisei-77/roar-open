@@ -95,7 +95,8 @@ const TeamSearch = () => {
     axios
       .get(url, {
         params: {
-          sportName: document.getElementsByName("sport_name")[0].value, //sportName,
+          teamId: "",
+          sportName: document.getElementsByName("sport_name")[0].value,
           prefectures: document.getElementsByName("prefectures_name")[0].value,
           activityFrequency: document.getElementsByName(
             "activity_frequency_name"

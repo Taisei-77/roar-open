@@ -27,7 +27,7 @@ const customDate =
 // date.getSeconds();
 
 //変数の定義
-let docRef = db.collection("Chat").doc("room"); // Cloud FirestoreのChatコレクションのroomドキュメントを参照する変数;
+let docRef = db.collection("chat").doc("room"); // Cloud FirestoreのChatコレクションのroomドキュメントを参照する変数;
 let messageData = []; //Colud Firestoreの内容を代入するための変数
 
 //関数の定義

@@ -78,7 +78,7 @@ const ProfileCreate = (props) => {
       <header className={styles.header}>
         <div className={styles.profileCreateTitle}>プロフィール編集</div>
         <div>
-          <Link className={styles.profileCreatePreviewBtn} to="/Profile">
+          <Link className={styles.profileCreatePreviewBtn} to="/Home">
             変更せずに戻る
           </Link>
         </div>

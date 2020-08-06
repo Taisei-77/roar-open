@@ -12,11 +12,12 @@ import TeamCreate from "./components/TeamCreate";
 import TeamSearch from "./components/TeamSearch";
 import Chat from "./components/Chat";
 import News from "./components/News";
-import Profile from "./components/Profile";
+// import Profile from "./components/Profile";
 import Setting from "./components/Setting";
 import ProfileCreate from "./components/ProfileCreate";
 
 import Auth from "./auth/Auth";
+import TeamEdit from "./components/TeamEdit";
 
 class App extends React.Component {
   constructor(props) {
@@ -45,9 +46,10 @@ class App extends React.Component {
             {/* 以下認証のみ */}
             <Auth toggleSidebar={this.toggleSidebar}>
               <Route path="/Home" component={Home} />
+              <Route path="/TeamEdit" component={TeamEdit} />
               <Route path="/TeamCreate" component={TeamCreate} />
               <Route path="/Chat" component={Chat} />
-              <Route path="/Profile" component={Profile} />
+              {/* <Route path="/Profile" component={Profile} /> */}
               <Route path="/ProfileCreate" component={ProfileCreate} />
               <Route
                 path="/Setting"

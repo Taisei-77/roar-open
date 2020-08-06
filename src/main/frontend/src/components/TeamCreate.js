@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import styles from "../style/TeamCreate.module.css";
 
 import axios from "axios";
+import { auth, db } from "../firebase/index";
 
 // コンポーネントの読み込み
 import { CreatePhoto } from "../UIkit/index";
@@ -50,6 +51,19 @@ export const TeamCreate = (props) => {
     setImages(imagesUrl);
   };
 
+  //作成時刻
+  const date = new Date();
+  const customDate =
+    date.getFullYear() +
+    "年" +
+    (date.getMonth() + 1) +
+    "月" +
+    date.getDate() +
+    "日" +
+    date.getHours() +
+    ":" +
+    date.getMinutes();
+
   // データベースのAPI
   const url = "http://localhost:8080/api/search";
 
@@ -69,11 +83,36 @@ export const TeamCreate = (props) => {
           .value,
         teamConcept: teamConceptValue,
       })
-      .then(() => {
-        props.history.push("/Chat");
+      .then((res) => {
+        //firebaseDBにチャットルーム作成
+        db.collection("chat")
+          .doc(res.data.teamId + "_" + res.data.teamName)
+          .set({
+            message: [],
+          })
+          .then(function () {
+            console.log("Document successfully written!");
+          })
+          .catch(function (error) {
+            alert("チャットルーム作成エラー：" + error);
+          });
+
+        //作成者をチームに参加させる
+        axios
+          .post("http://localhost:8080/api/usersTeams", {
+            uid: auth.currentUser.uid,
+            teamId: res.data.teamId,
+            teamName: res.data.teamName,
+          })
+          .then(() => {
+            props.history.push("/Chat");
+          })
+          .catch((error) => {
+            alert("チーム参加エラー：" + error);
+          });
       })
       .catch((error) => {
-        alert(error);
+        alert("チーム作成エラー：" + error);
       });
   };
 
@@ -88,6 +127,7 @@ export const TeamCreate = (props) => {
             name="teamName"
             value={teamNameValue}
             onChange={hadleValueChenge}
+            required
           />
         </div>
         <CreatePhoto

@@ -27,8 +27,20 @@ const Top = (props) => {
   };
 
   //送信中ボタンを更新マークにする
-  const login_button_text = login_text ? <Spinner /> : "ログイン";
-  const register_button_text = register_text ? <Spinner /> : "登録";
+  const login_button_text = login_text ? (
+    <div className="d-flex justify-content-center spinner-border text-light spinner-border-sm">
+      <Spinner />
+    </div>
+  ) : (
+    "ログイン"
+  );
+  const register_button_text = register_text ? (
+    <div className="d-flex justify-content-center spinner-border text-light spinner-border-sm">
+      <Spinner />
+    </div>
+  ) : (
+    "登録"
+  );
 
   //テキストをセット
   const handleChange = (e) => {

@@ -46,9 +46,9 @@ public class Rest {
 
     // チーム検索で取得
     @GetMapping("/search") // @RequestParamを省略
-    public List<CustomSearch> search(String sportName, String prefectures, String activityFrequency,
+    public List<CustomSearch> search(String teamId, String sportName, String prefectures, String activityFrequency,
             String dayOfTheWeek, String freeWord) {
-        return searchRepository.findTeamSQL(sportName, prefectures, activityFrequency, dayOfTheWeek, freeWord);
+        return searchRepository.findTeamSQL(teamId, sportName, prefectures, activityFrequency, dayOfTheWeek, freeWord);
     }
 
     @Autowired

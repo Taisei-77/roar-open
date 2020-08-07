@@ -8,7 +8,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 
 import TeamListDetail from "./TeamListDetail";
 
-const HomeTeamList = () => {
+const HomeTeamList = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleOpen = () => {
@@ -21,15 +21,12 @@ const HomeTeamList = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <img
-          className={styles.teamListImg}
-          src="https://source.unsplash.com/random"
-        />
+        <img className={styles.teamListImg} src={props.data.picture} />
       </div>
       <div className={styles.mainContainer}>
-        <p className={styles.teamName}>チーム名</p>
+        <p className={styles.teamName}>{props.data.teamName}</p>
         <div className={styles.teamInfo}>
-          <p className={styles.teamMenber}>メンバー数 : 1人</p>
+          <p className={styles.teamMenber}>メンバー : {props.data.count}人</p>
           <Button className={styles.teamDetail} onClick={handleOpen}>
             チーム詳細
           </Button>
@@ -47,14 +44,15 @@ const HomeTeamList = () => {
       >
         <Fade in={modalOpen}>
           <TeamListDetail
-          // team_id={props.team_id}
-          // team_name={props.team_name}
-          // picture={props.picture}
-          // sport_name={props.sport_name}
-          // prefectures={props.prefectures}
-          // activity_frequency={props.activity_frequency}
-          // day_of_the_week={props.day_of_the_week}
-          // team_concept={props.team_concept}
+            data={props.data}
+            team_id={props.data.team_id}
+            team_name={props.data.teamName}
+            picture={props.data.picture}
+            sport_name={props.data.sportName}
+            prefectures={props.data.prefectures}
+            activity_frequency={props.data.activityFrequency}
+            day_of_the_week={props.data.dayOfTheWeek}
+            team_concept={props.data.teamConcept}
           />
         </Fade>
       </Modal>

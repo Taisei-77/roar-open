@@ -13,8 +13,6 @@ import { GiJapan, GiRunningShoe } from "react-icons/gi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { DiCodeigniter } from "react-icons/di";
 
-// スタイルの設定
-
 const TeamDetails = (props) => {
   const url = "http://localhost:8080/api/usersTeams";
   //参加ボタン

@@ -89,6 +89,7 @@ const TeamListDetail = (props) => {
             to={{
               pathname: "/TeamEdit",
               state: {
+                team_id: props.team_id,
                 before_team_name: props.team_name,
                 before_picture: props.picture,
                 before_sport_name: props.sport_name,

@@ -9,15 +9,14 @@ import axios from "axios";
 
 const url = "http://localhost:8080/api/profile";
 
-const Profile = () => {
+const Profile = (props) => {
   const [name, setName] = useState(""),
     [icon, setIcon] = useState(""),
     [profile, setProfile] = useState(""),
     [activity, setActivity] = useState(""),
     [like, setLike] = useState(""),
     [sns, setSns] = useState(""),
-    [gallery, setGallery] = useState(""),
-    [teamCount, setTeamCount] = useState(0);
+    [gallery, setGallery] = useState("");
 
   //ユーザー名取得
   db.collection("users")
@@ -57,7 +56,7 @@ const Profile = () => {
           <p className={styles.userName}>{name}</p>
         </div>
         <div className={styles.mainHeaderRight}>
-          <p className={styles.teamCount}>{teamCount}</p>
+          <p className={styles.teamCount}>{props.teamCount}</p>
           <p className={styles.teamCountTitle}>所属チーム数</p>
         </div>
       </div>

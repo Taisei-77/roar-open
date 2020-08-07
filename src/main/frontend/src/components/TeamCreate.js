@@ -19,7 +19,7 @@ export const TeamCreate = (props) => {
     [teamConceptValue, setTeamConceptValue] = useState(""); //チームコンセプト
 
   //　入力値を取得するイベント
-  const hadleValueChenge = (e) => {
+  const handleValueChange = (e) => {
     switch (e.target.name) {
       case "teamConcept":
         setTeamConceptValue(e.target.value);
@@ -126,7 +126,7 @@ export const TeamCreate = (props) => {
             label="チーム名"
             name="teamName"
             value={teamNameValue}
-            onChange={hadleValueChenge}
+            onChange={handleValueChange}
             required
           />
         </div>
@@ -150,7 +150,7 @@ export const TeamCreate = (props) => {
             // DBに値を送るための記述
             name="teamConcept"
             value={teamConceptValue}
-            onChange={hadleValueChenge}
+            onChange={handleValueChange}
           />
         </div>
         {/* <div className={styles.teamCreateContainer}>

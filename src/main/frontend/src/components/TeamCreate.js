@@ -51,19 +51,6 @@ export const TeamCreate = (props) => {
     setImages(imagesUrl);
   };
 
-  //作成時刻
-  const date = new Date();
-  const customDate =
-    date.getFullYear() +
-    "年" +
-    (date.getMonth() + 1) +
-    "月" +
-    date.getDate() +
-    "日" +
-    date.getHours() +
-    ":" +
-    date.getMinutes();
-
   // データベースのAPI
   const url = "http://localhost:8080/api/search";
 
@@ -86,7 +73,7 @@ export const TeamCreate = (props) => {
       .then((res) => {
         //firebaseDBにチャットルーム作成
         db.collection("chat")
-          .doc(res.data.teamId + "_" + res.data.teamName)
+          .doc("teamId" + res.data.teamId)
           .set({
             message: [],
           })

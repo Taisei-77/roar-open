@@ -62,7 +62,7 @@ const Chat = () => {
   //チャット内容表示
   const handleShow = (id, name) => {
     db.collection("chat")
-      .doc(id + "_" + name)
+      .doc("teamId" + id)
       .onSnapshot(
         {
           includeMetadataChanges: true,
@@ -95,7 +95,7 @@ const Chat = () => {
     // 新しいメッセージをCloud Firestoreのメッセージ配列に追加する
     messageList = messageData.concat(newMessage);
     db.collection("chat")
-      .doc(id + "_" + name)
+      .doc("teamId" + id)
       .set({ message: messageList });
     setMessageData(messageList);
 

@@ -40,24 +40,56 @@ const Chat = () => {
   };
 
   const url = "http://localhost:8080/api/usersTeams";
-  let messageList = []; //Cloud Firestoreの内容を代入するための変数
+  const urlSearch = "http://localhost:8080/api/search";
+  let teamInfoList = []; //APIで取得してチーム情報をリスト保存
+  let messageList = []; //Cloud fireStoreの内容を代入するための変数
+
+  let i = "";
 
   //初回API受信
   useEffect(() => {
     const fn = async () => {
-      // チーム情報受信API
+      // チームリスト情報受信API
       await axios
         .get(url + "/" + auth.currentUser.uid)
         .then((res) => {
-          setTeamList(res.data);
+          //各チーム情報取得API
+          for (i = 0; i < res.data.length; i++) {
+            console.log(i);
+            SearchInfo(res.data[i].teamId);
+          }
           isLoading(true);
         })
         .catch((error) => {
-          alert(error);
+          alert("チームリスト情報取得エラー：" + error);
         });
     };
     fn();
   }, []);
+
+  //各チーム情報取得API
+  const SearchInfo = (id) => {
+    axios
+      .get(urlSearch, {
+        params: {
+          teamId: id,
+          sportName: "",
+          prefectures: "",
+          activityFrequency: "",
+          dayOfTheWeek: "",
+          freeWord: "",
+        },
+      })
+      .then((resSearch) => {
+        teamInfoList = teamInfoList.concat(resSearch.data);
+        if (i == teamInfoList.length) {
+          setTeamList(teamInfoList);
+        }
+      })
+      .catch((error) => {
+        alert("各チーム情報取得エラー：" + error);
+      });
+  };
 
   //チャット内容表示
   const handleShow = (id, name) => {
@@ -69,6 +101,9 @@ const Chat = () => {
         },
         function (doc) {
           setMessageData(doc.data().message);
+        },
+        function (error) {
+          alert(error);
         }
       );
     setId(id);
@@ -92,7 +127,7 @@ const Chat = () => {
         dateString: customDate, // 2020/8/20/13:34のように表示される。
       },
     ];
-    // 新しいメッセージをCloud Firestoreのメッセージ配列に追加する
+    // 新しいメッセージをCloud Fire storeのメッセージ配列に追加する
     messageList = messageData.concat(newMessage);
     db.collection("chat")
       .doc("teamId" + id)
@@ -128,7 +163,7 @@ const Chat = () => {
             <div>
               {teamList.map((data) => (
                 <ChatItem
-                  avatar={data.avatar} //アイコン
+                  avatar={data.picture} //アイコン
                   alt={"チーム画像"}
                   title={data.teamName} //チーム名
                   subtitle={"What are you doing?"} //最新コメント
@@ -164,8 +199,8 @@ const Chat = () => {
                   id="messageValue"
                   className={styles.submitText}
                   placeholder="テキストを入力"
-                  maxLength="200"
-                  minLength="1"
+                  maxlength="200" //ほぼ意味なし
+                  required //意味なし
                 />
                 <Button variant="contained" onClick={() => addMessage()}>
                   送信

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,10 +55,16 @@ public class Rest {
     @Autowired
     SearchService searchService;
 
-    // チーム登録・更新
+    // チーム登録
     @PostMapping("/search")
     public Search search(@RequestBody Search teamData) {
         return searchService.setTeam(teamData);
+    }
+
+    // チーム更新
+    @PutMapping("/search")
+    public Search putSearch(@RequestBody Search teamData) {
+        return searchService.putTeam(teamData);
     }
 
     // 以下「users_teams_info」テーブルAPI

@@ -18,6 +18,14 @@
 }
 
 .modalBody {
+    text-align: center;
+}
+
+.modalBody p {
+    margin: 1rem;
+}
+
+.modalFooter {
     display: flex;
     justify-content: center;
 }

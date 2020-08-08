@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { auth } from "../firebase/index";
-import { Container, Button, Modal } from "@material-ui/core";
+import { auth,  } from "../firebase/index";
+import { Container, Button, Modal, TextField } from "@material-ui/core";
 import styles from "../style/Setting.module.css";
+import * as firebase from 'firebase';
 
 const url = "http://localhost:8080/api/users";
 
 const Setting = (props) => {
+  const
+   [open, setOpen] = useState(false),
+   [password, setPassword] = useState("");
 
-  const [open, setOpen] = useState(false);
-
+  //作用していなかったためとりあえず削除している
   // const [userData, fetchUserInfo] = useState([]);
   // const UserInfo = () => {
   //   var arr = [];
@@ -45,18 +48,55 @@ const Setting = (props) => {
     auth.signOut();
   };
 
+//modalを開く
   const handleOpen = () => {
     setOpen(true);
   };
 
+//modalを閉じる
   const handleClose = () => {
     setOpen(false)
   };
 
-      // todo
-      // ログアウト
-      // 退会する
-      // メアド変更
+//アカウントを削除する
+  const withdrawal = () => {
+    var user = auth.currentUser;
+    console.log(user);
+    user.delete().then(() => {
+      //うまくいけばユーザーが削除される
+    })
+    .catch((error) => {
+      //エラーが起きた場合
+      console.log(error);
+    });
+  };
+
+//アカウントを削除する前に必要な再認証をする。
+  const reLogin = () => {
+    var user = auth.currentUser;
+    var credential = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      password
+    );
+    user.reauthenticateWithCredential(credential)
+    .then(() => {
+//再認証が完了した場合、アカウントを削除する関数が起動する
+      withdrawal();
+    })
+    .catch((error) => {
+//再認証が失敗した場合はエラーがアラートされる
+      alert(error);
+    });
+  };
+
+//再認証するために必要なpasswordを入力するためのもの
+  const handleChange = (e) => {
+    switch (e.target.name) {
+      case "password":
+        setPassword(e.target.value);
+        break;
+    }
+  };
 
   return (
     <Container>
@@ -82,8 +122,19 @@ const Setting = (props) => {
           <div className="m-4">
             <h2 className={styles.modalTitle}>本当に退会しますか？</h2>
             <div className={styles.modalBody}>
-              <Button className="mt-3">退会する</Button>
-              <Button className="mt-3" onClick={handleClose}>閉じる</Button>
+              <p>本当に退会するならパスワードを入力</p>
+              <TextField
+                type="password"
+                placeholder="Your Password"
+                name="password"
+                value={password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.modalFooter}>
+              <Button className="mt-3" onClick={reLogin}>退会する</Button>
+              <Button className="mt-3" onClick={handleClose}>戻る</Button>
             </div>
           </div>
         </div>

@@ -65,14 +65,10 @@ const Top = (props) => {
     }
   };
 
-  //送信
-  const handleFormSubmit = (e) => {
-    //通常の送信処理等を停止
-    e.preventDefault();
-    toggleSpinner(true);
-    //ログイン認証
-    if (e.target.name === "login") {
-      auth
+  //ログイン認証
+  const sendLogin = async (e) => {
+    if (login) {
+      await auth
         .signInWithEmailAndPassword(login_email, login_pass)
         .then(() => {
           //正常終了時
@@ -82,31 +78,47 @@ const Top = (props) => {
           toggleSpinner(false);
           alert("送信エラー　" + error);
         });
-    } else if (e.target.name === "register") {
+    } else if (register) {
       //新規登録認証
-      auth
+      await auth
         .createUserWithEmailAndPassword(register_email, register_pass)
         .then(() => {
           //正常終了時
-          //ユーザー名をfireStoreに登録
-          db.collection("users")
-            .doc(auth.currentUser.uid)
-            .set({
-              name: register_user,
-            })
-            .then(function () {
-              console.log("Document successfully written!");
-            })
-            .catch(function (error) {
-              alert("登録エラー　Error writing document：" + error);
-            });
-
           props.history.push("/Home");
         })
         .catch((error) => {
           toggleSpinner(false);
           alert("送信エラー　" + error);
         });
+    }
+  };
+
+  //ユーザー名をfireStoreに登録
+  const sendRegister = async () => {
+    await db
+      .collection("users")
+      .doc(auth.currentUser.uid)
+      .set({
+        name: register_user,
+      })
+      .then(function () {
+        console.log("Document successfully written!");
+      })
+      .catch(function (error) {
+        alert("登録エラー　Error writing document：" + error);
+      });
+  };
+
+  //送信
+  const handleFormSubmit = async (e) => {
+    //通常の送信処理等を停止
+    e.preventDefault();
+    toggleSpinner(true);
+    await sendLogin();
+
+    //ユーザー名登録
+    if (register) {
+      await sendRegister();
     }
   };
 
@@ -128,7 +140,7 @@ const Top = (props) => {
               <Modal.Title>ログイン</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form name="login" onSubmit={handleFormSubmit}>
+              <Form onSubmit={handleFormSubmit}>
                 <Form.Group controlId="formBasicEmail" className="m-3">
                   <Form.Label className="mb-3">メールアドレス</Form.Label>
                   <Form.Control
@@ -178,7 +190,7 @@ const Top = (props) => {
               <Modal.Title>アカウントを作成</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form name="register" onSubmit={handleFormSubmit}>
+              <Form onSubmit={handleFormSubmit}>
                 <Form.Group controlId="formBasicName" className="m-3">
                   <Form.Label className="mb-3">ユーザーネーム</Form.Label>
                   <Form.Control

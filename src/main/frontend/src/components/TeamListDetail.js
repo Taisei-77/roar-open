@@ -1,13 +1,14 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { auth } from "../firebase/index";
 import axios from "axios";
-
 //propsにhistoryを渡すため
 import { Link } from "react-router-dom";
-
+import TeamEdit from "./TeamEdit";
 import styles from "../style/TeamListDetail.module.css";
 import { Button } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
+import Fade from "@material-ui/core/Fade";
+import Backdrop from "@material-ui/core/Backdrop";
 
 import { GiJapan, GiRunningShoe } from "react-icons/gi";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -16,7 +17,15 @@ import { DiCodeigniter } from "react-icons/di";
 // スタイルの設定
 
 const TeamListDetail = (props) => {
-  console.log(props.team_id);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setModalOpen(false);
+  };
   //チームの編集
   const handleEdit = () => {};
 
@@ -86,7 +95,7 @@ const TeamListDetail = (props) => {
         <p className={styles.team_info_title}>チームコンセプト</p>
         <p className={styles.team_concept}>{props.team_concept}</p>
         <div className={styles.edit_btn}>
-          <Link
+          {/* <Link
             to={{
               pathname: "/TeamEdit",
               state: {
@@ -100,11 +109,25 @@ const TeamListDetail = (props) => {
                 before_team_concept: props.team_concept,
               },
             }}
+          > */}
+          <Button variant="contained" color="primary" onClick={handleOpen}>
+            内容を編集する
+          </Button>
+          {/* </Link> */}
+          <Modal
+            open={modalOpen}
+            onClose={handleClose}
+            className={styles.modal}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
           >
-            <Button variant="contained" color="primary" onClick={handleEdit}>
-              内容を編集する
-            </Button>
-          </Link>
+            <Fade in={modalOpen}>
+              <TeamEdit team_id={props.team_id} />
+            </Fade>
+          </Modal>
         </div>
         <div className={styles.withdraw_btn}>
           <Button variant="contained" size="small" onClick={handleWithdraw}>

@@ -16,7 +16,7 @@ import Spinner from "../UIkit/Spinner";
 // import { CompePartPerform } from "./CompePartPerform";
 
 export const TeamEdit = (props) => {
-  const { team_id } = props.location.state; //TeamListDetailから編集するチームのteam_idを受け取っている。
+  const team_id = props.team_id; //TeamListDetailから編集するチームのteam_idを受け取っている。
   const [teamNameValue, setTeamNameValue] = useState(""), //チーム名
     [images, setImages] = useState(""), //画像のURL
     [teamConceptValue, setTeamConceptValue] = useState(""), //チームコンセプト
@@ -119,12 +119,12 @@ export const TeamEdit = (props) => {
     return <Spinner />;
   } else {
     return (
-      <div>
+      <div className={styles.container}>
         <div className={styles.teamEditTitleBar}>
           <p className={styles.teamEditTitle}>チームの編集</p>
-          <Link className={styles.teamEditPreviewBtn} to="/Home">
+          {/* <Link className={styles.teamEditPreviewBtn} to="/Home">
             変更せずに戻る
-          </Link>
+          </Link> */}
         </div>
         <div className={styles.teamCreateBody}>
           <div className={styles.teamCreateContainer}>

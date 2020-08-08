@@ -62,6 +62,7 @@ const ProfileCreate = () => {
   //初回レンダリング時に、ユーザーのプロフィール情報が取得できる。
   useEffect(() => {
     UserInfo();
+    window.scrollTo(0, 0);
   }, []);
 
   const handleFormSubmit = (e) => {

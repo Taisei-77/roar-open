@@ -6,6 +6,12 @@ import { FcSettings } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { auth, db } from "../firebase/index";
 import axios from "axios";
+import { Button } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
+import Fade from "@material-ui/core/Fade";
+import Backdrop from "@material-ui/core/Backdrop";
+
+import ProfileCreate from "./ProfileCreate";
 
 const url = "http://localhost:8080/api/profile";
 
@@ -17,6 +23,24 @@ const Profile = (props) => {
     [like, setLike] = useState(""),
     [sns, setSns] = useState(""),
     [gallery, setGallery] = useState("");
+  //モーダルの開閉を管理するstate
+  const [modalOpen, setModalOpen] = useState(false);
+  //プロフィールが更新された際に際レンダリングをかけるためのstate
+  const [profileEdit, setProfileEdit] = useState(true);
+
+  // プロフィール編集のmodalの表示をするための関数
+  const handleOpen = () => {
+    setModalOpen(true);
+  };
+  // プロフィール編集のmodalを非表示にするための関数
+  const handleClose = () => {
+    setModalOpen(false);
+  };
+
+  // プロフィール編集がされた時に実行される関数
+  const profileEdited = () => {
+    setProfileEdit(!profileEdit);
+  };
 
   //ユーザー名取得
   db.collection("users")
@@ -62,23 +86,27 @@ const Profile = (props) => {
       </div>
       <header className={styles.header}>
         <p className={styles.profileTitle}>プロフィール</p>
-        <Link
-          to={{
-            pathname: "/ProfileCreate",
-            state: {
-              beforeIcon: icon,
-              beforeProfile: profile,
-              beforeActivity: activity,
-              beforeLike: like,
-              beforeSns: sns,
-              beforeGallery: gallery,
-            },
-          }}
-        >
+        <div>
           プロフィールの編集
-          <FcSettings className={styles.profileCreateButton} />
-        </Link>
+          <Button onClick={handleOpen}>
+            <FcSettings className={styles.profileCreateButton} />
+          </Button>
+        </div>
       </header>
+      <Modal
+        open={modalOpen}
+        onClose={handleClose}
+        className={styles.modal}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={modalOpen}>
+          <ProfileCreate />
+        </Fade>
+      </Modal>
 
       <div className={styles.main}>
         <div className={styles.mainBody}>

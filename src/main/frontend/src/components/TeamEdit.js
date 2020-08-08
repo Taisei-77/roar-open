@@ -70,7 +70,7 @@ export const TeamEdit = (props) => {
   const teamCreateBtn = () => {
     //送信
     axios
-      .post(url, {
+      .put(url, {
         teamId: team_id, //team_idでどのチームの編集をするのかを管理する。
         teamName: teamNameValue,
         picture: images,

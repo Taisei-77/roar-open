@@ -109,7 +109,7 @@ export const TeamEdit = (props) => {
         teamConcept: teamConceptValue,
       })
       .then(() => {
-        props.history.push("/Chat");
+        // props.history.push("/Chat");
       })
       .catch((error) => {
         alert(error);

@@ -45,7 +45,7 @@ const HomeTeamList = (props) => {
         <Fade in={modalOpen}>
           <TeamListDetail
             data={props.data}
-            team_id={props.data.team_id}
+            team_id={props.data.teamId}
             team_name={props.data.teamName}
             picture={props.data.picture}
             sport_name={props.data.sportName}

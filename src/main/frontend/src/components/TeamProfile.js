@@ -21,7 +21,6 @@ export const TeamProfile = (props) => {
           isClearable
           isSearchable
           options={SportName}
-          defaultInputValue={props.before_sport_name}
           placeholder="何のスポーツ？"
           name="sport_name"
         />
@@ -33,7 +32,6 @@ export const TeamProfile = (props) => {
           isMulti
           isClearable
           options={Prefectures}
-          defaultInputValue={props.before_prefectures}
           placeholder="どこで活動してる？"
           name="prefectures_name"
         />
@@ -44,7 +42,6 @@ export const TeamProfile = (props) => {
           className="profileSelect"
           isClearable
           options={ActivityFrequency}
-          defaultInputValue={props.before_activity_frequency}
           placeholder="どれくらい活動してる？"
           name="activity_frequency_name"
         />
@@ -56,7 +53,6 @@ export const TeamProfile = (props) => {
           isMulti
           isClearable
           options={DayOfTheWeek}
-          defaultInputValue={props.before_day_of_the_week}
           placeholder="何曜日に活動してる？"
           name="day_of_the_week_name"
         />

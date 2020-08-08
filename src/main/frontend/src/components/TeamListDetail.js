@@ -16,6 +16,7 @@ import { DiCodeigniter } from "react-icons/di";
 // スタイルの設定
 
 const TeamListDetail = (props) => {
+  console.log(props.team_id);
   //チームの編集
   const handleEdit = () => {};
 

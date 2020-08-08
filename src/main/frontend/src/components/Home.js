@@ -66,7 +66,6 @@ const Home = () => {
                 alert(error);
               });
           }
-          console.log(teamInfoList);
         })
         .catch((error) => {
           alert(error);

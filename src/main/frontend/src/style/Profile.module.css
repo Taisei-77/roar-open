@@ -13,7 +13,14 @@
   box-shadow: 0 12px 10px -6px rgba(0, 0, 0, 0.3);
   border-left: 10px solid orange;
 }
-
+.modal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /*  maxHeight: 500; */
+}
 .profileTitle {
   font-size: 24px;
   margin-left: 30px;

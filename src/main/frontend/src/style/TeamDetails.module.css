@@ -1,6 +1,6 @@
 .container {
   width: 900px;
-  height: 800px;
+  height: 100vh;
   background-color: #f9f9f9;
   overflow: scroll;
   /* border-radius: 20px; */

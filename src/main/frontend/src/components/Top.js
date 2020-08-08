@@ -66,7 +66,7 @@ const Top = (props) => {
   };
 
   //ログイン認証
-  const sendLogin = async (e) => {
+  const sendLogin = async () => {
     if (login) {
       await auth
         .signInWithEmailAndPassword(login_email, login_pass)

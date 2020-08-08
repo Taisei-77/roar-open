@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { auth,  } from "../firebase/index";
+import { auth, db } from "../firebase/index";
 import { Container, Button, Modal, TextField } from "@material-ui/core";
 import styles from "../style/Setting.module.css";
 import * as firebase from 'firebase';
@@ -58,6 +58,17 @@ const Setting = (props) => {
     setOpen(false)
   };
 
+//firestoreからドキュメントを削除する
+  const dbDelete = () => {
+    db.collection("users").doc(auth.currentUser.uid).delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+    })
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+  };
+
 //アカウントを削除する
   const withdrawal = () => {
     var user = auth.currentUser;
@@ -81,6 +92,7 @@ const Setting = (props) => {
     user.reauthenticateWithCredential(credential)
     .then(() => {
 //再認証が完了した場合、アカウントを削除する関数が起動する
+      dbDelete();
       withdrawal();
     })
     .catch((error) => {

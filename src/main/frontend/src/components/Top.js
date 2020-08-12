@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../style/Top.css";
-import { Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
+import styles from "../style/Top.module.css";
+import { Container, Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
 import { auth, db } from "../firebase/index";
 import { Spinner } from "../UIkit/index";
 
@@ -123,150 +123,163 @@ const Top = (props) => {
   };
 
   return (
-    <div>
-      <main>
-        {/* <!-- ログイン新規会員登録モーダルの右上寄せブロック --> */}
-        <ButtonToolbar className="float-right">
-          <Button onClick={() => isLoginShow(true)}>ログイン</Button>
-          <Button
-            onClick={() => isRegisterShow(true)}
-            style={{ marginLeft: 5 }}
-          >
-            新規会員登録
-          </Button>
+    <main className={styles.main}>
+      <section className={styles.header}>
+        <Container>
+          {/* <!-- ログイン新規会員登録モーダルの右上寄せブロック --> */}
+          <ButtonToolbar className="p-3 justify-content-end">
+            <div className={styles.btn} onClick={() => isLoginShow(true)}>
+              ログイン
+            </div>
+            <div
+              className={styles.btn}
+              onClick={() => isRegisterShow(true)}
+            >
+              新規会員登録
+            </div>
 
-          <Modal show={login} onHide={() => isLoginShow(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>ログイン</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form onSubmit={handleFormSubmit}>
-                <Form.Group controlId="formBasicEmail" className="m-3">
-                  <Form.Label className="mb-3">メールアドレス</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Email"
-                    name="login_email"
-                    value={login_email}
-                    onChange={handleChange}
-                    required
-                  />
-                  <Form.Text className="text-muted"></Form.Text>
-                </Form.Group>
+            <Modal show={login} onHide={() => isLoginShow(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>ログイン</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form onSubmit={handleFormSubmit}>
+                  <Form.Group controlId="formBasicEmail" className="m-3">
+                    <Form.Label className="mb-3">メールアドレス</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Email"
+                      name="login_email"
+                      value={login_email}
+                      onChange={handleChange}
+                      required
+                    />
+                    <Form.Text className="text-muted"></Form.Text>
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicPassword" className="m-3">
-                  <Form.Label className="mb-3">パスワード</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    name="login_pass"
-                    value={login_pass}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group
-                  controlId="formBasicCheckbox"
-                  className="mb-3"
-                ></Form.Group>
-                <Button variant="primary" type="submit" className="m-3">
-                  {/* ログインボタンのテキスト */}
-                  {login_button_text}
-                </Button>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Form.Text className="text-muted m-3">
-                アカウントをお持ちでない場合、
-                <span className="btn btn-link" onClick={() => toggleModal()}>
-                  新規会員登録
-                </span>
-              </Form.Text>
-            </Modal.Footer>
-          </Modal>
+                  <Form.Group controlId="formBasicPassword" className="m-3">
+                    <Form.Label className="mb-3">パスワード</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      name="login_pass"
+                      value={login_pass}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formBasicCheckbox"
+                    className="mb-3"
+                  ></Form.Group>
+                  <Button variant="primary" type="submit" className="m-3">
+                    {/* ログインボタンのテキスト */}
+                    {login_button_text}
+                  </Button>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Form.Text className="text-muted m-3">
+                  アカウントをお持ちでない場合、
+                  <span className="btn btn-link" onClick={() => toggleModal()}>
+                    新規会員登録
+                  </span>
+                </Form.Text>
+              </Modal.Footer>
+            </Modal>
 
-          <Modal show={register} onHide={() => isRegisterShow(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>アカウントを作成</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form onSubmit={handleFormSubmit}>
-                <Form.Group controlId="formBasicName" className="m-3">
-                  <Form.Label className="mb-3">ユーザーネーム</Form.Label>
-                  <Form.Control
-                    type="name"
-                    placeholder="Username"
-                    name="register_user"
-                    value={register_user}
-                    onChange={handleChange}
-                    required
-                    pattern="\S+.*" // 始まりは空白以外\S 以後は+ 文字. 全て* 許可
-                  />
-                </Form.Group>
+            <Modal show={register} onHide={() => isRegisterShow(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>アカウントを作成</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form onSubmit={handleFormSubmit}>
+                  <Form.Group controlId="formBasicName" className="m-3">
+                    <Form.Label className="mb-3">ユーザーネーム</Form.Label>
+                    <Form.Control
+                      type="name"
+                      placeholder="Username"
+                      name="register_user"
+                      value={register_user}
+                      onChange={handleChange}
+                      required
+                      pattern="\S+.*" // 始まりは空白以外\S 以後は+ 文字. 全て* 許可
+                    />
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicEmail" className="m-3">
-                  <Form.Label className="mb-3">メールアドレス</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Email"
-                    name="register_email"
-                    value={register_email}
-                    onChange={handleChange}
-                    required
-                  />
-                  <Form.Text className="text-muted"></Form.Text>
-                </Form.Group>
+                  <Form.Group controlId="formBasicEmail" className="m-3">
+                    <Form.Label className="mb-3">メールアドレス</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Email"
+                      name="register_email"
+                      value={register_email}
+                      onChange={handleChange}
+                      required
+                    />
+                    <Form.Text className="text-muted"></Form.Text>
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicPassword" className="m-3">
-                  <Form.Label className="mb-3">
-                    パスワード
-                    <span id="characterlimit">(半角英数字6~16桁)</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    name="register_pass"
-                    value={register_pass}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox"></Form.Group>
-                <Button variant="primary" type="submit" className="m-3">
-                  {/* 登録ボタンのテキスト */}
-                  {register_button_text}
-                </Button>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Form.Text className="text-muted m-3">
-                すでにアカウントをお持ちの場合、
-                <span className="btn btn-link" onClick={() => toggleModal()}>
-                  ログイン
-                </span>
-              </Form.Text>
-            </Modal.Footer>
-          </Modal>
-        </ButtonToolbar>
-        <div className="clearfix"></div>
-        {/* <!-- 真ん中のメッセージブロック --> */}
-        <div id="labelContents" className="text-center">
-          <h1 id="labelTitle">roar</h1>
-          <div id="labelExplanation">
-            <p>スポーツ専門のチャットツールでチームの輪を広げよう</p>
-            <p>簡単にチームのメンバーを募れる</p>
-            <p>スポーツコミュニティユーザー数世界１位</p>
-            <p>さあ、今すぐroarで新しい体験を...</p>
+                  <Form.Group controlId="formBasicPassword" className="m-3">
+                    <Form.Label className="mb-3">
+                      パスワード
+                      <span id="characterlimit">(半角英数字6~16桁)</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      name="register_pass"
+                      value={register_pass}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicCheckbox"></Form.Group>
+                  <Button variant="primary" type="submit" className="m-3">
+                    {/* 登録ボタンのテキスト */}
+                    {register_button_text}
+                  </Button>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Form.Text className="text-muted m-3">
+                  すでにアカウントをお持ちの場合、
+                  <span className="btn btn-link" onClick={() => toggleModal()}>
+                    ログイン
+                  </span>
+                </Form.Text>
+              </Modal.Footer>
+            </Modal>
+          </ButtonToolbar>
+        </Container>
+      </section>
+
+      <section>
+        <Container>
+          {/* <!-- 真ん中のメッセージブロック --> */}
+          <div className={styles.content}>
+            <div className={styles.logo}>
+              <img src="https://fontmeme.com/permalink/200730/290eb932de87052b5d303753501d1f76.png" />
+            </div>
+            <div className={styles.leadText}>
+              <p>スポーツ専門のチャットツールでチームの輪を広げよう</p>
+              <p>簡単にチームのメンバーを募れる</p>
+              <p>スポーツコミュニティユーザー数世界１位</p>
+              <p>さあ、今すぐroarで新しい体験を...</p>
+            </div>
+            {/* <!--  ページ下部の登録ボタンのブロック--> */}
+            <div className={styles.startUp}>
+              <button
+                className="btn btn-outline-light btn-lg px-5"
+                onClick={() => isRegisterShow(true)}
+              >
+                今すぐはじめる
+              </button>
+            </div>
           </div>
-          {/* <!--  ページ下部の登録ボタンのブロック--> */}
-        </div>
-        <div id="startUpContent" className="text-center">
-          <Button id="startUp" onClick={() => isRegisterShow(true)}>
-            今すぐはじめる
-          </Button>
-        </div>
-      </main>
-    </div>
+        </Container>
+      </section>
+    </main>
   );
 };
 

@@ -8,10 +8,10 @@ import * as firebase from 'firebase';
 const Setting = (props) => {
 
   const
-   [open, setOpen] = useState(false),
-   [openEmail, setOpenEmail] = useState(false),
-   [password, setPassword] = useState(""),
-   [newEmail,setNewEmail] = useState("");
+   [open, setOpen] = useState(false),           //退会用modalを開いたり閉じたりするstate
+   [openEmail, setOpenEmail] = useState(false), //メアド変更用modalを開いたり閉じたりするstate
+   [password, setPassword] = useState(""),      //新パスワードを入れるstate
+   [newEmail,setNewEmail] = useState("");       //新メアドを入れるstate
 
 //ログアウトボタン
   const handleLogout = () => {
@@ -19,20 +19,22 @@ const Setting = (props) => {
     auth.signOut();
   };
 
-//modalを開く
+//退会用modalを開く
   const handleOpen = () => {
     setOpen(true);
   };
 
+//メアド変更用modalを開く
   const handleOpenEmail = () => {
     setOpenEmail(true);
   }
 
-//modalを閉じる
+//退会用modalを閉じる
   const handleClose = () => {
     setOpen(false);
   };
 
+//メアド変更用modalを開く
   const handleCloseEmail = () => {
     setOpenEmail(false);
   }
@@ -73,6 +75,7 @@ const Setting = (props) => {
 //再認証が完了した場合、アカウントを削除する関数が起動する
       dbDelete();
       withdrawal();
+      alert("ご利用ありがとうございました");
     })
     .catch((error) => {
 //再認証が失敗した場合はエラーがアラートされる
@@ -98,13 +101,15 @@ const Setting = (props) => {
   const mailChange = () => {
     var user = auth.currentUser;
     user.updateEmail(newEmail)
-    .then(function() {
-      // Update successful.
+    .then(() => {
+      // 変更完了
     })
-    .catch(function(error) {
-      // An error happened.
+    .catch((error) => {
+      // エラーが起きた場合
+      alert(error);
     });
   };
+//再認証したのちにメアド変更する。
   const changeEmail = () => {
     var user = auth.currentUser;
     var credential = firebase.auth.EmailAuthProvider.credential(
@@ -126,20 +131,25 @@ const Setting = (props) => {
 
   return (
     <Container>
-      <div className={styles.title}>
-        <h1 className="text-left">設定画面</h1>
-      </div>
-      <ul>
-        <li>
-          <div className={styles.btn} onClick={handleOpenEmail}>メールアドレス変更</div>
-        </li>
-        <li>
-          <div className={styles.btn} onClick={handleLogout}>ログアウト</div>
-        </li>
-        <li>
-          <div className={styles.btn} onClick={handleOpen}>退会する</div>
-        </li>
-      </ul>
+{/* コンテンツ部分 */}
+      <section>
+        <div className={styles.title}>
+          <h1 className="text-left">設定画面</h1>
+        </div>
+        <ul>
+          <li>
+            <div className={styles.btn} onClick={handleOpenEmail}>メールアドレス変更</div>
+          </li>
+          <li>
+            <div className={styles.btn} onClick={handleLogout}>ログアウト</div>
+          </li>
+          <li>
+            <div className={styles.btn} onClick={handleOpen}>退会する</div>
+          </li>
+        </ul>
+      </section>
+
+{/* 退会用modal部分 */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -166,6 +176,7 @@ const Setting = (props) => {
         </div>
       </Modal>
 
+{/* メールアドレス変更用modal */}
       <Modal
         open={openEmail}
         onClose={handleCloseEmail}

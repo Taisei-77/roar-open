@@ -150,7 +150,6 @@ const Top = (props) => {
                       type="email"
                       placeholder="Email"
                       name="login_email"
-                      value={login_email}
                       onChange={handleChange}
                       required
                     />
@@ -163,7 +162,6 @@ const Top = (props) => {
                       type="password"
                       placeholder="Password"
                       name="login_pass"
-                      value={login_pass}
                       onChange={handleChange}
                       required
                     />
@@ -200,7 +198,6 @@ const Top = (props) => {
                       type="name"
                       placeholder="Username"
                       name="register_user"
-                      value={register_user}
                       onChange={handleChange}
                       required
                       pattern="\S+.*" // 始まりは空白以外\S 以後は+ 文字. 全て* 許可
@@ -213,7 +210,6 @@ const Top = (props) => {
                       type="email"
                       placeholder="Email"
                       name="register_email"
-                      value={register_email}
                       onChange={handleChange}
                       required
                     />
@@ -229,7 +225,6 @@ const Top = (props) => {
                       type="password"
                       placeholder="Password"
                       name="register_pass"
-                      value={register_pass}
                       onChange={handleChange}
                       required
                     />

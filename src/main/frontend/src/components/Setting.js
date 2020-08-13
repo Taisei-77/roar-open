@@ -10,7 +10,7 @@ const Setting = (props) => {
   const
    [open, setOpen] = useState(false),           //退会用modalを開いたり閉じたりするstate
    [openEmail, setOpenEmail] = useState(false), //メアド変更用modalを開いたり閉じたりするstate
-   [password, setPassword] = useState(""),      //新パスワードを入れるstate
+   [password, setPassword] = useState(""),      //パスワードを入れるstate
    [newEmail,setNewEmail] = useState("");       //新メアドを入れるstate
 
 //ログアウトボタン
@@ -43,23 +43,21 @@ const Setting = (props) => {
   const dbDelete = () => {
     db.collection("users").doc(auth.currentUser.uid).delete()
     .then(() => {
-      console.log("Document successfully deleted!");
     })
     .catch((error) => {
-      console.error("Error removing document: ", error);
+      alert("Error removing document: ", error);
     });
   };
 
 //アカウントを削除する
   const withdrawal = () => {
     var user = auth.currentUser;
-    console.log(user);
     user.delete().then(() => {
       //うまくいけばユーザーが削除される
     })
     .catch((error) => {
       //エラーが起きた場合
-      console.log(error);
+      alert(error);
     });
   };
 
@@ -109,6 +107,7 @@ const Setting = (props) => {
       alert(error);
     });
   };
+
 //再認証したのちにメアド変更する。
   const changeEmail = () => {
     var user = auth.currentUser;
@@ -163,7 +162,6 @@ const Setting = (props) => {
                 type="password"
                 placeholder="Your Password"
                 name="password"
-                value={password}
                 onChange={handleChange}
                 required
               />
@@ -190,7 +188,6 @@ const Setting = (props) => {
                 type="email"
                 placeholder="New email"
                 name="email"
-                value={newEmail}
                 onChange={handleChange}
                 required
                 className="my-2"
@@ -199,7 +196,6 @@ const Setting = (props) => {
                 type="password"
                 placeholder="Your Password"
                 name="password"
-                value={password}
                 onChange={handleChange}
                 required
                 className="my-2"

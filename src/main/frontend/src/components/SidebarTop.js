@@ -14,13 +14,19 @@ class SidebarTop extends React.Component {
   render() {
     return (
       <div className={styles.sidebar}>
+        <div className={styles.sidebarLogo}>
+          <img
+            src="https://fontmeme.com/permalink/200730/290eb932de87052b5d303753501d1f76.png"
+            className={styles.logo}
+          />
+        </div>
         <ul className={styles.sidebarFixed}>
-          <li>
+          <li className={styles.sidebarItem}>
             <Link to="/" className={styles.link}>
               roar
             </Link>
           </li>
-          <li>
+          <li className={styles.sidebarItem}>
             <Link to="/TeamSearch" className={styles.link}>
               チームを探す
             </Link>

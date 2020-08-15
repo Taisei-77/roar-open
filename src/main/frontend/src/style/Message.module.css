@@ -6,6 +6,11 @@
 .messageLeft {
   margin: 0 auto 10px 0;
 }
+.name {
+  color: #333;
+  font-size: 12px;
+  margin: 2px;
+}
 .avatar {
   border-radius: 50%;
   border: 0.5px solid #a8a3a3;

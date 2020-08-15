@@ -51,56 +51,116 @@ export const TeamCreate = (props) => {
     setImages(imagesUrl);
   };
 
+  // 1桁の数字を0埋めで2桁にする
+  let toDoubleDigits = function (num) {
+    num += "";
+    if (num.length === 1) {
+      num = "0" + num;
+    }
+    return num;
+  };
+
+  //現在時刻取得
+  const date = new Date();
+  const customDate =
+    toDoubleDigits(date.getFullYear()) +
+    "年" +
+    toDoubleDigits(date.getMonth() + 1) +
+    "月" +
+    toDoubleDigits(date.getDate()) +
+    "日" +
+    toDoubleDigits(date.getHours()) +
+    ":" +
+    toDoubleDigits(date.getMinutes()) +
+    ":" +
+    toDoubleDigits(date.getSeconds());
   // データベースのAPI
   const url = "http://localhost:8080/api/search";
+  const urlUsersTeams = "http://localhost:8080/api/usersTeams";
+  const uid = auth.currentUser.uid;
 
-  //作成ボタン
-  const teamCreateBtn = () => {
-    //送信
-    axios
-      .post(url, {
-        teamName: teamNameValue,
-        picture: images,
-        sportName: document.getElementsByName("sport_name")[0].value,
-        prefectures: document.getElementsByName("prefectures_name")[0].value,
-        activityFrequency: document.getElementsByName(
-          "activity_frequency_name"
-        )[0].value,
-        dayOfTheWeek: document.getElementsByName("day_of_the_week_name")[0]
-          .value,
-        teamConcept: teamConceptValue,
-      })
-      .then((res) => {
-        //firebaseDBにチャットルーム作成
-        db.collection("chat")
-          .doc("teamId" + res.data.teamId)
-          .set({
-            message: [],
-          })
-          .then(function () {
-            console.log("Document successfully written!");
-          })
-          .catch(function (error) {
-            alert("チャットルーム作成エラー：" + error);
-          });
+  //チーム情報送信
+  const sendTeam = () => {
+    return new Promise((resolve) => {
+      axios
+        .post(url, {
+          teamName: teamNameValue,
+          picture: images,
+          sportName: document.getElementsByName("sport_name")[0].value,
+          prefectures: document.getElementsByName("prefectures_name")[0].value,
+          activityFrequency: document.getElementsByName(
+            "activity_frequency_name"
+          )[0].value,
+          dayOfTheWeek: document.getElementsByName("day_of_the_week_name")[0]
+            .value,
+          teamConcept: teamConceptValue,
+        })
+        .then((res) => {
+          //firebaseDBにチャットルーム作成
+          db.collection("chat")
+            .doc("teamId" + res.data.teamId)
+            .set({
+              message: [],
+            })
+            .then(function () {
+              console.log("Document successfully written!");
+              let idAndName = [res.data.teamId, res.data.teamName];
+              resolve(idAndName);
+            })
+            .catch(function (error) {
+              alert("チャットルーム作成エラー：" + error);
+            });
+        })
+        .catch((error) => {
+          alert("チーム作成エラー：" + error);
+        });
+    });
+  };
 
-        //作成者をチームに参加させる
+  //作成者をチームに参加させる
+  const joinTeam = () => {
+    return new Promise((resolve) => {
+      sendTeam().then((idAndName) => {
         axios
-          .post("http://localhost:8080/api/usersTeams", {
-            uid: auth.currentUser.uid,
-            teamId: res.data.teamId,
-            teamName: res.data.teamName,
+          .post(urlUsersTeams, {
+            uid: uid,
+            teamId: idAndName[0],
+            teamName: idAndName[1],
           })
           .then(() => {
-            props.history.push("/Chat");
+            resolve(idAndName[0]);
           })
           .catch((error) => {
             alert("チーム参加エラー：" + error);
           });
-      })
-      .catch((error) => {
-        alert("チーム作成エラー：" + error);
       });
+    });
+  };
+
+  //firebaseDBへ参加時間を登録
+  const sendTime = () => {
+    joinTeam().then((id) => {
+      db.collection("chatExitTime")
+        .doc(id + "_" + uid)
+        .set({
+          exitTime: customDate,
+        })
+        .then(function () {
+          console.log("Document successfully written!");
+          props.history.push("/Chat");
+        })
+        .catch(function (error) {
+          alert("登録エラー　Error writing document：" + error);
+        });
+    });
+  };
+
+  //作成ボタン
+  const teamCreateBtn = () => {
+    //処理順
+    // sendTeam(); 1
+    // joinTeam() 2
+    sendTime(); //3
   };
 
   return (

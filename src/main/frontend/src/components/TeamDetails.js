@@ -1,6 +1,6 @@
 import React from "react";
 
-import { auth } from "../firebase/index";
+import { auth, db } from "../firebase/index";
 import axios from "axios";
 
 //propsにhistoryを渡すため
@@ -15,12 +15,54 @@ import { DiCodeigniter } from "react-icons/di";
 
 const TeamDetails = (props) => {
   const url = "http://localhost:8080/api/usersTeams";
+  const uid = auth.currentUser.uid;
+
+  // 1桁の数字を0埋めで2桁にする
+  let toDoubleDigits = function (num) {
+    num += "";
+    if (num.length === 1) {
+      num = "0" + num;
+    }
+    return num;
+  };
+
+  //現在時刻取得
+  const date = new Date();
+  const customDate =
+    toDoubleDigits(date.getFullYear()) +
+    "年" +
+    toDoubleDigits(date.getMonth() + 1) +
+    "月" +
+    toDoubleDigits(date.getDate()) +
+    "日" +
+    toDoubleDigits(date.getHours()) +
+    ":" +
+    toDoubleDigits(date.getMinutes()) +
+    ":" +
+    toDoubleDigits(date.getSeconds());
+
+  //firebaseDBへ参加時間を登録
+  const sendTime = async () => {
+    await db
+      .collection("chatExitTime")
+      .doc(props.team_id + "_" + uid)
+      .set({
+        exitTime: customDate,
+      })
+      .then(function () {
+        console.log("Document successfully written!");
+        props.history.push("/Chat");
+      })
+      .catch(function (error) {
+        alert("参加登録エラー　Error writing document：" + error);
+      });
+  };
   //参加ボタン
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     //送信
-    axios
+    await axios
       .post(url, {
-        uid: auth.currentUser.uid,
+        uid: uid,
         teamId: props.team_id,
         teamName: props.team_name,
       })
@@ -28,8 +70,10 @@ const TeamDetails = (props) => {
         props.history.push("/Chat");
       })
       .catch((error) => {
-        alert(error);
+        alert("参加登録エラー" + error);
       });
+
+    await sendTime();
   };
   return (
     <div className={styles.container}>

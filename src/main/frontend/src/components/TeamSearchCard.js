@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Fade from "@material-ui/core/Fade";
 import Backdrop from "@material-ui/core/Backdrop";
+import { FaUserFriends } from "react-icons/fa";
 
 // css modules
 import styles from "../style/TeamSearchCard.module.css";
@@ -49,7 +50,35 @@ export const TeamSearchCard = (props) => {
                 詳細を確認する
               </Button>
             </div>
+            <div className={styles.teamInfoContainer}>
+              {props.prefectures == "" ? (
+                //活動曜日が登録されていなければ空要素を返す
+                <></>
+              ) : (
+                //活動曜日が登録されていれば、以下の要素を返す
+                <p className={styles.teamInfoBlock}>
+                  <span className={styles.prefectures}>活動拠点</span>
+                  <span>{props.prefectures}</span>
+                </p>
+              )}
+              {props.sport_name == "" ? (
+                //スポーツが登録されていなければ空要素を返す
+                <></>
+              ) : (
+                //スポーツが登録されていれば以下の要素を返す
+                <p className={styles.teamInfoBlock}>
+                  <span className={styles.sportName}>スポーツ</span>
+                  <span>{props.sport_name}</span>
+                </p>
+              )}
+            </div>
             <p className={styles.teamConcept}>{props.team_concept}</p>
+            <p className={styles.teamMemberContainer}>
+              <span className={styles.teamMember}>
+                <FaUserFriends />
+              </span>
+              <span>{props.count}人</span>
+            </p>
           </div>
         </Grid>
       </Grid>

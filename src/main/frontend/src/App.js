@@ -14,7 +14,9 @@ import Chat from "./components/Chat";
 import News from "./components/News";
 import Setting from "./components/Setting";
 import ProfileCreate from "./components/ProfileCreate";
+import ProfileEditComplete from "./components/ProfileEditComplete";
 import TeamEdit from "./components/TeamEdit";
+import TeamEditComplete from "./components/TeamEditComplete";
 
 import Auth from "./auth/Auth";
 
@@ -45,7 +47,12 @@ class App extends React.Component {
             {/* 以下認証のみ */}
             <Auth toggleSidebar={this.toggleSidebar}>
               <Route path="/Home" component={Home} />
+              <Route
+                path="/ProfileEditComplete"
+                component={ProfileEditComplete}
+              />
               <Route path="/TeamEdit" component={TeamEdit} />
+              <Route path="/TeamEditComplete" component={TeamEditComplete} />
               <Route path="/TeamCreate" component={TeamCreate} />
               <Route path="/Chat" component={Chat} />
               {/* <Route path="/Profile" component={Profile} /> */}

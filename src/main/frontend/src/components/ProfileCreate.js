@@ -3,7 +3,7 @@ import Spinner from "../UIkit/Spinner";
 
 import styles from "../style/ProfileCreate.module.css";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { TextField, Button, Icon } from "@material-ui/core";
 import { CreatePhoto } from "../UIkit/index";
 import { auth } from "../firebase/index";
@@ -55,7 +55,6 @@ const ProfileCreate = (props) => {
         setSns(res.data.sns);
         setGallery(res.data.gallery);
         setLoading(!loading);
-        // props.editSubmittedToggle;
       })
       .catch((error) => {
         alert(error);
@@ -82,8 +81,7 @@ const ProfileCreate = (props) => {
         gallery: gallery,
       })
       .then(() => {
-        // props.history.push("/Profile");
-        // props.profileEdited;
+        props.history.push("/ProfileEditComplete");
       })
       .catch((error) => {
         alert(error);
@@ -184,4 +182,4 @@ const ProfileCreate = (props) => {
   }
 };
 
-export default ProfileCreate;
+export default withRouter(ProfileCreate);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // material-UIの読み込み
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -125,7 +125,7 @@ export const TeamEdit = (props) => {
         teamConcept: teamConceptValue,
       })
       .then(() => {
-        // props.history.push("/Chat");
+        props.history.push("/TeamEditComplete");
       })
       .catch((error) => {
         alert(error);
@@ -189,7 +189,7 @@ export const TeamEdit = (props) => {
               variant="contained"
               color="primary"
               type="submit"
-              onClick={(teamCreateBtn, props.handleClose)}
+              onClick={teamCreateBtn}
             >
               上記の内容に変更
             </Button>
@@ -200,4 +200,4 @@ export const TeamEdit = (props) => {
   }
 };
 
-export default TeamEdit;
+export default withRouter(TeamEdit);

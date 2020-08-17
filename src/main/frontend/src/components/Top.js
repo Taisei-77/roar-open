@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../style/Top.module.css";
 import { Container, Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
 import { auth, db } from "../firebase/index";
@@ -14,6 +14,16 @@ const Top = (props) => {
     [register_pass, setRegPass] = useState(""),
     [login_text, setLogin_text] = useState(false),
     [register_text, setRegister_text] = useState(false);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        //ログインしていたらHomeへ
+        props.history.push("/Home");
+      }
+    });
+  }, []);
+
   //modalの切り替え
   const toggleModal = () => {
     isLoginShow(!login);
@@ -66,60 +76,59 @@ const Top = (props) => {
   };
 
   //ログイン認証
-  const sendLogin = async () => {
-    if (login) {
-      await auth
-        .signInWithEmailAndPassword(login_email, login_pass)
-        .then(() => {
-          //正常終了時
-          props.history.push("/Home");
-        })
-        .catch((error) => {
-          toggleSpinner(false);
-          alert("送信エラー　" + error);
-        });
-    } else if (register) {
-      //新規登録認証
-      await auth
-        .createUserWithEmailAndPassword(register_email, register_pass)
-        .then(() => {
-          //正常終了時
-          props.history.push("/Home");
-        })
-        .catch((error) => {
-          toggleSpinner(false);
-          alert("送信エラー　" + error);
-        });
-    }
+  const sendLogin = () => {
+    return new Promise((resolve) => {
+      if (login) {
+        auth
+          .signInWithEmailAndPassword(login_email, login_pass)
+          .then(() => {
+            //正常終了時
+            props.history.push("/Home");
+          })
+          .catch((error) => {
+            toggleSpinner(false);
+            alert("送信エラー　" + error);
+          });
+      } else if (register) {
+        //新規登録認証
+        auth
+          .createUserWithEmailAndPassword(register_email, register_pass)
+          .then(() => {
+            //正常終了時
+            resolve();
+            props.history.push("/Home");
+          })
+          .catch((error) => {
+            toggleSpinner(false);
+            alert("送信エラー　" + error);
+          });
+      }
+    });
   };
 
   //ユーザー名をfireStoreに登録
-  const sendRegister = async () => {
-    await db
-      .collection("users")
-      .doc(auth.currentUser.uid)
-      .set({
-        name: register_user,
-      })
-      .then(function () {
-        console.log("Document successfully written!");
-      })
-      .catch(function (error) {
-        alert("登録エラー　Error writing document：" + error);
-      });
+  const sendRegister = () => {
+    sendLogin().then(() => {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .set({
+          name: register_user,
+        })
+        .then(function () {
+          console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+          alert("登録エラー　Error writing document：" + error);
+        });
+    });
   };
 
   //送信
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     //通常の送信処理等を停止
     e.preventDefault();
     toggleSpinner(true);
-    await sendLogin();
-
-    //ユーザー名登録
-    if (register) {
-      await sendRegister();
-    }
+    sendRegister();
   };
 
   return (

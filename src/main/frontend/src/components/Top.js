@@ -131,10 +131,7 @@ const Top = (props) => {
             <div className={styles.btn} onClick={() => isLoginShow(true)}>
               ログイン
             </div>
-            <div
-              className={styles.btn}
-              onClick={() => isRegisterShow(true)}
-            >
+            <div className={styles.btn} onClick={() => isRegisterShow(true)}>
               新規会員登録
             </div>
 
@@ -254,7 +251,7 @@ const Top = (props) => {
           {/* <!-- 真ん中のメッセージブロック --> */}
           <div className={styles.content}>
             <div className={styles.logo}>
-              <img src="https://fontmeme.com/permalink/200730/290eb932de87052b5d303753501d1f76.png" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/logo%2Froar%E3%83%AD%E3%82%B3%E3%82%99.png?alt=media&token=592910ac-6be1-48fd-8454-dc40828de9bb" />
             </div>
             <div className={styles.leadText}>
               <p>スポーツ専門のチャットツールでチームの輪を広げよう</p>

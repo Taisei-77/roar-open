@@ -46,7 +46,7 @@
 }
 .sidebarItem:hover::after {
   left: 0;
-  background-color: #771623;
+  background-color: white;
 }
 
 .link {
@@ -58,6 +58,8 @@
 }
 
 .link:hover {
-  color: white;
+  color: #2d2d2d;
   text-decoration: none;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }

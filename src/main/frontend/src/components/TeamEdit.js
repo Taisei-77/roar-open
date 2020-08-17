@@ -11,13 +11,14 @@ import axios from "axios";
 
 // コンポーネントの読み込み
 import { CreatePhoto } from "../UIkit/index";
-import { TeamProfile } from "./TeamProfile";
+import { TeamProfileEdit } from "./TeamProfileEdit";
 import Spinner from "../UIkit/Spinner";
 // import { CompePartPerform } from "./CompePartPerform";
 
 export const TeamEdit = (props) => {
   const team_id = props.team_id; //TeamListDetailから編集するチームのteam_idを受け取っている。
-  const [teamNameValue, setTeamNameValue] = useState(""), //チーム名
+  const [teamInfo, setTeamInfo] = useState(""),
+    [teamNameValue, setTeamNameValue] = useState(""), //チーム名
     [images, setImages] = useState(""), //画像のURL
     [teamConceptValue, setTeamConceptValue] = useState(""), //チームコンセプト
     [loading, setLoading] = useState(false);
@@ -77,6 +78,7 @@ export const TeamEdit = (props) => {
         //             teamConcept:値, teamId:値,  teamName:値,  }]　この形で返ってくる。
         const resData = res.data[0];
         console.log(resData);
+        setTeamInfo(resData);
         setTeamNameValue(resData.teamName);
         setImages(resData.picture);
         setTeamConceptValue(resData.teamConcept);
@@ -93,19 +95,33 @@ export const TeamEdit = (props) => {
 
   //作成ボタン
   const teamCreateBtn = () => {
+    //データベースに送信するデータを返してくれる関数。引数には(値を取得したい要素の名前, 編集前のチーム情報)を設定する。
+    const submitValueJudge = (elementName, preTeamInfo) => {
+      const nowValue = document.getElementsByName(elementName)[0].value; //送信時の要素の値
+      if (nowValue == "") {
+        //ユーザーが要素のデータを変更しなかった場合の返り値。
+        return preTeamInfo;
+      } else {
+        //ユーザーが要素のデータを変更した場合の返り値。
+        return nowValue;
+      }
+    };
     //送信
     axios
       .put(url, {
         teamId: team_id, //team_idでどのチームの編集をするのかを管理する。
         teamName: teamNameValue,
         picture: images,
-        sportName: document.getElementsByName("sport_name")[0].value,
-        prefectures: document.getElementsByName("prefectures_name")[0].value,
-        activityFrequency: document.getElementsByName(
-          "activity_frequency_name"
-        )[0].value,
-        dayOfTheWeek: document.getElementsByName("day_of_the_week_name")[0]
-          .value,
+        sportName: submitValueJudge("sport_name", teamInfo.sportName),
+        prefectures: submitValueJudge("prefectures_name", teamInfo.prefectures),
+        activityFrequency: submitValueJudge(
+          "activity_frequency_name",
+          teamInfo.activityFrequency
+        ),
+        dayOfTheWeek: submitValueJudge(
+          "day_of_the_week_name",
+          teamInfo.dayOfTheWeek
+        ),
         teamConcept: teamConceptValue,
       })
       .then(() => {
@@ -146,7 +162,10 @@ export const TeamEdit = (props) => {
             storageFolder={"team_images"}
           />
           {/* <div className={styles.basicProfile}>基本プロフィール</div> */}
-          <TeamProfile className={styles.teamCreateContainer} />
+          <TeamProfileEdit
+            className={styles.teamCreateContainer}
+            teamInfo={teamInfo}
+          />
           <div className={styles.teamCreateContainer}>
             <TextField
               id="teamConcept"
@@ -170,7 +189,7 @@ export const TeamEdit = (props) => {
               variant="contained"
               color="primary"
               type="submit"
-              onClick={teamCreateBtn}
+              onClick={(teamCreateBtn, props.handleClose)}
             >
               上記の内容に変更
             </Button>

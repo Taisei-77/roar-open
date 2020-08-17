@@ -11,7 +11,8 @@ import {
   DayOfTheWeek,
 } from "../data/data";
 
-export const TeamProfile = () => {
+export const TeamProfileEdit = (props) => {
+  console.log(props);
   return (
     <div className={styles.TeamProfileContainer}>
       <div className={styles.selectBlock}>
@@ -22,6 +23,8 @@ export const TeamProfile = () => {
           isSearchable
           options={SportName}
           placeholder="何のスポーツ？"
+          defaultInputValue={props.teamInfo.sportName}
+          defaultValue={props.teamInfo.sportName}
           name="sport_name"
         />
       </div>
@@ -33,6 +36,8 @@ export const TeamProfile = () => {
           isClearable
           options={Prefectures}
           placeholder="どこで活動してる？"
+          defaultInputValue={props.teamInfo.prefectures}
+          defaultValue={props.teamInfo.prefectures}
           name="prefectures_name"
         />
       </div>
@@ -43,6 +48,8 @@ export const TeamProfile = () => {
           isClearable
           options={ActivityFrequency}
           placeholder="どれくらい活動してる？"
+          defaultInputValue={props.teamInfo.activityFrequency}
+          defaultValue={props.teamInfo.activityFrequency}
           name="activity_frequency_name"
         />
       </div>
@@ -54,6 +61,8 @@ export const TeamProfile = () => {
           isClearable
           options={DayOfTheWeek}
           placeholder="何曜日に活動してる？"
+          defaultInputValue={props.teamInfo.dayOfTheWeek}
+          defaultValue={props.teamInfo.dayOfTheWeek}
           name="day_of_the_week_name"
         />
       </div>

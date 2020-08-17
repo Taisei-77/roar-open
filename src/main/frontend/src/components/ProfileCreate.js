@@ -8,10 +8,11 @@ import { TextField, Button, Icon } from "@material-ui/core";
 import { CreatePhoto } from "../UIkit/index";
 import { auth } from "../firebase/index";
 import axios from "axios";
+// import { defaultProps } from "react-select/src/Select";
 
 const url = "http://localhost:8080/api/profile";
 
-const ProfileCreate = () => {
+const ProfileCreate = (props) => {
   const [icon, setIcon] = useState(""),
     [profile, setProfile] = useState(""),
     [activity, setActivity] = useState(""),
@@ -54,6 +55,7 @@ const ProfileCreate = () => {
         setSns(res.data.sns);
         setGallery(res.data.gallery);
         setLoading(!loading);
+        // props.editSubmittedToggle;
       })
       .catch((error) => {
         alert(error);

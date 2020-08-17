@@ -14,9 +14,9 @@ import Chat from "./components/Chat";
 import News from "./components/News";
 import Setting from "./components/Setting";
 import ProfileCreate from "./components/ProfileCreate";
+import TeamEdit from "./components/TeamEdit";
 
 import Auth from "./auth/Auth";
-import TeamEdit from "./components/TeamEdit";
 
 class App extends React.Component {
   constructor(props) {

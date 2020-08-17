@@ -11,22 +11,15 @@ const usersTeams_url = "http://localhost:8080/api/usersTeams"; //uid取得
 const search_url = "http://localhost:8080/api/search"; //searchInfoからチーム情報取得
 
 const Home = () => {
-  const [teamList, setTeamList] = useState([]),
-    [teamCount, setTeamCount] = useState(0);
+  const [teamList, setTeamList] = useState([]), //所属チームの情報が入る。
+    [teamCount, setTeamCount] = useState(0), //所属チーム数のカウンター。
+    [editSubmitted, setEditSubmitted] = useState(false); //プロフィール編集orチーム編集が実行されたかどうかを管理する。
   // [teamInfoList, setTeamInfoList] = useState([]);
 
   //mySQLから取得したチーム情報を格納する変数
   let teamInfoList = [];
-  // const UserInfo = () => {
-  //   axios
-  //     .get(url + "/" + auth.currentUser.uid)
-  //     .then((res) => setIcon(res.data.icon));
-  // };
 
-  // useEffect(() => {
-  //   UserInfo();
-  // }, []);
-  const authUid = auth.currentUser.uid;
+  const authUid = auth.currentUser.uid; //ログインしているユーザーのUidを取得
   useEffect(() => {
     let resData = [];
     const getTeamList = async () => {
@@ -71,22 +64,16 @@ const Home = () => {
           alert(error);
         });
     };
-    // const getTeamInfoList = async () => {
-    //   for (let i = 0; i < resData.length; i++) {
-    //     axios
-    //       .get(search_url, { params: { team_name: resData[i] } })
-    //       .then((res) => {
-    //         console.log("TeamInfo:" + res.data);
-    //         setTeamInfoList(res.data);
-    //       })
-    //       .catch((error) => {
-    //         alert(error);
-    //       });
-    //   }
-    // };
     getTeamList();
-    // getTeamInfoList();
   }, []);
+
+  // const editSubmittedToggle = () => {
+  //   setEditSubmitted(!editSubmitted);
+  // };
+
+  // useEffect(() => {
+  //   editSubmittedToggle();
+  // }, [editSubmitted]);
 
   return (
     <div className={styles.homeContainer}>

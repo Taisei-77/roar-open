@@ -26,7 +26,7 @@ const HomeTeamList = (props) => {
       <div className={styles.mainContainer}>
         <p className={styles.teamName}>{props.data.teamName}</p>
         <div className={styles.teamInfo}>
-          <p className={styles.teamMenber}>メンバー : {props.data.count}人</p>
+          <p className={styles.teamMember}>メンバー : {props.data.count}人</p>
           <Button className={styles.teamDetail} onClick={handleOpen}>
             チーム詳細
           </Button>

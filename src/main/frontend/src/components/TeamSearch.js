@@ -110,7 +110,6 @@ const TeamSearch = () => {
       .then((res) => {
         //取得データ全てをリスト化表示
         setSearchResultData(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         alert(error);

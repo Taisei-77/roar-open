@@ -78,7 +78,6 @@ const TeamDetails = (props) => {
         exitTime: customDate,
       })
       .then(function () {
-        console.log("Document successfully written!");
         props.history.push("/Chat");
       })
       .catch(function (error) {

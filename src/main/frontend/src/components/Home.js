@@ -52,7 +52,6 @@ const Home = () => {
                 if (teamInfoList.length == resData.length) {
                   //ループの最後にteamListのstateを、teamInfoListに変更する。
                   setTeamList(teamInfoList);
-                  console.log(teamInfoList);
                 }
               })
               .catch((error) => {

@@ -114,9 +114,7 @@ const Top = (props) => {
         .set({
           name: register_user,
         })
-        .then(function () {
-          console.log("Document successfully written!");
-        })
+        .then(function () {})
         .catch(function (error) {
           alert("登録エラー　Error writing document：" + error);
         });

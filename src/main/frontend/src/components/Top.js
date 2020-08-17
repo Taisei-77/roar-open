@@ -145,8 +145,8 @@ const Top = (props) => {
             </div>
 
             <Modal show={login} onHide={() => isLoginShow(false)}>
-              <Modal.Header closeButton>
-                <Modal.Title>ログイン</Modal.Title>
+              <Modal.Header>
+                <Modal.Title className={styles.modalTitle}>ログイン</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form onSubmit={handleFormSubmit}>
@@ -154,36 +154,33 @@ const Top = (props) => {
                     <Form.Label className="mb-3">メールアドレス</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="Email"
+                      placeholder="メールアドレスを入力"
                       name="login_email"
                       onChange={handleChange}
                       required
                     />
-                    <Form.Text className="text-muted"></Form.Text>
                   </Form.Group>
 
                   <Form.Group controlId="formBasicPassword" className="m-3">
-                    <Form.Label className="mb-3">パスワード</Form.Label>
+                    <Form.Label className="mb-3">
+                      パスワード<span className={styles.small}>(半角英数字6~16桁)</span>
+                    </Form.Label>
                     <Form.Control
                       type="password"
-                      placeholder="Password"
+                      placeholder="パスワードを入力"
                       name="login_pass"
                       onChange={handleChange}
                       required
                     />
                   </Form.Group>
-                  <Form.Group
-                    controlId="formBasicCheckbox"
-                    className="mb-3"
-                  ></Form.Group>
-                  <Button variant="primary" type="submit" className="m-3">
+                  <Button type="submit" className="m-3">
                     {/* ログインボタンのテキスト */}
                     {login_button_text}
                   </Button>
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Form.Text className="text-muted m-3">
+                <Form.Text className="text-muted m-2">
                   アカウントをお持ちでない場合、
                   <span className="btn btn-link" onClick={() => toggleModal()}>
                     新規会員登録
@@ -193,8 +190,8 @@ const Top = (props) => {
             </Modal>
 
             <Modal show={register} onHide={() => isRegisterShow(false)}>
-              <Modal.Header closeButton>
-                <Modal.Title>アカウントを作成</Modal.Title>
+              <Modal.Header>
+                <Modal.Title className={styles.modalTitle}>アカウントを作成</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form onSubmit={handleFormSubmit}>
@@ -202,7 +199,7 @@ const Top = (props) => {
                     <Form.Label className="mb-3">ユーザーネーム</Form.Label>
                     <Form.Control
                       type="name"
-                      placeholder="Username"
+                      placeholder="ユーザーネームを入力"
                       name="register_user"
                       onChange={handleChange}
                       required
@@ -214,7 +211,7 @@ const Top = (props) => {
                     <Form.Label className="mb-3">メールアドレス</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="Email"
+                      placeholder="メールアドレスを入力"
                       name="register_email"
                       onChange={handleChange}
                       required
@@ -225,25 +222,24 @@ const Top = (props) => {
                   <Form.Group controlId="formBasicPassword" className="m-3">
                     <Form.Label className="mb-3">
                       パスワード
-                      <span id="characterlimit">(半角英数字6~16桁)</span>
+                      <span className={styles.small}>(半角英数字6~16桁)</span>
                     </Form.Label>
                     <Form.Control
                       type="password"
-                      placeholder="Password"
+                      placeholder="パスワードを入力"
                       name="register_pass"
                       onChange={handleChange}
                       required
                     />
                   </Form.Group>
-                  <Form.Group controlId="formBasicCheckbox"></Form.Group>
-                  <Button variant="primary" type="submit" className="m-3">
+                  <Button type="submit" className="m-3">
                     {/* 登録ボタンのテキスト */}
                     {register_button_text}
                   </Button>
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Form.Text className="text-muted m-3">
+                <Form.Text className="text-muted m-2">
                   すでにアカウントをお持ちの場合、
                   <span className="btn btn-link" onClick={() => toggleModal()}>
                     ログイン

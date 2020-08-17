@@ -14,20 +14,12 @@ import { GiJapan, GiRunningShoe } from "react-icons/gi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { DiCodeigniter } from "react-icons/di";
 
-// スタイルの設定
-
 const TeamListDetail = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleOpen = () => {
     setModalOpen(true);
   };
-
-  const handleClose = () => {
-    setModalOpen(false);
-  };
-  //チームの編集
-  const handleEdit = () => {};
 
   //チームの退会
   const handleWithdraw = () => {};
@@ -95,28 +87,13 @@ const TeamListDetail = (props) => {
         <p className={styles.team_info_title}>チームコンセプト</p>
         <p className={styles.team_concept}>{props.team_concept}</p>
         <div className={styles.edit_btn}>
-          {/* <Link
-            to={{
-              pathname: "/TeamEdit",
-              state: {
-                team_id: props.team_id,
-                before_team_name: props.team_name,
-                before_picture: props.picture,
-                before_sport_name: props.sport_name,
-                before_prefectures: props.prefectures,
-                before_activity_frequency: props.activity_frequency,
-                before_day_of_the_week: props.day_of_the_week,
-                before_team_concept: props.team_concept,
-              },
-            }}
-          > */}
           <Button variant="contained" color="primary" onClick={handleOpen}>
             内容を編集する
+            <Link to="/TeamEdit" />
           </Button>
           {/* </Link> */}
           <Modal
             open={modalOpen}
-            onClose={handleClose}
             className={styles.modal}
             closeAfterTransition
             BackdropComponent={Backdrop}

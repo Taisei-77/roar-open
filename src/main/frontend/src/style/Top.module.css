@@ -17,7 +17,6 @@
 
 .logo {
   text-align: center;
-  margin: 2rem 0 4rem 0;
 }
 
 .logo img {
@@ -54,4 +53,12 @@
 
 .btn:hover {
   opacity: 0.8;
+}
+
+.modalTitle {
+  margin: 1rem;
+}
+
+.small {
+  font-size: 0.7rem;
 }

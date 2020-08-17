@@ -103,7 +103,6 @@ export const TeamCreate = (props) => {
               message: [],
             })
             .then(function () {
-              console.log("Document successfully written!");
               let idAndName = [res.data.teamId, res.data.teamName];
               resolve(idAndName);
             })
@@ -146,7 +145,6 @@ export const TeamCreate = (props) => {
           exitTime: customDate,
         })
         .then(function () {
-          console.log("Document successfully written!");
           props.history.push("/Chat");
         })
         .catch(function (error) {

@@ -77,7 +77,6 @@ export const TeamEdit = (props) => {
         //res.dataは [{activityFrequency:値 , count:値, dayOfTheWeek:値, picture:値, prefectures:値, sportName:値,
         //             teamConcept:値, teamId:値,  teamName:値,  }]　この形で返ってくる。
         const resData = res.data[0];
-        console.log(resData);
         setTeamInfo(resData);
         setTeamNameValue(resData.teamName);
         setImages(resData.picture);

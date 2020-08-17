@@ -192,6 +192,7 @@ const TeamSearch = () => {
         {state.resourceData.length > 0 ? (
           state.resourceData.map((data) => (
             <TeamSearchCard
+              count={data.count}
               team_id={data.teamId}
               team_name={data.teamName}
               picture={data.picture}

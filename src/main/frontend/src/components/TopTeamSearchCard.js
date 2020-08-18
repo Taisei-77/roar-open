@@ -11,9 +11,9 @@ import { FaUserFriends } from "react-icons/fa";
 // css modules
 import styles from "../style/TeamSearchCard.module.css";
 
-import TeamDetails from "./TeamDetails";
+import TopTeamSearchCardModal from "./TopTeamSearchCardModal";
 
-export const TeamSearchCard = (props) => {
+export const TopTeamSearchCard = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleOpen = () => {
@@ -94,17 +94,7 @@ export const TeamSearchCard = (props) => {
         }}
       >
         <Fade in={modalOpen}>
-          <TeamDetails
-            userTeamIdList={props.userTeamIdList}
-            team_id={props.team_id}
-            team_name={props.team_name}
-            picture={props.picture}
-            sport_name={props.sport_name}
-            prefectures={props.prefectures}
-            activity_frequency={props.activity_frequency}
-            day_of_the_week={props.day_of_the_week}
-            team_concept={props.team_concept}
-          />
+          <TopTeamSearchCardModal />
         </Fade>
       </Modal>
     </div>

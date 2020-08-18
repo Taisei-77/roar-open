@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import Select from "react-select";
-
 // material-uiの読み込み
 import { AppBar, Toolbar, Button, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-
 // CSSの読み込み
 import styles from "../style/TeamSearch.module.css";
-
 // 他ファイルからコンポーネントの読み込み
 import {
   SportName,
@@ -17,9 +14,13 @@ import {
   DayOfTheWeek,
 } from "../data/data";
 import { TeamSearchCard } from "./TeamSearchCard";
+import { TopTeamSearchCard } from "./TopTeamSearchCard";
+//firebaseのインポート
+import { auth } from "../firebase/index";
 
 // データベースとの通信
 const url = "http://localhost:8080/api/search";
+const userTeamsUrl = "http://localhost:8080/api/usersTeams";
 
 // searchResultDataを入れておくための変数
 let searchResultDataBox = "";
@@ -57,6 +58,89 @@ const TeamSearch = () => {
   // ユーザーが検索のために選択した値を管理するstate
   const [freeWord, setFreeWord] = useState(""), //フリーワードstate
     [searchResultData, setSearchResultData] = useState([]); //検索結果を管理するためのstate
+  //　ユーザーが参加しているチームのIDを管理するstateと変数。
+  const [userTeamIdList, setUserTeamIdList] = useState([]); //ユーザーが所属しているチームのIDが配列で管理される。
+  let teamId = []; // ユーザーが所属しているチームのIDを入れる箱
+  //ユーザーのログイン、未ログインを管理するstate
+  const [login, setLogin] = useState(false);
+
+  //ユーザーが既に参加しているチームのチームIDを全て取得し、配列型で格納し、stateのteamIdListをそのデータに更新する関数。
+  const getUsersTeamsId = async () => {
+    const uid = auth.currentUser.uid;
+    await axios
+      .get(userTeamsUrl + "/" + uid) //ユーザーが既に参加しているチームのチームIDを取得
+      .then((res) => {
+        const resData = res.data;
+        //res.dataは[0:{id:"値" , uid:"値" , teamId:"値" , teamName:"値" },1:{},2:{}.....]で返ってくる。
+        //dataのオブジェクト１つ１つから、teamIdを取り出し、変数teamIdに配列で格納する。
+        resData.map((data) => {
+          teamId = teamId.concat(data.teamId);
+        });
+        //stateのTeamIdListを更新。
+        setUserTeamIdList(teamId);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  //初回レンダリング時に実行される。
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        //ログインしていたら,ユーザーが所属するチームのIDを取得する。
+        getUsersTeamsId();
+        setLogin(!login);
+      }
+    });
+  }, []);
+
+  //コンポーネントを返してくれる関数。（JSXに<TeamSearchCardChoice />と書くことで,条件に応じた要素を返してくれる。条件付きレンダー。)
+  const TeamSearchCardChoice = () => {
+    if (login) {
+      //ユーザーがログインしている場合
+      if (state.resourceData.length > 0) {
+        return state.resourceData.map((data) => (
+          //チーム詳細画面が表示できるチームカード
+          <TeamSearchCard
+            userTeamIdList={userTeamIdList}
+            count={data.count}
+            team_id={data.teamId}
+            team_name={data.teamName}
+            picture={data.picture}
+            sport_name={data.sportName}
+            prefectures={data.prefectures}
+            activity_frequency={data.activityFrequency}
+            day_of_the_week={data.dayOfTheWeek}
+            team_concept={data.teamConcept}
+          />
+        ));
+      } else {
+        return <p className={styles.searchResultNone}>検索結果は0件でした。</p>;
+      }
+    } else {
+      //ユーザーがログインしていない場合
+      if (state.resourceData.length > 0) {
+        return state.resourceData.map((data) => (
+          //チーム詳細画面がログインへの誘導になっているチームカード
+          <TopTeamSearchCard
+            userTeamIdList={userTeamIdList}
+            count={data.count}
+            team_id={data.teamId}
+            team_name={data.teamName}
+            picture={data.picture}
+            sport_name={data.sportName}
+            prefectures={data.prefectures}
+            activity_frequency={data.activityFrequency}
+            day_of_the_week={data.dayOfTheWeek}
+            team_concept={data.teamConcept}
+          />
+        ));
+      } else {
+        return <p className={styles.searchResultNone}>検索結果は0件でした。</p>;
+      }
+    }
+  };
 
   const [state, dispatch] = useReducer(reducer, {
     currentPage: 1, //現在のページ
@@ -187,27 +271,10 @@ const TeamSearch = () => {
         </Toolbar>
       </AppBar>
       <div>
-        {/*　DBから取得した値を1つずつ取り出して、map以下の処理を個数分行う。 */}
-        {state.resourceData.length > 0 ? (
-          state.resourceData.map((data) => (
-            <TeamSearchCard
-              count={data.count}
-              team_id={data.teamId}
-              team_name={data.teamName}
-              picture={data.picture}
-              sport_name={data.sportName}
-              prefectures={data.prefectures}
-              activity_frequency={data.activityFrequency}
-              day_of_the_week={data.dayOfTheWeek}
-              team_concept={data.teamConcept}
-            />
-          ))
-        ) : (
-          <p className={styles.searchResultNone}>検索結果は0件でした。</p>
-        )}
+        <TeamSearchCardChoice />
       </div>
 
-      <div className={styles.pageNationActuion}>
+      <div className={styles.pageNationAction}>
         <Button
           variant="contained"
           onClick={viewPreview}

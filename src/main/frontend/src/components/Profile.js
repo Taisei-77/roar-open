@@ -47,7 +47,6 @@ const Profile = (props) => {
     .doc(auth.currentUser.uid)
     .get()
     .then((doc) => {
-      console.log(doc.data().name);
       setName(doc.data().name);
     });
 

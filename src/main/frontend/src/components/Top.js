@@ -114,9 +114,7 @@ const Top = (props) => {
         .set({
           name: register_user,
         })
-        .then(function () {
-          console.log("Document successfully written!");
-        })
+        .then(function () {})
         .catch(function (error) {
           alert("登録エラー　Error writing document：" + error);
         });
@@ -146,7 +144,9 @@ const Top = (props) => {
 
             <Modal show={login} onHide={() => isLoginShow(false)}>
               <Modal.Header>
-                <Modal.Title className={styles.modalTitle}>ログイン</Modal.Title>
+                <Modal.Title className={styles.modalTitle}>
+                  ログイン
+                </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form onSubmit={handleFormSubmit}>
@@ -163,7 +163,8 @@ const Top = (props) => {
 
                   <Form.Group controlId="formBasicPassword" className="m-3">
                     <Form.Label className="mb-3">
-                      パスワード<span className={styles.small}>(半角英数字6~16桁)</span>
+                      パスワード
+                      <span className={styles.small}>(半角英数字6~16桁)</span>
                     </Form.Label>
                     <Form.Control
                       type="password"
@@ -191,7 +192,9 @@ const Top = (props) => {
 
             <Modal show={register} onHide={() => isRegisterShow(false)}>
               <Modal.Header>
-                <Modal.Title className={styles.modalTitle}>アカウントを作成</Modal.Title>
+                <Modal.Title className={styles.modalTitle}>
+                  アカウントを作成
+                </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form onSubmit={handleFormSubmit}>

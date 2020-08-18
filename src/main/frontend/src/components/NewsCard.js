@@ -21,22 +21,18 @@ const NewsCard = () => {
         const result = await fetch(url);
         const json = await result.json();
         setArticles(json.articles);
-      }
-      //tryに例外が発生するとすぐこちらが呼び出される
-      catch (e) {
+      } catch (e) {
+        //tryに例外が発生するとすぐこちらが呼び出される
         alert(e);
       }
     };
     fetchData();
   }, []);
-  //webAPIから取得したニュース情報
-  console.log(articles);
+
   //取得したニュースの中からsource.nameが一致するもの以外をresultに返す
-  const result = articles.filter(function(i){
-      return i.source.name !== "Gekisaka.jp";
+  const result = articles.filter(function (i) {
+    return i.source.name !== "Gekisaka.jp";
   });
-  //ゲキサカ以外のニュース情報
-  console.log(result);
 
   return (
     //カードの見た目

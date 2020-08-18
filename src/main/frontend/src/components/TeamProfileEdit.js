@@ -12,7 +12,6 @@ import {
 } from "../data/data";
 
 export const TeamProfileEdit = (props) => {
-  console.log(props);
   return (
     <div className={styles.TeamProfileContainer}>
       <div className={styles.selectBlock}>

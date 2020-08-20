@@ -21,6 +21,7 @@ export const TeamEdit = (props) => {
     [teamNameValue, setTeamNameValue] = useState(""), //チーム名
     [images, setImages] = useState(""), //画像のURL
     [teamConceptValue, setTeamConceptValue] = useState(""), //チームコンセプト
+    [teamNameValidation, setTeamNameValidation] = useState(false), //チーム名入力のバリデーションチェック
     [loading, setLoading] = useState(false);
 
   //　入力値を取得するイベント
@@ -31,6 +32,11 @@ export const TeamEdit = (props) => {
         break;
       case "teamName":
         setTeamNameValue(e.target.value);
+        if (e.target.value == "") {
+          setTeamNameValidation(true);
+        } else {
+          setTeamNameValidation(false);
+        }
         break;
       //no default
     }
@@ -94,41 +100,48 @@ export const TeamEdit = (props) => {
 
   //作成ボタン
   const teamCreateBtn = () => {
-    //データベースに送信するデータを返してくれる関数。引数には(値を取得したい要素の名前, 編集前のチーム情報)を設定する。
-    const submitValueJudge = (elementName, preTeamInfo) => {
-      const nowValue = document.getElementsByName(elementName)[0].value; //送信時の要素の値
-      if (nowValue == "") {
-        //ユーザーが要素のデータを変更しなかった場合の返り値。
-        return preTeamInfo;
-      } else {
-        //ユーザーが要素のデータを変更した場合の返り値。
-        return nowValue;
-      }
-    };
-    //送信
-    axios
-      .put(url, {
-        teamId: team_id, //team_idでどのチームの編集をするのかを管理する。
-        teamName: teamNameValue,
-        picture: images,
-        sportName: submitValueJudge("sport_name", teamInfo.sportName),
-        prefectures: submitValueJudge("prefectures_name", teamInfo.prefectures),
-        activityFrequency: submitValueJudge(
-          "activity_frequency_name",
-          teamInfo.activityFrequency
-        ),
-        dayOfTheWeek: submitValueJudge(
-          "day_of_the_week_name",
-          teamInfo.dayOfTheWeek
-        ),
-        teamConcept: teamConceptValue,
-      })
-      .then(() => {
-        props.history.push("/TeamEditComplete");
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    if (teamNameValidation) {
+      alert("チーム名は必須項目です。");
+    } else {
+      //データベースに送信するデータを返してくれる関数。引数には(値を取得したい要素の名前, 編集前のチーム情報)を設定する。
+      const submitValueJudge = (elementName, preTeamInfo) => {
+        const nowValue = document.getElementsByName(elementName)[0].value; //送信時の要素の値
+        if (nowValue == "") {
+          //ユーザーが要素のデータを変更しなかった場合の返り値。
+          return preTeamInfo;
+        } else {
+          //ユーザーが要素のデータを変更した場合の返り値。
+          return nowValue;
+        }
+      };
+      //送信
+      axios
+        .put(url, {
+          teamId: team_id, //team_idでどのチームの編集をするのかを管理する。
+          teamName: teamNameValue,
+          picture: images,
+          sportName: submitValueJudge("sport_name", teamInfo.sportName),
+          prefectures: submitValueJudge(
+            "prefectures_name",
+            teamInfo.prefectures
+          ),
+          activityFrequency: submitValueJudge(
+            "activity_frequency_name",
+            teamInfo.activityFrequency
+          ),
+          dayOfTheWeek: submitValueJudge(
+            "day_of_the_week_name",
+            teamInfo.dayOfTheWeek
+          ),
+          teamConcept: teamConceptValue,
+        })
+        .then(() => {
+          props.history.push("/TeamEditComplete");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
   };
   if (loading === false) {
     return <Spinner />;
@@ -150,7 +163,13 @@ export const TeamEdit = (props) => {
               value={teamNameValue}
               onChange={handleValueChange}
             />
+            {teamNameValidation && (
+              <p style={{ color: "#F44335", fontSize: 8 }}>
+                チーム名は必須項目です。
+              </p>
+            )}
           </div>
+
           <CreatePhoto
             className={styles.teamCreateContainer}
             height={450}

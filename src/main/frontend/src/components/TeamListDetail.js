@@ -20,6 +20,9 @@ const TeamListDetail = (props) => {
   const handleOpen = () => {
     setModalOpen(true);
   };
+  const handleClose = () => {
+    setModalOpen(false);
+  };
 
   //チームの退会
   const handleWithdraw = () => {};
@@ -94,6 +97,7 @@ const TeamListDetail = (props) => {
           {/* </Link> */}
           <Modal
             open={modalOpen}
+            onClose={handleClose}
             className={styles.modal}
             closeAfterTransition
             BackdropComponent={Backdrop}

@@ -85,8 +85,8 @@ const Profile = (props) => {
       </div>
       <header className={styles.header}>
         <p className={styles.profileTitle}>プロフィール</p>
-        <div>
-          プロフィールの編集
+        <div className={styles.profileEdit}>
+          <p>プロフィールの編集</p>
           <Button onClick={handleOpen}>
             <FcSettings className={styles.profileCreateButton} />
           </Button>

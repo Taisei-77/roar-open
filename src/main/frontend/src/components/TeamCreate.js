@@ -16,7 +16,8 @@ import { TeamProfile } from "./TeamProfile";
 export const TeamCreate = (props) => {
   const [teamNameValue, setTeamNameValue] = useState(""), //チーム名
     [images, setImages] = useState(""), //画像のURL
-    [teamConceptValue, setTeamConceptValue] = useState(""); //チームコンセプト
+    [teamConceptValue, setTeamConceptValue] = useState(""), //チームコンセプト
+    [teamNameValidation, setTeamNameValidation] = useState(true); //チーム名入力のバリデーションチェック
 
   //　入力値を取得するイベント
   const handleValueChange = (e) => {
@@ -26,6 +27,11 @@ export const TeamCreate = (props) => {
         break;
       case "teamName":
         setTeamNameValue(e.target.value);
+        if (e.target.value == "") {
+          setTeamNameValidation(true);
+        } else {
+          setTeamNameValidation(false);
+        }
         break;
       //no default
     }
@@ -155,10 +161,14 @@ export const TeamCreate = (props) => {
 
   //作成ボタン
   const teamCreateBtn = () => {
-    //処理順
-    // sendTeam(); 1
-    // joinTeam() 2
-    sendTime(); //3
+    if (teamNameValidation == true) {
+      alert("チーム名は必須項目です。");
+    } else {
+      //処理順
+      // sendTeam(); 1
+      // joinTeam() 2
+      sendTime(); //3
+    }
   };
 
   return (
@@ -172,8 +182,13 @@ export const TeamCreate = (props) => {
             name="teamName"
             value={teamNameValue}
             onChange={handleValueChange}
-            required
+            required={true}
           />
+          {teamNameValidation && (
+            <p style={{ color: "#F44335", fontSize: 8 }}>
+              チーム名は必須項目です。
+            </p>
+          )}
         </div>
         <CreatePhoto
           className={styles.teamCreateContainer}

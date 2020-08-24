@@ -91,8 +91,15 @@ public class Rest {
 
     // チーム退会
     @DeleteMapping("/usersTeams")
-    public UsersTeams usersTeamsDelete(String uid, String teamId) {
-        return usersTeamsService.deleteUsersTeams(uid, teamId);
+    public String usersTeamsDelete(String uid, String teamId) {
+        usersTeamsService.deleteUsersTeams(uid, teamId);
+        return "OK";
+    }
+
+    @DeleteMapping("/usersTeamsA")
+    public String usersTeamsDedlete(String uid, String teamId) {
+        System.out.println(uid + teamId);
+        return uid + teamId;
     }
 
     // 所属チームリスト取得

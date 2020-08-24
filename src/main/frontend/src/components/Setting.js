@@ -13,7 +13,6 @@ const Setting = (props) => {
 
   //ログアウトボタン
   const handleLogout = () => {
-    alert("ログアウトします");
     props.toggleSidebar(false);
     auth.signOut();
   };

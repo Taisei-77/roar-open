@@ -19,7 +19,9 @@ const Chat = () => {
     [show, isShow] = useState(false),
     [messageData, setMessageData] = useState([]),
     [id, setId] = useState(""),
-    [teamList, setTeamList] = useState([]);
+    [teamList, setTeamList] = useState([]),
+    [icon, setIcon] = useState("");
+
   let i = 0;
   let teamInfoList = []; //concat用の変数
   let messageList = []; //Cloud fireStoreの内容を代入するための変数
@@ -97,10 +99,23 @@ const Chat = () => {
       });
   };
 
+  const getImage = async () => {
+    //送信
+    await axios
+      .get("http://localhost:8080/api/profile" + "/" + auth.currentUser.uid) //パスパラメータにユーザーIDを追加
+      .then((res) => {
+        setIcon(res.data.icon);
+      })
+      .catch((error) => {
+        alert("アイコン取得エラー" + error);
+      });
+  };
+
   useEffect(() => {
     //初回API処理待ち
     const f = async () => {
       await UsersTeamsInfo();
+      await getImage();
       isLoading(true);
     };
     f();
@@ -123,7 +138,7 @@ const Chat = () => {
       .update({ exitTime: date })
       .then(function () {})
       .catch(function (error) {
-        alert("退出時間更新エラー：" + error);
+        console.log("チャット未参加 or 退出時間更新エラー：" + error);
       });
   };
   //チャット内容表示
@@ -160,8 +175,7 @@ const Chat = () => {
     // ユーザーが送信する新しいメッセージ情報
     const newMessage = [
       {
-        avatar:
-          "https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/images%2FIpUsst5ZpOB2GUy5?alt=media&token=82158741-deea-4fd4-bfe2-09ee67c2c6a1",
+        avatar: icon,
         uid: auth.currentUser.uid, //メッセージを右に配置
         // position: uid === userUid ならright　 uid !== userUid　ならleft
         type: "text",

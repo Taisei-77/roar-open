@@ -3,7 +3,6 @@ package com.example.roar.entity;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 //エンティティ(クラス名)と主キー(ID)の型を指定
 //「JpaRepository」にはCRUD操作の為の基本的なメソッドが定義されている
@@ -13,7 +12,6 @@ public interface UsersTeamsRepository extends JpaRepository<UsersTeams, Long> {
     List<UsersTeams> findByUidIs(String uid);
 
     // uidとteamIdの一致で削除
-    @Query(value = "DELETE" + "FROM users_teams_info AS u" + "WHERE" + "u.teams_uid = :uid" + "AND"
-            + "u.teams_team_id = :teamId", nativeQuery = true)
-    UsersTeams deleteMember(String uid, String teamId);
+    void deleteByUidAndTeamId(String uid, String teamId);
+
 }

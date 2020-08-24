@@ -27,4 +27,8 @@ public class UsersTeamsService {
     public List<UsersTeams> getUsersTeams(String uid) {
         return usersTeamsRepository.findByUidIs(uid);
     }
+
+    public UsersTeams deleteUsersTeams(String uid, String teamId) {
+        return usersTeamsRepository.deleteMember(uid, teamId);
+    }
 }

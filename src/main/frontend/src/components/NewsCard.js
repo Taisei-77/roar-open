@@ -8,29 +8,52 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+import axios from "axios";
+
 const NewsCard = () => {
-  const [news, setNews] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      //ニュースを引っ張ってくるAPIキー
-      const url = "https://gnews.io/api/v3/topics/sports?&token=9447084710d08d9bd7bb1663cfabdb25";
-      //APIの中身をJSONに変換し、articlesをステートに入れている。
-      const result = await fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setNews(data.articles);
-      });
+      //ニュースを引っ張ってくるwebAPI
+      // const url =
+      //   "http://newsapi.org/v2/top-headlines?country=jp&category=sports&apiKey=c68b6097d82e46b7bb27b7d19e3110cf";
+      // //成功させたい処理
+      // try {
+      //   const result = await fetch(url);
+      //   const json = await result.json();
+      //   setArticles(json.articles);
+      // } catch (e) {
+      //   //tryに例外が発生するとすぐこちらが呼び出される
+      //   alert(e);
+      // }
+
+      await axios
+        .get("http://localhost:8080/api/news")
+        .then((res) => {
+          console.log(res.data.articles);
+          // console.log();
+          // console.log(JSON.parse(""));
+          // let as = JSON.parse(JSON.stringify(res));
+          // console.log(as.data);
+          setArticles(res.data.articles);
+        })
+        .catch((error) => {
+          alert("チームリスト情報取得エラー：" + error);
+        });
     };
     fetchData();
   }, []);
 
+  //取得したニュースの中からsource.nameが一致するもの以外をresultに返す
+  const result = articles.filter(function (i) {
+    return i.source.name !== "Gekisaka.jp";
+  });
+
   return (
     //カードの見た目
     <ul>
-      {news.map((item) => (
+      {result.map((item) => (
         <li key={item.id} className="m-3">
           <Card>
             <Grid container>
@@ -41,7 +64,7 @@ const NewsCard = () => {
                     component="img"
                     alt="ニュース画像"
                     height="150"
-                    image={item.image}
+                    image={item.urlToImage}
                     title="ニュース画像"
                   />
                 </CardActionArea>

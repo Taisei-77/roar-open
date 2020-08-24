@@ -2,6 +2,7 @@ package com.example.roar.controller;
 
 import java.util.List;
 
+import com.example.roar.entity.News;
 import com.example.roar.entity.Search;
 import com.example.roar.entity.SearchRepository;
 import com.example.roar.entity.User;
@@ -13,6 +14,7 @@ import com.example.roar.service.UsersTeamsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin("*")
+// @CrossOrigin("https://roar-b54b1.web.app")
 @RequestMapping("/api")
+
 public class Rest {
+
+    // test
+    @GetMapping("/test")
+    public String test() {
+        System.out.println("testAPI受信");
+        return "成功";
+    }
+
     // 以下「users_info」テーブルAPI
     @Autowired
     UserService userService;
@@ -77,11 +89,23 @@ public class Rest {
         return usersTeamsService.setUsersTeams(usersTeamsData);
     }
 
+    // チーム退会
+    @DeleteMapping("/usersTeams")
+    public UsersTeams usersTeamsDelete(String uid, String teamId) {
+        return usersTeamsService.deleteUsersTeams(uid, teamId);
+    }
+
     // 所属チームリスト取得
     @GetMapping("/usersTeams/{uid}")
     public List<UsersTeams> usersTeamsUid(@PathVariable("uid") String usersTeamsUidData) {
-        System.out.println(usersTeamsUidData);
         return usersTeamsService.getUsersTeams(usersTeamsUidData);
+    }
+
+    // ニュースAPI取得
+    @GetMapping("/news")
+    public String newsDate() {
+        News news = new News();
+        return news.getNewsJson();
     }
 
     // @PathParamで/rest/{keyword}? ⇒パスパラメータ{keyword}を取得

@@ -39,7 +39,6 @@ const ChatItem = (props) => {
       .doc(props.teamId + "_" + auth.currentUser.uid)
       .onSnapshot(
         function (doc) {
-          console.log("hann");
           let count = 0; //未読数をカウント
           let exitTime = doc.data().exitTime;
           let i = 0; //find関数の回転数記録
@@ -69,7 +68,6 @@ const ChatItem = (props) => {
               setUnread(count);
               setSubtitle(m.text);
               if (m.dateString !== null) {
-                console.log(m.dateString);
                 setDateString(m.dateString);
               }
             }

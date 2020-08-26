@@ -12,9 +12,7 @@ const search_url = "http://localhost:8080/api/search"; //searchInfoからチー�
 
 const Home = () => {
   const [teamList, setTeamList] = useState([]), //所属チームの情報が入る。
-    [teamCount, setTeamCount] = useState(0), //所属チーム数のカウンター。
-    [editSubmitted, setEditSubmitted] = useState(false); //プロフィール編集orチーム編集が実行されたかどうかを管理する。
-  // [teamInfoList, setTeamInfoList] = useState([]);
+    [teamCount, setTeamCount] = useState(0); //所属チーム数のカウンター。
 
   //mySQLから取得したチーム情報を格納する変数
   let teamInfoList = [];
@@ -86,7 +84,7 @@ const Home = () => {
           <div className={styles.teamList}>
             {/* 所属チームのデータをmap()で<HomeTeamList>に展開する */}
             {teamList.map((data) => (
-              <HomeTeamList data={data} />
+              <HomeTeamList data={data} uid={authUid} />
             ))}
           </div>
         </div>

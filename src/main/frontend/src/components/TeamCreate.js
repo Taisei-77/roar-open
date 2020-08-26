@@ -15,7 +15,9 @@ import { TeamProfile } from "./TeamProfile";
 
 export const TeamCreate = (props) => {
   const [teamNameValue, setTeamNameValue] = useState(""), //チーム名
-    [images, setImages] = useState(""), //画像のURL
+    [images, setImages] = useState(
+      "https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/dummy_icons%2F%E3%83%81%E3%83%BC%E3%83%A0%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.jpeg?alt=media&token=74487d24-188f-413a-bf5e-87761376e3dc"
+    ), //画像のURL
     [teamConceptValue, setTeamConceptValue] = useState(""), //チームコンセプト
     [teamNameValidation, setTeamNameValidation] = useState(true); //チーム名入力のバリデーションチェック
 
@@ -54,7 +56,13 @@ export const TeamCreate = (props) => {
 
   //画像URLを取得しセット
   const getImages = (imagesUrl) => {
-    setImages(imagesUrl);
+    if (imagesUrl === "") {
+      setImages(
+        "https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/dummy_icons%2F%E3%83%81%E3%83%BC%E3%83%A0%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.jpeg?alt=media&token=74487d24-188f-413a-bf5e-87761376e3dc"
+      );
+    } else {
+      setImages(imagesUrl);
+    }
   };
 
   // 1桁の数字を0埋めで2桁にする

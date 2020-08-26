@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "../style/Top.module.css";
 import { Container, Button, ButtonToolbar, Modal, Form } from "react-bootstrap";
+import axios from "axios";
 import { auth, db } from "../firebase/index";
 import { Spinner } from "../UIkit/index";
+
+const url = "http://localhost:8080/api/profile";
 
 const Top = (props) => {
   const [login, isLoginShow] = useState(false),
@@ -114,11 +117,27 @@ const Top = (props) => {
         .set({
           name: register_user,
         })
-        .then(function () {})
+        .then(function () {
+          sendRegisterMySQL();
+        })
         .catch(function (error) {
           alert("登録エラー　Error writing document：" + error);
         });
     });
+  };
+
+  const sendRegisterMySQL = () => {
+    axios
+      .post(url, {
+        uid: auth.currentUser.uid,
+        userName: register_user,
+        icon:
+          "https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/dummy_icons%2F%E5%80%8B%E4%BA%BA%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.jpeg?alt=media&token=82fabdc4-65b2-4b19-8b59-9cb321cf5bad",
+      })
+      .then(() => {})
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   //送信

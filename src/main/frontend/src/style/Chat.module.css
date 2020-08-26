@@ -23,8 +23,15 @@
 }
 .searchBar {
   display: flex;
+  align-items: center;
   height: 40px;
   border-bottom: 0.5px solid #4c4c4c;
+}
+.searchBarTitle {
+  display: inline-block;
+  color: #4c4c4c;
+  flex-grow: 1;
+  text-align: center;
 }
 .listSearchWord {
   flex-grow: 1;
@@ -50,6 +57,7 @@
 }
 .roomName {
   display: inline-block;
+  color: #4c4c4c;
   flex-grow: 1;
   text-align: center;
   line-height: 40px;

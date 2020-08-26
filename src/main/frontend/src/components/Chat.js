@@ -20,8 +20,8 @@ const Chat = () => {
     [messageData, setMessageData] = useState([]),
     [id, setId] = useState(""),
     [teamList, setTeamList] = useState([]),
-    [icon, setIcon] = useState("");
-
+    [icon, setIcon] = useState(""), //ユーザーのアイコンを管理
+    [roomName, setRoomName] = useState("");
   let i = 0;
   let teamInfoList = []; //concat用の変数
   let messageList = []; //Cloud fireStoreの内容を代入するための変数
@@ -194,6 +194,9 @@ const Chat = () => {
     document.getElementById("messageValue").value = "";
     messageAreaScroll();
   };
+  const handleChange = (data) => {
+    setRoomName(data.teamName);
+  };
 
   if (loading === false) {
     //読み込み中
@@ -205,22 +208,26 @@ const Chat = () => {
         <div className={styles.mainContainer}>
           <div className={styles.listContainer}>
             <div className={styles.searchBar}>
-              <input className={styles.listSearchWord} type="text" />
+              <div className={styles.searchBarTitle}>チーム一覧</div>
+              {/* 検索機能を追加する場合は以下のコメントアウトを外す */}
+              {/* <input className={styles.listSearchWord} type="text" />
               <Button>
                 <SearchIcon className={styles.searchIcon} />
-              </Button>
+              </Button> */}
             </div>
             <div>
               {teamList.map((data) => (
-                <ChatItem
-                  teamId={data.teamId}
-                  picture={data.picture} //アイコン
-                  alt={"チーム画像"}
-                  teamName={data.teamName} //チーム名
-                  subtitle={"z"} //最新コメント
-                  dateString={"2020/08/05 10:10"} //最新コメントの時刻
-                  handleShow={(teamId, name) => handleShow(teamId, name)} //チャット内容表示
-                />
+                <div onClick={() => handleChange(data)}>
+                  <ChatItem
+                    teamId={data.teamId}
+                    picture={data.picture} //アイコン
+                    alt={"チーム画像"}
+                    teamName={data.teamName} //チーム名
+                    subtitle={"z"} //最新コメント
+                    dateString={"2020/08/05 10:10"} //最新コメントの時刻
+                    handleShow={(teamId, name) => handleShow(teamId, name)} //チャット内容表示
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -228,11 +235,12 @@ const Chat = () => {
           {show ? (
             <div className={styles.messageContainer}>
               <div className={styles.searchBar}>
-                <div className={styles.roomName}>チャット相手の名前</div>
-                <input className={styles.messageSearchWord} type="text" />
+                <div className={styles.roomName}>{roomName}</div>
+                {/* 検索機能を追加する場合は以下のコメントアウトを外す */}
+                {/* <input className={styles.messageSearchWord} type="text" />
                 <Button>
                   <SearchIcon className={styles.searchIcon} />
-                </Button>
+                </Button> */}
               </div>
               <div id="messageArea" className={styles.messageArea}>
                 {messageData.map((data) => (

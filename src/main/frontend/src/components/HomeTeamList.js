@@ -44,6 +44,7 @@ const HomeTeamList = (props) => {
       >
         <Fade in={modalOpen}>
           <TeamListDetail
+            uid={props.uid}
             data={props.data}
             team_id={props.data.teamId}
             team_name={props.data.teamName}

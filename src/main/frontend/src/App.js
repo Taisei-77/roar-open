@@ -8,6 +8,7 @@ import SidebarTop from "./components/SidebarTop";
 import Sidebar from "./components/Sidebar";
 import Top from "./components/Top";
 import Home from "./components/Home";
+import WithdrawComplete from "./components/WithdrawComplete";
 import TeamCreate from "./components/TeamCreate";
 import TeamSearch from "./components/TeamSearch";
 import Chat from "./components/Chat";
@@ -51,6 +52,7 @@ class App extends React.Component {
                 path="/ProfileEditComplete"
                 component={ProfileEditComplete}
               />
+              <Route path="/WithdrawComplete" component={WithdrawComplete} />
               <Route path="/TeamEdit" component={TeamEdit} />
               <Route path="/TeamEditComplete" component={TeamEditComplete} />
               <Route path="/TeamCreate" component={TeamCreate} />

@@ -12,12 +12,15 @@ import Fade from "@material-ui/core/Fade";
 import Backdrop from "@material-ui/core/Backdrop";
 
 import ProfileCreate from "./ProfileCreate";
+import { icons } from "react-icons/lib/cjs";
 
 const url = "http://localhost:8080/api/profile";
 
 const Profile = (props) => {
   const [name, setName] = useState(""),
-    [icon, setIcon] = useState(""),
+    [icon, setIcon] = useState(
+      "https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/dummy_icons%2F%E5%80%8B%E4%BA%BA%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.jpeg?alt=media&token=82fabdc4-65b2-4b19-8b59-9cb321cf5bad"
+    ),
     [profile, setProfile] = useState(""),
     [activity, setActivity] = useState(""),
     [like, setLike] = useState(""),
@@ -25,8 +28,6 @@ const Profile = (props) => {
     [gallery, setGallery] = useState("");
   //モーダルの開閉を管理するstate
   const [modalOpen, setModalOpen] = useState(false);
-  //プロフィールが更新された際に際レンダリングをかけるためのstate
-  const [profileEdit, setProfileEdit] = useState(true);
 
   // プロフィール編集のmodalの表示をするための関数
   const handleOpen = () => {
@@ -35,11 +36,6 @@ const Profile = (props) => {
   // プロフィール編集のmodalを非表示にするための関数
   const handleClose = () => {
     setModalOpen(false);
-  };
-
-  // プロフィール編集がされた時に実行される関数
-  const profileEdited = () => {
-    setProfileEdit(!profileEdit);
   };
 
   //ユーザー名取得
@@ -75,7 +71,15 @@ const Profile = (props) => {
     <div className={styles.container}>
       <div className={styles.mainHeader}>
         <div className={styles.mainHeaderLeft}>
-          <img src={icon} className={styles.avatar} alt="アイコン画像" />
+          <img
+            src={
+              icon == null
+                ? "https://firebasestorage.googleapis.com/v0/b/roar-b54b1.appspot.com/o/dummy_icons%2F%E5%80%8B%E4%BA%BA%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.jpeg?alt=media&token=82fabdc4-65b2-4b19-8b59-9cb321cf5bad"
+                : icon
+            }
+            className={styles.avatar}
+            alt="アイコン画像"
+          />
           <p className={styles.userName}>{name}</p>
         </div>
         <div className={styles.mainHeaderRight}>

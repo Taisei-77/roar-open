@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../firebase/index";
 import axios from "axios";
 //propsにhistoryを渡すため
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import TeamEdit from "./TeamEdit";
 import styles from "../style/TeamListDetail.module.css";
 import { Button } from "@material-ui/core";
@@ -14,6 +14,8 @@ import { GiJapan, GiRunningShoe } from "react-icons/gi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { DiCodeigniter } from "react-icons/di";
 
+const url = "http://localhost:8080/api/usersTeams";
+
 const TeamListDetail = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -23,9 +25,22 @@ const TeamListDetail = (props) => {
   const handleClose = () => {
     setModalOpen(false);
   };
-
   //チームの退会
-  const handleWithdraw = () => {};
+  const handleWithdraw = () => {
+    axios
+      .delete(url, {
+        params: {
+          uid: props.uid,
+          teamId: props.team_id,
+        },
+      })
+      .then(() => {
+        props.history.push("/WithdrawComplete");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.team_details_title}>チーム詳細</div>
@@ -120,4 +135,4 @@ const TeamListDetail = (props) => {
   );
 };
 
-export default TeamListDetail;
+export default withRouter(TeamListDetail);

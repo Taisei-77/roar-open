@@ -9,7 +9,7 @@
 最新ニュースまとめ
 
 # Author
-王、村上、大村
+王、村上、大村、栗栖
 
 # Requirement
 ・Java8
